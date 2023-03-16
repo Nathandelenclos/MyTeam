@@ -27,11 +27,10 @@ server_t *create_server(int port, string dir)
 {
     server_t *server = MALLOC(sizeof(server_t));
     server->clients = NULL;
-    server->accounts = NULL;
+    server->users = NULL;
+    server->teams = NULL;
+    server->user_in_teams = NULL;
     int ret;
-    string real = realpath(dir, NULL);
-    server->base_dir = my_strdup(real);
-    free(real);
     server->socket_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server->socket_fd < 0)
         perror_exit("socket()");
@@ -43,7 +42,6 @@ server_t *create_server(int port, string dir)
     ret = listen(server->socket_fd, MAX_CONNECTIONS);
     if (ret < 0)
         perror_exit("listen()");
-    create_user(server);
     return server;
 }
 
@@ -55,10 +53,7 @@ void new_connection(server_t *server)
 {
     if (FD_ISSET(server->socket_fd, &server->readfds)) {
         client_t *client = MALLOC(sizeof(client_t));
-        client->pwd = my_strdup(server->base_dir);
-        client->auth = 0;
-        client->account = NULL;
-        client->state_auth = 0;
+        client->user = NULL;
         client->socket_fd = accept(server->socket_fd,
         (struct sockaddr *)
         &client->sockaddr,

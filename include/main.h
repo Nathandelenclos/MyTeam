@@ -16,28 +16,18 @@
     #include <sys/types.h>
     #include <sys/socket.h>
     #include <netinet/in.h>
-    #include "list.h"
+    #include "struct.h"
     #include <errno.h>
 
     #define MAX_CONNECTIONS 1024
 
-typedef char *string;
-
 typedef struct dirent *dirent_t;
-
-typedef struct {
-    string name;
-    string password;
-} account_t;
 
 typedef struct {
     int socket_fd;
     struct sockaddr_in sockaddr;
     socklen_t len;
-    account_t *account;
-    int state_auth;
-    string pwd;
-    int auth;
+    user_t *user;
 } client_t;
 
 typedef struct {
@@ -46,8 +36,9 @@ typedef struct {
     node *clients;
     fd_set readfds;
     int last_fd;
-    node *accounts;
-    string base_dir;
+    node *users;
+    node *teams;
+    node *user_in_teams;
 } server_t;
 
 typedef struct {
@@ -71,7 +62,6 @@ string *split(string str, char delim);
 int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
-void create_user(server_t *server);
 int exist_dir(string dir);
 string get_read(int fd);
 

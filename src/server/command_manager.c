@@ -26,17 +26,6 @@ void disconect_client(server_t *server, client_t *client, int valread)
 }
 
 /**
- * No operation.
- * @param server
- * @param client
- * @param data
- */
-void noop(server_t *server, client_t *client, string data)
-{
-    dprintf(client->socket_fd, "200 Command okay\r\n");
-}
-
-/**
  *
  * @param server
  * @param client
@@ -45,7 +34,7 @@ void noop(server_t *server, client_t *client, string data)
  */
 void exec_command(server_t *server, client_t *client, command cmd, string data)
 {
-    if (!cmd.auth_required || (cmd.auth_required && client->auth) ) {
+    if (!cmd.auth_required || (cmd.auth_required && client->user) ) {
         cmd.function(server, client, data);
     } else {
         dprintf(client->socket_fd, "530 you are not authenticate.\r\n");
