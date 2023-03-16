@@ -1,0 +1,10 @@
+include/list.h
+include/my.h
+myftp
+*.o
+vgcore.*
+coding-style-reports.log
+.idea
+test_ftp.sh
+unit_tests*
+doc
