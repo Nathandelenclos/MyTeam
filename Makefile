@@ -61,5 +61,9 @@ fclean: clean
 tests_run:	$(TESTOBJ)
 	@ echo "tests_run"
 
+exp:
+	@ export LD_LIBRARY_PATH=./libs/myteams/
+	@ printf "$(GREEN)Done$(RESET)\n"
+
 re: fclean all
 de: fclean debug

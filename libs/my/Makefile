@@ -6,7 +6,7 @@
 ##
 
 PROJECT	=	my
-NAME	=	../libmy.a
+NAME	=	../myteams/libmy.a
 
 OBJS	=	$(SRCS:.c=.o)
 
