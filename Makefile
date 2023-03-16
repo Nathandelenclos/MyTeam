@@ -31,7 +31,11 @@ debug:
 	@ make -C ./src/client debug
 debug: $(NAME)
 
-$(NAME):
+exp:
+	@ export LD_LIBRARY_PATH=./libs/myteams/
+	@ printf "$(GREEN)Done$(RESET)\n"
+
+$(NAME): exp
 	@ make -C ./libs/linked_list
 	@ make -C ./libs/my
 	@ make -C ./src/server
@@ -60,10 +64,6 @@ fclean: clean
 
 tests_run:	$(TESTOBJ)
 	@ echo "tests_run"
-
-exp:
-	@ export LD_LIBRARY_PATH=./libs/myteams/
-	@ printf "$(GREEN)Done$(RESET)\n"
 
 re: fclean all
 de: fclean debug
