@@ -32,10 +32,11 @@ void disconect_client(server_t *server, client_t *client, int valread)
  * @param cmd
  * @param data
  */
-void exec_command(server_t *server, client_t *client, command cmd, string data)
+void exec_command(server_t *server, client_t *client, command cmd, socket_t
+*socket)
 {
     if (!cmd.auth_required || (cmd.auth_required && client->user) ) {
-        cmd.function(server, client, data);
+        cmd.function(server, client, socket->data);
     } else {
         dprintf(client->socket_fd, "530 you are not authenticate.\r\n");
     }
@@ -48,14 +49,14 @@ void exec_command(server_t *server, client_t *client, command cmd, string data)
  * @param valread
  * @param data
  */
-void command_client(server_t *server, client_t *client, int valread,
-    string data)
+void command_client(server_t *server, client_t *client, socket_t *socket)
 {
     string buff;
     for (int i = 0; i < 14; ++i) {
-        buff = strstr(data, commands[i].name);
-        if (buff && strncmp(buff, data, strlen(commands[i].name)) == 0) {
-            return exec_command(server, client, commands[i], data);
+        buff = strstr(socket->data, commands[i].name);
+        if (buff && strncmp(buff, socket->data, strlen(commands[i].name)) == 0 &&
+        client->context == commands[i].context) {
+            return exec_command(server, client, commands[i], socket);
         }
     }
     dprintf(client->socket_fd, "500 unknown command !\r\n");

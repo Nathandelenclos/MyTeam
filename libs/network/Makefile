@@ -1,46 +1,28 @@
 ##
-## EPITECH PROJECT, 2021
-## Makefile
+## EPITECH PROJECT, 2018
+## libmy
 ## File description:
 ## Makefile
 ##
 
-PROJECT	=	MyTeams Client
-NAME	=	../../myteams_cli
+PROJECT	=	Network
+NAME	=	../myteams/libnet.a
 
-MAIN	= 	main.c
-SRCS	=	$(shell find ./ -type f -name "*.c" ! -name 'main.c')
-HEADS	=	$(shell find ../../include -type f -name "*.h")
-TESTS	=	$(shell find ../../tests -type f -name "*.c")
-
-OBJS	=	$(SRCS:.c=.o) $(MAIN:.c=.o)
-
-TESTOBJ	=	$(SRCS:.c=.o) $(TESTS:.c=.o)
-TESTNAME	=	unit_tests
+OBJS	=	$(SRCS:.c=.o)
 
 ################################################################################
 
-#CFLAGS	+=	-W -Wall -Wextra
 CFLAGS	+=	-I../../include/
 
 LDFLAGS	+=	-L../../libs/myteams/
 LDFLAGS	+=	-llist
 LDFLAGS	+=	-lmy
-LDFLAGS	+=	-lnet
 LDFLAGS	+=	-lmyteams
 
-TESTCFLAGS = $(CFLAGS) $(LDFLAGS) --coverage -lcriterion
-
 ################################################################################
 
-OUTPUT_DOC	=	./doc
-INPUT_DOC	=	./src
-
-################################################################################
 SHELL	=	/bin/bash
 PRINT	=	printf "$(PROJECT):\t" ; printf
-RM	=	rm -f
-CC	=	gcc
 
 RESET	=	\033[0m
 RED	=	\033[0;31m
@@ -52,16 +34,29 @@ CYAN	=	\033[1;36m
 
 ################################################################################
 
+# ---------------------------------------------------------------------------- #
+#  Modules                                                                     #
+# ---------------------------------------------------------------------------- #
+
+SRCS	+=	$(shell find . -type f -name "*.c")
+HEADS 	= $(shell find . -type f -name "*.h")
+
+################################################################################
+
 all: $(NAME)
 
-debug: CFLAGS += -g3 -D DEBUG
+debug: CFLAGS += -g3
 debug: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): prebuild $(OBJS)
+	@ cp $(HEADS) ../../include
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Building $(NAME)"
-	@ $(CC) -o $(NAME) $(OBJS) $(LDFLAGS) && \
+	@ (ar rc $(NAME) $(OBJS) && ranlib $(NAME)) && \
 	  (printf "$(GREEN)Done$(RESET)\n" ; exit 0) || \
 	  (printf "$(RED)Fail$(RESET)\n" ; exit 1)
+
+prebuild:
+	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
 
 clean:
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting object files"
@@ -71,13 +66,7 @@ clean:
 fclean: clean
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting $(NAME)"
 	@ $(RM) $(NAME)
-	@ $(RM) vgcore.*
-	@ $(RM) -r ./doc
 	@ printf "$(GREEN)Done$(RESET)\n"
-
-tests_run:	$(TESTOBJ)
-	@ gcc -o $(TESTNAME) $(TESTOBJ) $(TESTCFLAGS)
-	./$(TESTNAME)
 
 re: fclean all
 de: fclean debug
@@ -86,3 +75,5 @@ de: fclean debug
 	@ $(CC) -c $< -o $@ $(CFLAGS) && \
 	  ($(PRINT) "  $(GREEN)[OK]$(CYAN)  %b$(RESET)\n" $<) || \
 	  ($(PRINT) "  $(RED)[XX]$(CYAN)  %b$(RESET)\n" $< ; exit 1)
+
+.PHONY: all debug $(NAME) prebuild clean fclean re de .c.o

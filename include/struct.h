@@ -6,11 +6,17 @@
 */
 
 #include "list.h"
+#include "my.h"
 
 #ifndef STRUCT_H
     #define STRUCT_H
 
-typedef char *string;
+typedef enum {
+    NONE,
+    TEAM,
+    CHANNEL,
+    THREAD,
+} context_t;
 
 typedef struct {
     string name;

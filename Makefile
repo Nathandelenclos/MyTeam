@@ -9,6 +9,7 @@ PROJECT	=	MyTeams
 NAME	=	myTeams
 
 ################################################################################
+
 SHELL	=	/bin/bash
 PRINT	=	printf "$(PROJECT):\t" ; printf
 RM	=	rm -f
@@ -37,6 +38,7 @@ exp:
 
 $(NAME): exp
 	@ make -C ./libs/linked_list
+	@ make -C ./libs/network
 	@ make -C ./libs/my
 	@ make -C ./src/server
 	@ make -C ./src/client
@@ -45,6 +47,7 @@ $(NAME): exp
 clean:
 	@ make -C ./libs/linked_list clean
 	@ make -C ./libs/my clean
+	@ make -C ./libs/network clean
 	@ make -C ./src/server clean
 	@ make -C ./src/client clean
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting object files"
@@ -54,6 +57,7 @@ clean:
 fclean: clean
 	@ make -C ./libs/linked_list fclean
 	@ make -C ./libs/my fclean
+	@ make -C ./libs/network fclean
 	@ make -C ./src/server fclean
 	@ make -C ./src/client fclean
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting $(NAME)"

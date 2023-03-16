@@ -18,6 +18,7 @@
     #include <netinet/in.h>
     #include "struct.h"
     #include <errno.h>
+    #include "network.h"
 
     #define MAX_CONNECTIONS 1024
 
@@ -28,6 +29,7 @@ typedef struct {
     struct sockaddr_in sockaddr;
     socklen_t len;
     user_t *user;
+    context_t context;
 } client_t;
 
 typedef struct {
@@ -46,6 +48,7 @@ typedef struct {
     string name;
     int auth_required;
     string description;
+    context_t context;
 } command;
 
 void help_init(void);
@@ -56,14 +59,12 @@ void read_action(server_t *server);
 void handle_client(server_t *server);
 void perror_exit(const char *string);
 void disconect_client(server_t *server, client_t *client, int valread);
-void command_client(server_t *server, client_t *client, int valread,
-    string data);
+void command_client(server_t *server, client_t *client, socket_t *socket);
 string *split(string str, char delim);
 int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
-string get_read(int fd);
 
 static const command commands[] = {};
 

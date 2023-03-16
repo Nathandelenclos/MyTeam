@@ -87,10 +87,10 @@ void read_action(server_t *server)
         tmp_node != NULL; tmp_node = tmp_node->next) {
         tmp_client = tmp_node->data;
         if (FD_ISSET(tmp_client->socket_fd, &server->readfds)) {
-            string buff = get_read(tmp_client->socket_fd);
-            disconect_client(server, tmp_client, strlen(buff));
-            command_client(server, tmp_client, strlen(buff), buff);
-            FREE(buff);
+            socket_t *socket = get_read(tmp_client->socket_fd);
+            //disconect_client(server, tmp_client, strlen(socket->data));
+            command_client(server, tmp_client, socket);
+            FREE(socket);
         }
     }
 }

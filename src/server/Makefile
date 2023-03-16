@@ -26,6 +26,7 @@ CFLAGS	+=	-I../../include/
 LDFLAGS	+=	-L../../libs/myteams/
 LDFLAGS	+=	-llist
 LDFLAGS	+=	-lmy
+LDFLAGS	+=	-lnet
 LDFLAGS	+=	-lmyteams
 
 TESTCFLAGS = $(CFLAGS) $(LDFLAGS) --coverage -lcriterion

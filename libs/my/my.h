@@ -14,6 +14,8 @@
     #define false 0
     #define FALSE 0
 
+typedef char *string;
+
 int my_printf(int fd, char *str, ...);
 int my_str_to_int(char *string);
 int my_char_is_in_string(char const c, char const *string);

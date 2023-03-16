@@ -39,25 +39,3 @@ void exit_all(int code)
     FREE_ALL();
     exit(code == 84 ? 84 : 0);
 }
-
-/**
- *
- * @param fd
- * @return
- */
-string get_read(int fd)
-{
-    string result = MALLOC(sizeof(char) * 1024);
-    string buff = MALLOC(sizeof(char) * 1024);
-    memset(buff, 0, sizeof(char) * 1024);
-    memset(result, 0, sizeof(char) * 1024);
-    string end = NULL;
-    while (end == NULL) {
-        read(fd, buff, 1024);
-        strcat(result, buff);
-        end = strstr(result, "\r\n");
-    }
-    FREE(buff);
-    end[0] = '\0';
-    return result;
-}
