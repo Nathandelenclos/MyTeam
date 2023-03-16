@@ -1,5 +1,6 @@
 include/list.h
 include/my.h
+include/network.h
 myftp
 *.o
 vgcore.*
