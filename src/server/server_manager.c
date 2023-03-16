@@ -8,6 +8,11 @@
 #include "main.h"
 #include "list.h"
 
+/**
+ * Init socket address
+ * @param server
+ * @param port
+ */
 void init_socketaddr(server_t *server, int port)
 {
     memset(&server->sockaddr, 0, sizeof(server->sockaddr));
