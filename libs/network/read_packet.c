@@ -10,9 +10,9 @@
 #include <unistd.h>
 
 /**
- *
- * @param fd
- * @return
+ * Read packet from socket.
+ * @param fd - fd to read packet.
+ * @return - Return packet.
  */
 packet_t *read_packet(int fd)
 {

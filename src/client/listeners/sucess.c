@@ -7,11 +7,19 @@
 
 #include "client.h"
 
-void success(packet_t *socket)
+/**
+ * Success listener.
+ * @param packet - Packet to read.
+ */
+void success(packet_t *packet)
 {
     printf("Info: %s\n", socket->data);
 }
 
+/**
+ * Unfound listener.
+ * @param packet - Packet to read.
+ */
 void unfound(packet_t *socket)
 {
     printf("Error: %s\n", socket->data);

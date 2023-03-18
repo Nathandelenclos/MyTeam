@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include "list.h"
 
+/**
+ * Free the list.
+ * @param list - List to free.
+ * @param free_f - Function to free the data.
+ */
 void m_free(node *list, void *size)
 {
     node *m;
@@ -22,6 +27,12 @@ void m_free(node *list, void *size)
     }
 }
 
+/**
+ * Malloc with a linked list.
+ * @param size - Size of the malloc.
+ * @param opt - 1 if malloc, 0 if free.
+ * @return Pointer to the malloc.
+ */
 void *my_malloc(void *size, int opt)
 {
     static node *list = NULL;

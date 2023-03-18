@@ -12,7 +12,7 @@
 
 /**
  * Close fd of user when he is disconnected.
- * @param server
+ * @param server - server
  * @param client
  * @param valread
  */

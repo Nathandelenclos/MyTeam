@@ -10,6 +10,9 @@
 #include "network.h"
 #include "client.h"
 
+/**
+ * @brief Print help for init.
+ */
 void help_init(void)
 {
     printf("USAGE: ./myteams_cli ip port\n");
@@ -18,12 +21,22 @@ void help_init(void)
     printf("\tport\tis the port number on which the server socket listens.\n");
 }
 
+/**
+ * Exit function for free all.
+ * @param code - code for exit.
+ */
 void exit_all(int code)
 {
     FREE_ALL();
     exit(code == 84 ? 84 : 0);
 }
 
+/**
+ * @brief Main function for client.
+ * @param ac - number of arguments.
+ * @param av - arguments.
+ * @return - EXIT_SUCCESS or EXIT_FAILURE.
+ */
 int main(int ac, char **av)
 {
     signal(SIGINT, exit_all);

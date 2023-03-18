@@ -7,6 +7,12 @@
 
 #include "network.h"
 
+/**
+ * Create sockaddr_in.
+ * @param port - Port to use.
+ * @param ip - Ip to use.
+ * @return - Return sockaddr_in.
+ */
 sockaddr_in_t create_sockaddr_in(int port, string ip)
 {
     sockaddr_in_t addr;

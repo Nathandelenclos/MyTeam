@@ -7,6 +7,10 @@
 
 #include <stdlib.h>
 
+/**
+ * Free a pointer if it's not NULL.
+ * @param ptr - Pointer to free.
+ */
 void my_free(void *ptr)
 {
     if (ptr == NULL)

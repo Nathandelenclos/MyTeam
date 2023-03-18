@@ -10,8 +10,8 @@
 
 /**
  * Init socket address
- * @param server
- * @param port
+ * @param server - Server to init.
+ * @param port - Port to init.
  */
 void init_socketaddr(server_t *server, int port)
 {
@@ -23,10 +23,10 @@ void init_socketaddr(server_t *server, int port)
 
 /**
  * Create server and queue.
- * @param port Port listening for socket.
- * @param dir Base of directory for server.
+ * @param port - Port listening for socket.
+ * @param dir - Base of directory for server.
  * @see typedef server_t
- * @return Return typedef server_t malloc.
+ * @return - Return typedef server_t malloc.
  */
 server_t *create_server(int port)
 {
@@ -50,7 +50,7 @@ server_t *create_server(int port)
 
 /**
  * Add new user to server on new connection.
- * @param server
+ * @param server - Server to add user.
  */
 void new_connection(server_t *server)
 {
@@ -75,7 +75,7 @@ void new_connection(server_t *server)
 
 /**
  * Handle message of user and execute commands.
- * @param server
+ * @param server - Server to handle.
  */
 void read_action(server_t *server)
 {
@@ -95,7 +95,7 @@ void read_action(server_t *server)
 
 /**
  * Manage all action of users.
- * @param server
+ * @param server - Server to manage.
  */
 void handle_client(server_t *server)
 {

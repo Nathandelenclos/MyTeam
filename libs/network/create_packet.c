@@ -7,6 +7,12 @@
 
 #include "network.h"
 
+/**
+ * Create packet.
+ * @param code - Code of packet.
+ * @param data - Data of packet.
+ * @return - Return packet.
+ */
 packet_t *create_packet(int code, string data)
 {
     packet_t *socket = MALLOC(sizeof(packet_t));

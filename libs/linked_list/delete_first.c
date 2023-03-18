@@ -8,6 +8,10 @@
 #include "list.h"
 #include <stdlib.h>
 
+/**
+ * Delete the first node of the list.
+ * @param head - Head of the list.
+ */
 void delete_first(node **head)
 {
     node *tmp;

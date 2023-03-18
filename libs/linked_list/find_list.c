@@ -7,6 +7,12 @@
 
 #include "list.h"
 
+/**
+ * Find a node in the list.
+ * @param list - List to search.
+ * @param function - Function to compare.
+ * @return - The node found.
+ */
 node *find_list(node *list, int (*function)(each_t each))
 {
     node *tmp = list;

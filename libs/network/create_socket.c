@@ -7,6 +7,10 @@
 
 #include "network.h"
 
+/**
+ * Create socket.
+ * @return - Return socket fd.
+ */
 int create_socket(void)
 {
     int skt = socket(AF_INET, SOCK_STREAM, 0);

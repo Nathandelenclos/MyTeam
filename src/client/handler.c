@@ -10,6 +10,10 @@
 #include "my.h"
 #include <errno.h>
 
+/**
+ * Loop for actions.
+ * @param client_socket - Socket of client.
+ */
 void loop_actions(int client_socket)
 {
     int is_running = true;
@@ -28,6 +32,12 @@ void loop_actions(int client_socket)
     }
 }
 
+/**
+ * Handle server actions.
+ * @param fds - Groups of file descriptors.
+ * @param client_socket  - Socket of client.
+ * @param is_running - Is running.
+ */
 void server_action(fd_set *fds, int client_socket, int *is_running)
 {
     if (FD_ISSET(client_socket, fds)) {
@@ -46,6 +56,12 @@ void server_action(fd_set *fds, int client_socket, int *is_running)
     }
 }
 
+/**
+ * Handle user actions.
+ * @param fds - Groups of file descriptors.
+ * @param client_socket - Socket of client.
+ * @param is_running - Is running.
+ */
 void user_action(fd_set *fds, int client_socket, int *is_running)
 {
     if (FD_ISSET(0, fds)) {
@@ -62,6 +78,10 @@ void user_action(fd_set *fds, int client_socket, int *is_running)
     }
 }
 
+/**
+ * Read user input.
+ * @return - Return packet.
+ */
 packet_t *user_read(void)
 {
     packet_t *socket = MALLOC(sizeof(packet_t));

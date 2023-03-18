@@ -18,7 +18,6 @@ typedef struct {
     context_t context;
 } command;
 
-
 static const command commands[] = {
     {NULL, "", 0, "None", NONE},
 };

@@ -8,6 +8,10 @@
 #include <stddef.h>
 #include "list.h"
 
+/**
+ * Reverse a linked list.
+ * @param head_ref - Head of the list.
+ */
 void reverse_list(node **head_ref)
 {
     node *prev = NULL;

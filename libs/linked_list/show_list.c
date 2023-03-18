@@ -10,6 +10,10 @@
 #include <stddef.h>
 #include <unistd.h>
 
+/**
+ * Show the list.
+ * @param list - List to show.
+ */
 void show_list(node *list)
 {
     node *tmp = list;

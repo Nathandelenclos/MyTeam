@@ -8,6 +8,12 @@
 #include "list.h"
 #include <stdlib.h>
 
+/**
+ * Free the list.
+ * @param head - Head of the list.
+ * @param p_free - Function to free the data.
+ * @return 0 if success, -1 if error.
+ */
 int free_list(node *head, void (*p_free)(void *data))
 {
     node* tmp;

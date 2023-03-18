@@ -10,9 +10,9 @@
 
 /**
  * Count of occurrence of char in string.
- * @param str
- * @param c
- * @return
+ * @param str - String to count.
+ * @param c - Char to count.
+ * @return - Return count of occurrence.
  */
 int count_occurrence_char(string str, char c)
 {
@@ -28,10 +28,10 @@ int count_occurrence_char(string str, char c)
 }
 
 /**
- * sl
- * @param str - {string} is string to split
- * @param delim 
- * @return 
+ * Split string.
+ * @param str - String to split
+ * @param delim - Delimiter
+ * @return - Return array of string.
  */
 string *split(string str, char delim)
 {
@@ -51,8 +51,8 @@ string *split(string str, char delim)
 
 /**
  * Len of array.
- * @param array
- * @return
+ * @param array - Array to count.
+ * @return - Return len of array.
  */
 int array_string_len(string *array)
 {
@@ -61,6 +61,11 @@ int array_string_len(string *array)
     return i;
 }
 
+/**
+ * Check if dir exist.
+ * @param dir - Dir to check.
+ * @return - Return 1 if exist, 0 if not.
+ */
 int exist_dir(string dir)
 {
     if (chdir(dir) == 0) {

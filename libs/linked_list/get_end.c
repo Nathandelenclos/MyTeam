@@ -8,6 +8,11 @@
 #include "list.h"
 #include <stdlib.h>
 
+/**
+ * Delete a node in the list.
+ * @param head_ref - Head of the list.
+ * @param key - Data to delete.
+ */
 node *get_end(node *list)
 {
     int len = 0;

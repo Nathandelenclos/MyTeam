@@ -13,7 +13,7 @@
  * Main function.
  * @param ac Number of args.
  * @param av Array of args.
- * @return
+ * @return - EXIT_SUCCESS or EXIT_FAILURE.
  */
 int main(int ac, char **av)
 {

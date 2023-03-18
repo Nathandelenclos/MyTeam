@@ -7,6 +7,11 @@
 
 #include "list.h"
 
+/**
+ * Map a function to each node of the list.
+ * @param list - List to map.
+ * @param function - Function to map.
+ */
 void map_list(node *list, void (*function)(each_t each))
 {
     node *tmp = list;
