@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-PROJECT	=	list
+PROJECT	=	Linked List
 NAME	=	../myteams/liblist.a
 
 OBJS	=	$(SRCS:.c=.o)

@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-PROJECT	=	my
+PROJECT	=	My
 NAME	=	../myteams/libmy.a
 
 OBJS	=	$(SRCS:.c=.o)
