@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2023
-** myftp
+** myTeams
 ** File description:
 ** user commands
 */
 
-#include "main.h"
+#include "server.h"

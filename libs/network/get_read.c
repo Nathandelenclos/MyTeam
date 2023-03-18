@@ -14,9 +14,9 @@
  * @param fd
  * @return
  */
-socket_t *get_read(int fd)
+packet_t *read_packet(int fd)
 {
-    socket_t *skt = MALLOC(sizeof(socket_t));
+    packet_t *skt = MALLOC(sizeof(packet_t));
     read(fd, &skt->code, sizeof(int ));
     read(fd, &skt->len, sizeof(int ));
     skt->data = MALLOC(sizeof(char) * (skt->len + 1));

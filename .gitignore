@@ -1,7 +1,8 @@
 include/list.h
 include/my.h
 include/network.h
-myftp
+include/code.h
+myTeams
 *.o
 vgcore.*
 coding-style-reports.log

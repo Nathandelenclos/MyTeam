@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2023
-** myFTP
+** myTeams
 ** File description:
 ** Server Manager
 */
 
-#include "main.h"
+#include "server.h"
 #include "list.h"
 
 /**
@@ -69,7 +69,7 @@ void new_connection(server_t *server)
             ntohs(client->sockaddr.sin_port));
         server->last_fd = client->socket_fd;
         put_in_list(&server->clients, client);
-        send_socket(client->socket_fd, create_data(SUCCESS, "test"));
+        send_packet(client->socket_fd, create_packet(SUCCESS, "test"));
     }
 }
 
@@ -85,10 +85,9 @@ void read_action(server_t *server)
         tmp_node != NULL; tmp_node = tmp_node->next) {
         tmp_client = tmp_node->data;
         if (FD_ISSET(tmp_client->socket_fd, &server->readfds)) {
-            socket_t *socket = get_read(tmp_client->socket_fd);
+            packet_t *socket = read_packet(tmp_client->socket_fd);
             disconect_client(server, tmp_client, strlen(socket->data));
-            //command_client(server, tmp_client, socket);
-            printf("%i: %s %i\n", socket->code, socket->data, socket->len);
+            command_client(server, tmp_client, socket);
             FREE(socket);
         }
     }

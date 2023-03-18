@@ -7,9 +7,9 @@
 
 #include "network.h"
 
-socket_t *create_data(int code, string data)
+packet_t *create_packet(int code, string data)
 {
-    socket_t *socket = MALLOC(sizeof(socket_t));
+    packet_t *socket = MALLOC(sizeof(packet_t));
     socket->data = my_strdup(data);
     socket->code = code;
     socket->len = strlen(data);

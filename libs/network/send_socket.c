@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int send_socket(int fd, socket_t *socket)
+int send_packet(int fd, packet_t *socket)
 {
     write(fd, &socket->code, sizeof(int));
     write(fd, &socket->len, sizeof(int));

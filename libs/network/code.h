@@ -9,6 +9,8 @@
     #define CODE_NETWORK_H
     #define SUCCESS 200
     #define ERROR 500
-    #define QUIT 0;
+    #define QUIT 0
+    #define UNFOUND 400
+    #define UNAUTHORIZED 401
 
 #endif

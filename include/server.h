@@ -36,14 +36,6 @@ typedef struct {
     node *user_in_teams;
 } server_t;
 
-typedef struct {
-    void (*function)(server_t *server, client_t *client, string data);
-    string name;
-    int auth_required;
-    string description;
-    context_t context;
-} command;
-
 void help_init(void);
 void init_socketaddr(server_t *server, int port);
 server_t *create_server(int port);
@@ -52,13 +44,11 @@ void read_action(server_t *server);
 void handle_client(server_t *server);
 void perror_exit(const char *string);
 void disconect_client(server_t *server, client_t *client, int valread);
-void command_client(server_t *server, client_t *client, socket_t *socket);
+void command_client(server_t *server, client_t *client, packet_t *socket);
 string *split(string str, char delim);
 int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
-
-static const command commands[] = {};
 
 #endif

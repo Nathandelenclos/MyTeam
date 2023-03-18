@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2023
-** myFtp
+** myTeams
 ** File description:
 ** Main
 */
 
-#include "main.h"
+#include "server.h"
 #include "list.h"
 #include <signal.h>
 

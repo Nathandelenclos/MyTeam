@@ -1,12 +1,14 @@
 /*
 ** EPITECH PROJECT, 2023
-** myFTP
+** myTeams
 ** File description:
 ** CommandManager
 */
 
-#include "main.h"
+#include "server.h"
+#include "commands.h"
 #include "list.h"
+#include "network.h"
 
 /**
  * Close fd of user when he is disconnected.
@@ -32,13 +34,14 @@ void disconect_client(server_t *server, client_t *client, int valread)
  * @param cmd
  * @param data
  */
-void exec_command(server_t *server, client_t *client, command cmd, socket_t
+void exec_command(server_t *server, client_t *client, command cmd, packet_t
 *socket)
 {
     if (!cmd.auth_required || (cmd.auth_required && client->user) ) {
         cmd.function(server, client, socket->data);
     } else {
-        dprintf(client->socket_fd, "530 you are not authenticate.\r\n");
+        send_packet(client->socket_fd,
+            create_packet(UNAUTHORIZED,"You are not logged in."));
     }
 }
 
@@ -49,15 +52,15 @@ void exec_command(server_t *server, client_t *client, command cmd, socket_t
  * @param valread
  * @param data
  */
-void command_client(server_t *server, client_t *client, socket_t *socket)
+void command_client(server_t *server, client_t *client, packet_t *socket)
 {
     string buff;
-    for (int i = 0; i < 14; ++i) {
+    for (int i = 0; commands[i].function != NULL; ++i) {
         buff = strstr(socket->data, commands[i].name);
         if (buff && strncmp(buff, socket->data, strlen(commands[i].name)) == 0 &&
         client->context == commands[i].context) {
             return exec_command(server, client, commands[i], socket);
         }
     }
-    dprintf(client->socket_fd, "500 unknown command !\r\n");
+    send_packet(client->socket_fd, create_packet(UNFOUND, "Command not found."));
 }

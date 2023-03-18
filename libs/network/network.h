@@ -23,13 +23,13 @@ typedef struct {
     int code;
     int len;
     string data;
-} socket_t;
+} packet_t;
 
 string my_strdup(string data);
-socket_t *get_read(int fd);
-int send_socket(int fd, socket_t *socket);
+packet_t *read_packet(int fd);
+int send_packet(int fd, packet_t *socket);
+packet_t *create_packet(int code, string data);
 int create_socket(void);
-socket_t *create_data(int code, string data);
 sockaddr_in_t create_sockaddr_in(int port, string ip);
 
 #endif

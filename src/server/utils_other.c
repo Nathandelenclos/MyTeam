@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2023
-** myftp
+** myTeams
 ** File description:
 ** utils
 */
 
-#include "main.h"
+#include "server.h"
 
 
 /**
