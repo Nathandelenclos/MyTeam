@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2023
-** myFtp
+** myTeams
 ** File description:
 ** Main
 */
 
-#ifndef FTP_H_
-    #define FTP_H_
+#ifndef TEAMS_H_
+    #define TEAMS_H_
 
     #include "struct.h"
     #include "my.h"
