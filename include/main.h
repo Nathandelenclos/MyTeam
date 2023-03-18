@@ -46,7 +46,7 @@ typedef struct {
 
 void help_init(void);
 void init_socketaddr(server_t *server, int port);
-server_t *create_server(int port, string dir);
+server_t *create_server(int port);
 void new_connection(server_t *server);
 void read_action(server_t *server);
 void handle_client(server_t *server);

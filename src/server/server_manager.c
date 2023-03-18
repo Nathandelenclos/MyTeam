@@ -28,7 +28,7 @@ void init_socketaddr(server_t *server, int port)
  * @see typedef server_t
  * @return Return typedef server_t malloc.
  */
-server_t *create_server(int port, string dir)
+server_t *create_server(int port)
 {
     server_t *server = MALLOC(sizeof(server_t));
     server->clients = NULL;
@@ -86,8 +86,9 @@ void read_action(server_t *server)
         tmp_client = tmp_node->data;
         if (FD_ISSET(tmp_client->socket_fd, &server->readfds)) {
             socket_t *socket = get_read(tmp_client->socket_fd);
-            //disconect_client(server, tmp_client, strlen(socket->data));
-            command_client(server, tmp_client, socket);
+            disconect_client(server, tmp_client, strlen(socket->data));
+            //command_client(server, tmp_client, socket);
+            printf("%i: %s %i\n", socket->code, socket->data, socket->len);
             FREE(socket);
         }
     }
@@ -113,7 +114,7 @@ void handle_client(server_t *server)
         if ((activity < 0) && (errno != EINTR)) {
             printf("Erreur lors de la surveillance des sockets\n");
         }
-        //read_action(server);
+        read_action(server);
         new_connection(server);
     }
 }

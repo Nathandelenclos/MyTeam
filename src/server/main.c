@@ -17,12 +17,12 @@
  */
 int main(int ac, char **av)
 {
-    if (ac != 3 || atoi(av[1]) == 0 || exist_dir(av[2]) == 0) {
+    if (ac != 2 || atoi(av[1]) == 0) {
         help_init();
         return 84;
     }
     signal(SIGINT, exit_all);
-    server_t *server = create_server(atoi(av[1]), av[2]);
+    server_t *server = create_server(atoi(av[1]));
     handle_client(server);
     return 0;
 }
