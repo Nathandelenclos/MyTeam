@@ -9,7 +9,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int send_socket(int fd, socket_t *socket) {
+int send_socket(int fd, socket_t *socket)
+{
     size_t size = sizeof(socket);
     write(fd, &size, sizeof(size_t));
     write(fd, socket, sizeof(socket));
