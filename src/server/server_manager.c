@@ -36,9 +36,7 @@ server_t *create_server(int port, string dir)
     server->teams = NULL;
     server->user_in_teams = NULL;
     int ret;
-    server->socket_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (server->socket_fd < 0)
-        perror_exit("socket()");
+    server->socket_fd = create_socket();
     init_socketaddr(server, port);
     ret = bind(server->socket_fd, (struct sockaddr *) &server->sockaddr,
         sizeof(server->sockaddr));
@@ -71,7 +69,7 @@ void new_connection(server_t *server)
             ntohs(client->sockaddr.sin_port));
         server->last_fd = client->socket_fd;
         put_in_list(&server->clients, client);
-        dprintf(client->socket_fd, "220 Connection success !\r\n");
+        send_socket(client->socket_fd, create_data(SUCCESS, "test"));
     }
 }
 
@@ -115,7 +113,7 @@ void handle_client(server_t *server)
         if ((activity < 0) && (errno != EINTR)) {
             printf("Erreur lors de la surveillance des sockets\n");
         }
-        read_action(server);
+        //read_action(server);
         new_connection(server);
     }
 }

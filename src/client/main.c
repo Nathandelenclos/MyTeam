@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <signal.h>
 #include "list.h"
 #include "network.h"
 
@@ -48,12 +49,19 @@ void server_action(fd_set *fds, int client_socket, int *is_running)
     }
 }
 
+void exit_all(int code)
+{
+    FREE_ALL();
+    exit(code == 84 ? 84 : 0);
+}
+
 int main(int ac, char **av)
 {
+    signal(SIGINT, exit_all);
     int client_socket = create_socket();
     sockaddr_in_t server_address = create_sockaddr_in(atoi(av[2]), av[1]);
     int is_running = true;
-    fd_set fd_grp;
+    fd_set fds;
 
     if (connect(client_socket, (struct sockaddr*)&server_address, sizeof(server_address)) < 0) {
         perror("La connexion a échoué");
@@ -61,17 +69,18 @@ int main(int ac, char **av)
     }
 
     while (is_running) {
-        FD_ZERO(&fd_grp);
-        FD_SET(0, &fd_grp);
-        FD_SET(client_socket, &fd_grp);
-        int activity = select(client_socket + 1, &fd_grp, NULL, NULL,
+        FD_ZERO(&fds);
+        FD_SET(0, &fds);
+        FD_SET(client_socket, &fds);
+        int activity = select(client_socket + 1, &fds, NULL, NULL,
             NULL);
         if ((activity < 0) && (errno != EINTR)) {
             printf("Erreur lors de la surveillance des sockets\n");
         }
-        user_action(&fd_grp, client_socket, &is_running);
+        user_action(&fds, client_socket, &is_running);
+        server_action(&fds, client_socket, &is_running);
     }
-
+    FREE_ALL();
     close(client_socket);
-    return 0;
+    return EXIT_SUCCESS;
 }

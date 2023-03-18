@@ -28,20 +28,6 @@ int count_occurrence_char(string str, char c)
 }
 
 /**
- * strdup with my_malloc for garbage collector.
- * @param data
- * @return
- */
-string my_strdup(string data)
-{
-    string ret = MALLOC(sizeof(char) * strlen(data) + 1);
-    for (int i = 0; i <= strlen(data); ++i) {
-        ret[i] = data[i];
-    }
-    return ret;
-}
-
-/**
  * sl
  * @param str - {string} is string to split
  * @param delim 

@@ -16,11 +16,11 @@
  */
 socket_t *get_read(int fd)
 {
-    socket_t *socket = MALLOC(sizeof(socket_t));
-    void *size = MALLOC(sizeof(size_t));
-    memset(socket, 0, sizeof(socket_t));
-    memset(size, 0, sizeof(size_t));
-    read(fd, size, sizeof(size_t));
-    read(fd, socket, *((size_t *)size));
-    return socket;
+    socket_t *skt = MALLOC(sizeof(socket_t));
+    read(fd, &skt->code, sizeof(int ));
+    read(fd, &skt->len, sizeof(int ));
+    skt->data = MALLOC(sizeof(char) * (skt->len + 1));
+    memset(skt->data, 0, (skt->len + 1));
+    read(fd, skt->data, skt->len);
+    return skt;
 }

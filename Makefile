@@ -8,6 +8,12 @@
 PROJECT	=	MyTeams
 NAME	=	myTeams
 
+MAKES	=	./libs/network	\
+           	./libs/my	\
+            ./src/server	\
+            ./src/client	\
+            ./src/server	\
+
 ################################################################################
 
 SHELL	=	/bin/bash
@@ -28,38 +34,24 @@ CYAN	=	\033[1;36m
 all: $(NAME)
 
 debug:
-	@ make -C ./src/server debug
-	@ make -C ./src/client debug
-debug: $(NAME)
+	@ $(foreach file, ${MAKES}, make -C $(file) debug;)
 
 exp:
 	@ export LD_LIBRARY_PATH=./libs/myteams/
 	@ printf "$(GREEN)Done$(RESET)\n"
 
 $(NAME): exp
-	@ make -C ./libs/linked_list
-	@ make -C ./libs/network
-	@ make -C ./libs/my
-	@ make -C ./src/server
-	@ make -C ./src/client
+	@ $(foreach file, ${MAKES}, make -C $(file);)
 	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
 
 clean:
-	@ make -C ./libs/linked_list clean
-	@ make -C ./libs/my clean
-	@ make -C ./libs/network clean
-	@ make -C ./src/server clean
-	@ make -C ./src/client clean
+	@ $(foreach file, ${MAKES}, make -C $(file) clean;)
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting object files"
 	@ $(RM) $(OBJS)
 	@ printf "$(GREEN)Done$(RESET)\n"
 
 fclean: clean
-	@ make -C ./libs/linked_list fclean
-	@ make -C ./libs/my fclean
-	@ make -C ./libs/network fclean
-	@ make -C ./src/server fclean
-	@ make -C ./src/client fclean
+	@ $(foreach file, ${MAKES}, make -C $(file) fclean;)
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting $(NAME)"
 	@ $(RM) $(NAME)
 	@ $(RM) vgcore.*
@@ -71,3 +63,24 @@ tests_run:	$(TESTOBJ)
 
 re: fclean all
 de: fclean debug
+
+client:
+	@ make -C ./libs/linked_list
+	@ make -C ./libs/network
+	@ make -C ./libs/my
+	@ make -C ./src/client
+	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
+
+server:
+	@ make -C ./libs/linked_list
+	@ make -C ./libs/network
+	@ make -C ./libs/my
+	@ make -C ./src/server
+	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
+
+libs:
+	@ make -C ./libs/linked_list
+	@ make -C ./libs/network
+	@ make -C ./libs/my
+	@ make -C ./src/server
+	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"

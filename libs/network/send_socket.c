@@ -11,7 +11,7 @@
 
 int send_socket(int fd, socket_t *socket)
 {
-    size_t size = sizeof(socket);
-    write(fd, &size, sizeof(size_t));
-    write(fd, socket, sizeof(socket));
+    write(fd, &socket->code, sizeof(int));
+    write(fd, &socket->len, sizeof(int));
+    write(fd, socket->data, sizeof(socket->len));
 }

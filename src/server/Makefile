@@ -54,7 +54,7 @@ CYAN	=	\033[1;36m
 
 all: $(NAME)
 
-debug: CFLAGS += -g3 -D DEBUG
+debug: CFLAGS += -g
 debug: $(NAME)
 
 $(NAME): $(OBJS)
