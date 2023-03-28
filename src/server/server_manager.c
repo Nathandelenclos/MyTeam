@@ -57,6 +57,7 @@ void new_connection(server_t *server)
     if (FD_ISSET(server->socket_fd, &server->readfds)) {
         client_t *client = MALLOC(sizeof(client_t));
         client->user = NULL;
+        client->context = NONE;
         client->socket_fd = accept(server->socket_fd,
         (struct sockaddr *)
         &client->sockaddr,

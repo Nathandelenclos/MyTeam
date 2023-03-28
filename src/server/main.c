@@ -10,7 +10,7 @@
 #include <signal.h>
 
 /**
- * Main function.
+ * Main function for Server.
  * @param ac Number of args.
  * @param av Array of args.
  * @return - EXIT_SUCCESS or EXIT_FAILURE.

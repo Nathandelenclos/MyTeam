@@ -12,5 +12,5 @@
     #define QUIT 0
     #define UNFOUND 400
     #define UNAUTHORIZED 401
-
+    #define LIST_SUCCESS_CODE 201
 #endif

@@ -18,7 +18,10 @@ typedef struct {
     context_t context;
 } command;
 
+void list_team(server_t *server, client_t *client, string data);
+
 static const command commands[] = {
+    {list_team, "/list", 0, "list all existing channels", NONE},
     {NULL, "", 0, "None", NONE},
 };
 

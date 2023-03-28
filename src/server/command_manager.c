@@ -28,11 +28,11 @@ void disconect_client(server_t *server, client_t *client, int valread)
 }
 
 /**
- *
- * @param server
- * @param client
- * @param cmd
- * @param data
+ * Execute command.
+ * @param server - server
+ * @param client - client
+ * @param cmd - command
+ * @param data - data of command
  */
 void exec_command(server_t *server, client_t *client, command cmd, packet_t
 *socket)
@@ -52,14 +52,14 @@ void exec_command(server_t *server, client_t *client, command cmd, packet_t
  * @param valread
  * @param data
  */
-void command_client(server_t *server, client_t *client, packet_t *socket)
+void command_client(server_t *server, client_t *client, packet_t *packet)
 {
     string buff;
     for (int i = 0; commands[i].function != NULL; ++i) {
-        buff = strstr(socket->data, commands[i].name);
-        if (buff && strncmp(buff, socket->data, strlen(commands[i].name)) == 0 &&
+        buff = strstr(packet->data, commands[i].name);
+        if (buff && strncmp(buff, packet->data, strlen(commands[i].name)) == 0 &&
         client->context == commands[i].context) {
-            return exec_command(server, client, commands[i], socket);
+            return exec_command(server, client, commands[i], packet);
         }
     }
     send_packet(client->socket_fd, create_packet(UNFOUND, "Command not found."));

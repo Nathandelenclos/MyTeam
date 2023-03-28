@@ -27,6 +27,7 @@ void unfound(packet_t *socket);
 
 static const listener listeners[] = {
     {SUCCESS, success},
+    {LIST_SUCCESS_CODE, success},
     {UNFOUND, unfound},
     {QUIT, NULL}
 };

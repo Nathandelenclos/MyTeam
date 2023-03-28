@@ -13,14 +13,15 @@
  */
 void success(packet_t *packet)
 {
-    printf("Info: %s\n", socket->data);
+    printf("Info: %s\n", packet->data);
 }
 
 /**
  * Unfound listener.
  * @param packet - Packet to read.
  */
-void unfound(packet_t *socket)
+void unfound(packet_t *packet)
 {
-    printf("Error: %s\n", socket->data);
+    printf("Error: %s\n", packet->data);
 }
+
