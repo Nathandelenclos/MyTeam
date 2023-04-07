@@ -2,6 +2,8 @@ include/list.h
 include/my.h
 include/network.h
 include/code.h
+include/logging_client.h
+include/logging_server.h
 myTeams
 *.o
 vgcore.*
