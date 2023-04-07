@@ -13,4 +13,6 @@
     #define UNFOUND 400
     #define UNAUTHORIZED 401
     #define LIST_SUCCESS_CODE 201
+    #define LOGIN_SUCCESS 202
+    #define LOGOUT_SUCCESS 203
 #endif

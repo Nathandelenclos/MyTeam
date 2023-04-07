@@ -25,7 +25,7 @@ void help_init(void)
 {
     printf("USAGE: ./myteams_server port\r\n");
     printf("\tport is the port number on which "
-           "the server socket listens\r\n");
+        "the server socket listens\r\n");
 }
 
 /**

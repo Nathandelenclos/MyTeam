@@ -17,7 +17,7 @@ void help_init(void)
 {
     printf("USAGE: ./myteams_cli ip port\n");
     printf("\tip\tis the server ip address on which"
-           " the server socket listens.\n");
+        " the server socket listens.\n");
     printf("\tport\tis the port number on which the server socket listens.\n");
 }
 

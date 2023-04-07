@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "network.h": "c",
+        "my.h": "c",
+        "stdlib.h": "c",
+        "select.h": "c",
+        "server.h": "c",
+        "list.h": "c",
+        "struct.h": "c",
+        "stdio.h": "c",
+        "typeinfo": "c"
+    }
+}

@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2023
-** myTeams
+** EPITECH PROJECT, 2022
+** B-NWP-400-LIL-4-1-myteams-simon.riembault
 ** File description:
-**
+** sucess.c
 */
 
 #include "client.h"
@@ -25,3 +25,7 @@ void unfound(packet_t *packet)
     printf("Error: %s\n", packet->data);
 }
 
+void login_user(packet_t *packet)
+{
+    printf("Login: %s\n", packet->data);
+}

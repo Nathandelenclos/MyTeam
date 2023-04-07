@@ -69,5 +69,7 @@ char *my_strncat(char *, char const *, int);
 void print_int(int fd, char *arg, int index, va_list ap);
 void print_float(int fd, char *arg, int index, va_list ap);
 int my_count_char(char *string, char c);
+char **str_to_word_array(char *str, char *sep);
+char *my_strconcat(char *str1, char *str2);
 
 #endif

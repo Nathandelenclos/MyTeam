@@ -32,6 +32,16 @@ void loop_actions(int client_socket)
     }
 }
 
+void exec_server_action(packet_t *socket)
+{
+    for (int i = 0; listeners[i].code != 0; i++) {
+        if (listeners[i].code == socket->code) {
+            listeners[i].func(socket);
+            return;
+        }
+    }
+}
+
 /**
  * Handle server actions.
  * @param fds - Groups of file descriptors.
@@ -46,12 +56,7 @@ void server_action(fd_set *fds, int client_socket, int *is_running)
             *is_running = false;
             return;
         }
-        for (int i = 0; listeners[i].code != 0; i++) {
-            if (listeners[i].code == socket->code) {
-                listeners[i].func(socket);
-                break;
-            }
-        }
+        exec_server_action(socket);
         FREE(socket);
     }
 }

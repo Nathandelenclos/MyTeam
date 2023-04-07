@@ -57,10 +57,11 @@ void command_client(server_t *server, client_t *client, packet_t *packet)
     string buff;
     for (int i = 0; commands[i].function != NULL; ++i) {
         buff = strstr(packet->data, commands[i].name);
-        if (buff && strncmp(buff, packet->data, strlen(commands[i].name)) == 0 &&
-        client->context == commands[i].context) {
+        if (buff && strncmp(buff, packet->data, strlen(commands[i].name)) == 0
+            && client->context == commands[i].context) {
             return exec_command(server, client, commands[i], packet);
         }
     }
-    send_packet(client->socket_fd, create_packet(UNFOUND, "Command not found."));
+    send_packet(client->socket_fd,
+        create_packet(UNFOUND, "Command not found."));
 }
