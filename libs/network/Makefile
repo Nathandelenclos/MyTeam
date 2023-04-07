@@ -18,6 +18,7 @@ LDFLAGS	+=	-L../../libs/myteams/
 LDFLAGS	+=	-llist
 LDFLAGS	+=	-lmy
 LDFLAGS	+=	-lmyteams
+LDFLAGS	+=	-luuid
 
 ################################################################################
 

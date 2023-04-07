@@ -31,5 +31,6 @@ int send_packet(int fd, packet_t *socket);
 packet_t *create_packet(int code, string data);
 int create_socket(void);
 sockaddr_in_t create_sockaddr_in(int port, string ip);
+string new_uuid(void);
 
 #endif
