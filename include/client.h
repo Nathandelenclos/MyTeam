@@ -26,12 +26,14 @@ void loop_actions(int client_socket);
 void success(packet_t *socket);
 void unfound(packet_t *socket);
 void login_user(packet_t *socket);
+void logout_user(packet_t *socket);
 
 static const listener listeners[] = {
     {SUCCESS, success},
     {ERROR, unfound},
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
+    {LOGOUT_SUCCESS, logout_user},
     {UNFOUND, unfound},
     {QUIT, NULL}
 };
