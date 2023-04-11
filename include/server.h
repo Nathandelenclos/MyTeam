@@ -52,4 +52,7 @@ string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
 
+int server_event_user_logged_in(char const *user_uuid);
+int server_event_user_logged_out(char const *user_uuid);
+
 #endif

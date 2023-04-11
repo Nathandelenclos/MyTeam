@@ -28,6 +28,7 @@ LDFLAGS	+=	-llist
 LDFLAGS	+=	-lmy
 LDFLAGS	+=	-lnet
 LDFLAGS	+=	-lmyteams
+LDFLAGS	+=	-luuid
 
 TESTCFLAGS = $(CFLAGS) $(LDFLAGS) --coverage -lcriterion
 

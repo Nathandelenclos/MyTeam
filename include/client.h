@@ -27,10 +27,12 @@ void success(packet_t *socket);
 void unfound(packet_t *socket);
 void login_user(packet_t *socket);
 void logout_user(packet_t *socket);
+void give_users(packet_t *socket);
 
 static const listener listeners[] = {
     {SUCCESS, success},
     {ERROR, unfound},
+    {USERS_SUCCESS_CODE, give_users},
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
     {LOGOUT_SUCCESS, logout_user},
