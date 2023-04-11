@@ -21,7 +21,7 @@ TESTNAME	=	unit_tests
 ################################################################################
 
 #CFLAGS	+=	-W -Wall -Wextra
-CFLAGS	+=	-I../../include/
+CFLAGS	+=	-I../../include/ -I ../../libs/myteams
 
 LDFLAGS	+=	-L../../libs/myteams/
 LDFLAGS	+=	-llist

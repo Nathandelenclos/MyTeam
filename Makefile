@@ -40,8 +40,6 @@ debug:
 $(NAME):
 	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
 	@ $(foreach file, ${MAKES}, ${MAKE} $(file);)
-	@ cp ./libs/myteams/logging_client.h ./include/
-	@ cp ./libs/myteams/logging_server.h ./include/
 	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "$(GREEN)Done$(RESET)"
 
 clean:
@@ -55,8 +53,6 @@ fclean: clean
 	@ $(PRINT) "$(YELLOW)%-40b$(RESET)" "Deleting $(NAME)"
 	@ $(RM) $(NAME)
 	@ $(RM) vgcore.*
-	@ $(RM) ./include/logging_client.h
-	@ $(RM) ./include/logging_server.h
 	@ $(RM) -r ./doc
 	@ printf "$(GREEN)Done$(RESET)\n"
 
