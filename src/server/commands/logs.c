@@ -8,17 +8,23 @@
 #include "server.h"
 #include "stdbool.h"
 
+/**
+ * check if the user exist in server info.
+ * @param server - server info.
+ * @param client - client info.
+ * @param name - name of the user who wants to login.
+ */
 char *login_user_exist(server_t *server, client_t *client, string name)
 {
+    if (client->user != NULL)
+        return ("You are already login");
     user_t *tmp;
-    char *str = NULL;
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
         tmp = (user_t *)node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
-            str = my_strconcat("Welcome back ", name);
             client->user = tmp;
-            return str;
+            return my_strconcat("Welcome back ", name);
         }
     }
     user_t *new_user = MALLOC(sizeof(user_t));
@@ -28,10 +34,15 @@ char *login_user_exist(server_t *server, client_t *client, string name)
     new_user->online = true;
     put_in_list(&server->users, new_user);
     client->user = new_user;
-    sprintf(str, "%s %s %s", "You are now login ", name, client->user->uuid);
-    return str;
+    return my_multcat(4, "You are now login ", name, " ", client->user->uuid);
 }
 
+/**
+ * login the user.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /login.
+ */
 void login_user(server_t *server, client_t *client, string data)
 {
     int i = 0;
@@ -49,6 +60,12 @@ void login_user(server_t *server, client_t *client, string data)
     send_packet(client->socket_fd, packet);
 }
 
+/**
+ * check if the user exist in server info.
+ * @param server - server info.
+ * @param client - client info.
+ * @param name - name of the user who wants to logout.
+ */
 char *logout_user_exist(server_t *server, client_t *client, string name)
 {
     user_t *tmp;
@@ -68,6 +85,12 @@ char *logout_user_exist(server_t *server, client_t *client, string name)
     return str;
 }
 
+/**
+ * logout the user.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /logout.
+ */
 void logout_user(server_t *server, client_t *client, string data)
 {
     int i = 0;
@@ -92,6 +115,12 @@ void logout_user(server_t *server, client_t *client, string data)
     send_packet(client->socket_fd, packet);
 }
 
+/**
+ * give all the users in server info.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /users.
+ */
 void give_users(server_t *server, client_t *client, string data)
 {
     int i = 0;
@@ -109,8 +138,8 @@ void give_users(server_t *server, client_t *client, string data)
         node_tmp = node_tmp->next) {
         tmp = (user_t *)node_tmp->data;
         if (tmp != NULL)
-            sprintf(msg_cli, "%s%s %s %d",
-            "USERS:\n", tmp->name, tmp->uuid, tmp->online);
+            msg_cli = my_multcat(7, msg_cli, "\n",
+            tmp->name, " ", tmp->uuid, " ", (tmp->online ? "1" : "0"));
     }
     packet = create_packet(USERS_SUCCESS_CODE, msg_cli);
     send_packet(client->socket_fd, packet);

@@ -30,3 +30,19 @@ char *my_strconcat(char *str1, char *str2)
     strcat(res, str2);
     return (res);
 }
+
+char *my_multcat(int nb, ...)
+{
+    va_list ap;
+    char *res = malloc(sizeof(char) + 1);
+    char *tmp = NULL;
+    res[0] = '\0';
+    va_start(ap, nb);
+    for (int i = 0; i < nb; ++i) {
+        tmp = my_strconcat(res, va_arg(ap, char *));
+        free(res);
+        res = tmp;
+    }
+    va_end(ap);
+    return res;
+}
