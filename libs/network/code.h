@@ -16,4 +16,5 @@
     #define LOGIN_SUCCESS 202
     #define LOGOUT_SUCCESS 203
     #define USERS_SUCCESS_CODE 204
+    #define INFO_USER_GIVEN_SUCCESS 205
 #endif
