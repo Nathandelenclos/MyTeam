@@ -12,6 +12,7 @@
     #include "my.h"
     #include "list.h"
     #include "network.h"
+    #include "logging_server.h"
     #include <sys/select.h>
 
     #define MAX_CONNECTIONS 1024
