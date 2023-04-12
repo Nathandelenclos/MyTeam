@@ -29,3 +29,13 @@ void login_user(packet_t *packet)
 {
     printf("Login: %s\n", packet->data);
 }
+
+void logout_user(packet_t *packet)
+{
+    printf("Logout: %s\n", packet->data);
+}
+
+void give_users(packet_t *packet)
+{
+    printf("Users: %s\n", packet->data);
+}

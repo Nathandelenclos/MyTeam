@@ -15,4 +15,5 @@
     #define LIST_SUCCESS_CODE 201
     #define LOGIN_SUCCESS 202
     #define LOGOUT_SUCCESS 203
+    #define USERS_SUCCESS_CODE 204
 #endif

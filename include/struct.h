@@ -7,6 +7,7 @@
 
 #include "list.h"
 #include "my.h"
+#include "stdbool.h"
 
 #ifndef STRUCT_H
     #define STRUCT_H
@@ -22,6 +23,7 @@ typedef struct {
     string name;
     string uuid;
     node *p_discuss;
+    bool online;
 } user_t;
 
 typedef struct {
