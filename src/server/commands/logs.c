@@ -28,10 +28,7 @@ char *login_user_exist(server_t *server, client_t *client, string name)
     new_user->online = true;
     put_in_list(&server->users, new_user);
     client->user = new_user;
-    server_event_user_logged_in(client->user->uuid);
-    str = my_strconcat("You are now login ", name);
-    str = my_strconcat(str, " ");
-    str = my_strconcat(str, client->user->uuid);
+    sprintf(str, "%s %s %s", "You are now login ", name, client->user->uuid);
     return str;
 }
 
@@ -46,6 +43,7 @@ void login_user(server_t *server, client_t *client, string data)
         packet = create_packet(ERROR, "bad nb arg");
     } else {
         msg_cli = login_user_exist(server, client, command[1]);
+        server_event_user_logged_in(client->user->uuid);
         packet = create_packet(LOGIN_SUCCESS, msg_cli);
     }
     send_packet(client->socket_fd, packet);
@@ -81,19 +79,16 @@ void logout_user(server_t *server, client_t *client, string data)
         packet = create_packet(ERROR, "bad nb arg");
         send_packet(client->socket_fd, packet);
         return;
-    }
-    if (client->user == NULL) {
+    } else if (client->user == NULL) {
         packet = create_packet(ERROR, "No user login");
         send_packet(client->socket_fd, packet);
         return;
     }
     msg_cli = logout_user_exist(server, client, client->user->name);
-    if (strcmp(msg_cli, "Missed logout") == 0) {
+    if (strcmp(msg_cli, "Missed logout") == 0)
         packet = create_packet(ERROR, "Missed logout");
-        send_packet(client->socket_fd, packet);
-        return;
-    }
-    packet = create_packet(LOGOUT_SUCCESS, msg_cli);
+    else
+        packet = create_packet(LOGOUT_SUCCESS, msg_cli);
     send_packet(client->socket_fd, packet);
 }
 
@@ -110,21 +105,12 @@ void give_users(server_t *server, client_t *client, string data)
         return;
     }
     user_t *tmp;
-    msg_cli = my_strconcat(msg_cli, "USERS:\n");
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
         tmp = (user_t *)node_tmp->data;
-        if (tmp != NULL) {
-            msg_cli = my_strconcat(msg_cli, tmp->name);
-            msg_cli = my_strconcat(msg_cli, " ");
-            msg_cli = my_strconcat(msg_cli, tmp->uuid);
-            msg_cli = my_strconcat(msg_cli, " ");
-            if (tmp->online == true)
-                msg_cli = my_strconcat(msg_cli, "1");
-            else
-                msg_cli = my_strconcat(msg_cli, "0");
-            //use sprintf() followed by scanf
-        }
+        if (tmp != NULL)
+            sprintf(msg_cli, "%s%s %s %d",
+            "USERS:\n", tmp->name, tmp->uuid, tmp->online);
     }
     packet = create_packet(USERS_SUCCESS_CODE, msg_cli);
     send_packet(client->socket_fd, packet);
