@@ -6,6 +6,7 @@
 */
 
 #include "client.h"
+#include "logging_client.h"
 
 /**
  * Success listener.
@@ -13,7 +14,9 @@
  */
 void success(packet_t *packet)
 {
+    //sscanf(packet->data, "%s|%s|%s", client_uuid, client_name, message);
     printf("Info: %s\n", packet->data);
+    //client_event_logged_in()
 }
 
 /**

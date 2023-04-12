@@ -31,8 +31,10 @@ void use(server_t *server, client_t *client, string data);
 void create(server_t *server, client_t *client, string data);
 void list_team(server_t *server, client_t *client, string data);
 void give_info(server_t *server, client_t *client, string data);
+void display_help(server_t *server, client_t *client, string data);
 
 static const command commands[] = {
+    {display_help, "/help", 0, "show help", NONE},
     {login_user, "/login", 0, "set the user_name used by client", NONE},
     {logout_user, "/logout", 0, "disconnect the client from the server", NONE},
     {give_users, "/users", 0, "get the list of all users that exist on the\
