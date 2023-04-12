@@ -60,3 +60,38 @@ void give_users(packet_t *packet)
     FREE(user_name);
     FREE(user_uuid);
 }
+
+void create_team(packet_t *packet)
+{
+    printf("Create team: %s\n", packet->data);
+}
+
+void create_channel(packet_t *packet)
+{
+    printf("Create channel: %s\n", packet->data);
+}
+
+void create_thread(packet_t *packet)
+{
+    printf("Create thread: %s\n", packet->data);
+}
+
+void create_reply(packet_t *packet)
+{
+    printf("Create reply: %s\n", packet->data);
+}
+
+void suscribe(packet_t *packet)
+{
+    printf("Suscribe to team: %s\n", packet->data);
+}
+
+void suscribed(packet_t *packet)
+{
+    printf("Is suscribed to team: %s\n", packet->data);
+}
+
+void unsuscribe(packet_t *packet)
+{
+    printf("Unsuscribe to team: %s\n", packet->data);
+}

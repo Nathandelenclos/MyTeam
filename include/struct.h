@@ -23,6 +23,7 @@ typedef struct {
     string name;
     string uuid;
     node *p_discuss;
+    node *team_subscribed;
     bool online;
 } user_t;
 

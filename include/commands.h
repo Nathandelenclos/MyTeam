@@ -28,7 +28,10 @@ void subscribe(server_t *server, client_t *client, string data);
 void subscribed(server_t *server, client_t *client, string data);
 void unsubscribe(server_t *server, client_t *client, string data);
 void use(server_t *server, client_t *client, string data);
-void create(server_t *server, client_t *client, string data);
+void create_team(server_t *server, client_t *client, string data);
+void create_channel(server_t *server, client_t *client, string data);
+void create_thread(server_t *server, client_t *client, string data);
+void create_reply(server_t *server, client_t *client, string data);
 void list_team(server_t *server, client_t *client, string data);
 void give_info(server_t *server, client_t *client, string data);
 
@@ -47,8 +50,10 @@ static const command commands[] = {
         users subscribed to a team", NONE},
     {unsubscribe, "/unsubscribe", 0, "unsubscribe from a team", NONE},
     {use, "/use", 0, "use specify a context team/channel/thread", NONE},
-    {create, "/create", 0, "based on what is being used create the sub\
-        resource", NONE},
+    {create_team, "/create", 0, "create a team", NONE},
+    {create_channel, "/create", 0, "create a team", TEAM},
+    {create_thread, "/create", 0, "create a team", CHANNEL},
+    {create_reply, "/create", 0, "create a team", THREAD},
     {list_team, "/list", 0, "list all existing teams", NONE},
     {give_info, "/info", 0, "based on what is being used list the current",
         NONE},

@@ -25,6 +25,7 @@ typedef struct {
     socklen_t len;
     user_t *user;
     context_t context;
+    void *data;
 } client_t;
 
 typedef struct {
@@ -52,5 +53,6 @@ int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
+int check_args(char *data, int *nb_arg, char *command0);
 
 #endif

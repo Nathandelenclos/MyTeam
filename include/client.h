@@ -29,6 +29,13 @@ void unfound(packet_t *socket);
 void login_user(packet_t *socket);
 void logout_user(packet_t *socket);
 void give_users(packet_t *socket);
+void create_team(packet_t *socket);
+void create_channel(packet_t *socket);
+void create_thread(packet_t *socket);
+void create_reply(packet_t *socket);
+void suscribe(packet_t *socket);
+void suscribed(packet_t *socket);
+void unsuscribe(packet_t *socket);
 
 static const listener listeners[] = {
     {SUCCESS, success},
@@ -37,6 +44,13 @@ static const listener listeners[] = {
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
     {LOGOUT_SUCCESS, logout_user},
+    {CREATE_TEAM_SUCCESS, create_team},
+    {CREATE_CHANNEL_SUCCESS, create_channel},
+    {CREATE_THREAD_SUCCESS, create_thread},
+    {CREATE_REPLY_SUCCESS, create_reply},
+    {SUSCRIBE_SUCCESS, suscribe},
+    {SUSCRIBED_SUCCESS, suscribed},
+    {UNSUSCRIBE_SUCCESS, unsuscribe},
     {UNFOUND, unfound},
     {QUIT, NULL}
 };

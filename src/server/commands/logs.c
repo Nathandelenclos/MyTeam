@@ -24,6 +24,7 @@ char *login_user_exist(server_t *server, client_t *client, string name)
         tmp = (user_t *)node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
             client->user = tmp;
+            client->user->online = true;
             return my_strconcat("Welcome back ", name);
         }
     }
@@ -48,11 +49,11 @@ void login_user(server_t *server, client_t *client, string data)
     int i = 0;
     char *msg_cli = NULL;
     packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
-    for (i; command[i] != NULL; i++);
-    if (i != 2) {
-        packet = create_packet(ERROR, "bad nb arg");
+    int nb_arg[] = {1, -1};
+    if (check_args(data, nb_arg, "/login") == 1) {
+        packet = create_packet(ERROR, "bad command");
     } else {
+        char **command = str_to_word_array(data, "\"");
         msg_cli = login_user_exist(server, client, command[1]);
         server_event_user_logged_in(client->user->uuid);
         packet = create_packet(LOGIN_SUCCESS, msg_cli);
