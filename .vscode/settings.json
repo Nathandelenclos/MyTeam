@@ -8,6 +8,8 @@
         "list.h": "c",
         "struct.h": "c",
         "stdio.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "sstream": "c",
+        "client.h": "c"
     }
 }

@@ -12,6 +12,7 @@
     #include "my.h"
     #include "list.h"
     #include "network.h"
+    #include "logging_server.h"
     #include <sys/select.h>
 
     #define MAX_CONNECTIONS 1024
@@ -51,8 +52,5 @@ int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
-
-int server_event_user_logged_in(char const *user_uuid);
-int server_event_user_logged_out(char const *user_uuid);
 
 #endif

@@ -6,6 +6,7 @@
 */
 
 #include "network.h"
+#include "logging_client.h"
 #include <sys/select.h>
 
 #ifndef CLIENT_H
