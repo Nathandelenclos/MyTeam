@@ -32,6 +32,9 @@
     #define SUSCRIBED_SUCCESS 210
     #define UNSUSCRIBE_SUCCESS 211
     #define USE_SUCCESS 212
+    #define SUBSCRIBE_SUCCESS 213
+    #define SUBSCRIBED_SUCCESS 214
+    #define UNSUBSCRIBE_SUCCESS 215
 
 // Others:
     #define QUIT 0

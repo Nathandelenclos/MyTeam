@@ -24,7 +24,6 @@ typedef struct {
     string name;
     string uuid;
     node *p_discuss;
-    node *team_subscribed;
     bool online;
 } user_t;
 
@@ -33,6 +32,7 @@ typedef struct {
     string name;
     string description;
     node *channels;
+    node *subscribers;
 } team_t;
 
 typedef struct {

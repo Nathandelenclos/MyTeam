@@ -39,6 +39,7 @@ bool is_good_create_channel(server_t *server, client_t *client, string data)
     return true;
 }
 
+
 /**
  * Create a new channel.
  * @param server - server.
@@ -49,6 +50,10 @@ void create_channel(server_t *server, client_t *client, string data)
 {
     if (!is_good_create_channel(server, client, data))
         return;
+    if (!is_subscribed(client->team, client->user)) {
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED, client->team->uuid));
+        return;
+    }
     char **command = str_to_word_array(data, "\"");
     channel_t *new_channel = MALLOC(sizeof(channel_t));
     new_channel->name = my_strdup(command[1]);

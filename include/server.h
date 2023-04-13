@@ -57,5 +57,7 @@ int exist_dir(string dir);
 int check_args(char *data, int *nb_arg, char *command0);
 int len_array(string *array);
 string itoa(long n);
+int broadcast(server_t *server, packet_t *packet);
+bool is_subscribed(team_t *team, user_t *user);
 
 #endif

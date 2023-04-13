@@ -24,7 +24,13 @@ bool good_actions_use(server_t *server, client_t *client, string data)
     }
     return true;
 }
-
+/**
+ * Set team at the client.
+ * @param server - server info.
+ * @param client - client info.
+ * @param command_parsed - command parsed.
+ * @return - true or false.
+ */
 bool set_team(server_t *server, client_t *client, string *command_parsed)
 {
     if (len_array(command_parsed) >= 2 && command_parsed[1] != NULL) {
@@ -38,6 +44,13 @@ bool set_team(server_t *server, client_t *client, string *command_parsed)
     return true;
 }
 
+/**
+ * Set channel at the client.
+ * @param server - server info.
+ * @param client - client info.
+ * @param command_parsed - command parsed.
+ * @return - true or false.
+ */
 bool set_channel(server_t *server, client_t *client, string *command_parsed)
 {
     if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
@@ -55,6 +68,13 @@ bool set_channel(server_t *server, client_t *client, string *command_parsed)
     return true;
 }
 
+/**
+ * Set thread at the client.
+ * @param server - server info.
+ * @param client - client info.
+ * @param command_parsed - command parsed.
+ * @return - true or false.
+ */
 bool set_thread(server_t *server, client_t *client, string *command_parsed)
 {
     if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {

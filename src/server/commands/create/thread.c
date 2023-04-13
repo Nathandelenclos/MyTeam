@@ -39,6 +39,17 @@ bool is_good_create_thread(server_t *server, client_t *client, string data)
     return true;
 }
 
+thread_t *new_thread(string title, string body)
+{
+    thread_t *thread = MALLOC(sizeof(thread_t));
+    thread->title = my_strdup(title);
+    thread->body = my_strdup(body);
+    thread->uuid = new_uuid();
+    thread->time = time(NULL);
+    thread->replies = NULL;
+    return thread;
+}
+
 /**
  * Create a new thread.
  * @param server - server.
@@ -49,19 +60,19 @@ void create_thread(server_t *server, client_t *client, string data)
 {
     if (!is_good_create_thread(server, client, data))
         return;
-    char **command = str_to_word_array(data, "\"");
-    thread_t *new_thread = MALLOC(sizeof(thread_t));
-    new_thread->title = my_strdup(command[1]);
-    new_thread->body = my_strdup(command[3]);
-    new_thread->uuid = new_uuid();
-    new_thread->time = time(NULL);
-    new_thread->replies = NULL;
-    put_in_list(&client->channel->threads, new_thread);
-    server_event_thread_created(client->channel->uuid, new_thread->uuid, client->user->uuid,
-        new_thread->title, new_thread->body);
-    string info = my_multcat(9,client->channel->uuid, "|", new_thread->uuid, "|", itoa(new_thread->time), "|",
-    new_thread->title, "|", new_thread->body);
+    if (!is_subscribed(client->team, client->user)) {
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED, client->team->uuid));
+        return;
+    }
+    string *command = str_to_word_array(data, "\"");
+    thread_t *thread = new_thread(command[1], command[3]);
+    put_in_list(&client->channel->threads, thread);
+    server_event_thread_created(client->channel->uuid, thread->uuid, client->user->uuid,
+        thread->title, thread->body);
+    string info = my_multcat(9,client->channel->uuid, "|", thread->uuid, "|", itoa(thread->time), "|",
+        thread->title, "|", thread->body);
     send_packet(client->socket_fd, create_packet(CREATE_THREAD_SUCCESS,info));
     free(info);
+    free_array(command);
 }
 
