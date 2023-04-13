@@ -25,7 +25,9 @@ typedef struct {
     socklen_t len;
     user_t *user;
     context_t context;
-    void *data;
+    team_t *team;
+    channel_t *channel;
+    thread_t *thread;
 } client_t;
 
 typedef struct {

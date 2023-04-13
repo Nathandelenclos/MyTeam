@@ -11,6 +11,12 @@
     #define ERROR 500
     #define UNFOUND 400
     #define UNAUTHORIZED 401
+    #define UNKNOW_TEAM 402
+    #define UNKNOW_CHANNEL 403
+    #define UNKNOW_THREAD 404
+    #define UNKNOW_USER 405
+    #define ALREADY_EXIST 406
+
 
 // Success:
     #define SUCCESS 200

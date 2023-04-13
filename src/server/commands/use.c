@@ -9,57 +9,6 @@
 #include "stdbool.h"
 
 /**
- * get the team by uuid.
- * @param teams - list of teams.
- * @param str - uuid.
- * @return - team.
- */
-team_t *get_team_by_uuid(node *teams, string str)
-{
-    for (node *tmp = teams; tmp; tmp = tmp->next) {
-        team_t *team = tmp->data;
-        if (strcmp(team->uuid, str) == 0) {
-            return team;
-        }
-    }
-    return NULL;
-}
-
-/**
- * get the channel by uuid.
- * @param channels - list of channels.
- * @param str - uuid.
- * @return - channel.
- */
-channel_t *get_channel_by_uuid(node *channels, string str)
-{
-    for (node *tmp = channels; tmp; tmp = tmp->next) {
-        channel_t *channel = tmp->data;
-        if (strcmp(channel->uuid, str) == 0) {
-            return channel;
-        }
-    }
-    return NULL;
-}
-
-/**
- * get the thread by uuid.
- * @param threads - list of threads.
- * @param str - uuid.
- * @return - thread.
- */
-thread_t *get_thread_by_uuid(node *threads, string str)
-{
-    for (node *tmp = threads; tmp; tmp = tmp->next) {
-        thread_t *thread = tmp->data;
-        if (strcmp(thread->uuid, str) == 0) {
-            return thread;
-        }
-    }
-    return NULL;
-}
-
-/**
  * check if the command is good.
  * @param server - server info.
  * @param client - client info.
@@ -76,6 +25,57 @@ bool good_actions_use(server_t *server, client_t *client, string data)
     return true;
 }
 
+bool set_team(server_t *server, client_t *client, string *command_parsed)
+{
+    if (len_array(command_parsed) >= 2 && command_parsed[1] != NULL) {
+        client->context = TEAM;
+        client->team = get_team_by_uuid(server->teams, command_parsed[1]);
+        if (client->team == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            return false;
+        }
+    }
+    return true;
+}
+
+bool set_channel(server_t *server, client_t *client, string *command_parsed)
+{
+    if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
+        client->context = CHANNEL;
+        if (client->team == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            return false;
+        }
+        client->channel = get_channel_by_uuid(client->team->channels, command_parsed[3]);
+        if (client->channel == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            return false;
+        }
+    }
+    return true;
+}
+
+bool set_thread(server_t *server, client_t *client, string *command_parsed)
+{
+    if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {
+        client->context = THREAD;
+        if (client->team == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            return false;
+        }
+        if (client->channel == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            return false;
+        }
+        client->thread = get_thread_by_uuid(client->channel->threads, command_parsed[5]);
+        if (client->thread == NULL) {
+            send_packet(client->socket_fd, create_packet(UNKNOW_THREAD, "Thread not found."));
+            return false;
+        }
+    }
+    return true;
+}
+
 /**
  * use the context.
  * @param server - server info.
@@ -86,22 +86,20 @@ void use(server_t *server, client_t *client, string data)
 {
     if (!good_actions_use(server, client, data))
         return;
-    char **command_parsed = str_to_word_array(data, "\"");
     client->context = NONE;
-    client->data = NULL;
-    if (command_parsed[1] != NULL) {
-        client->context = TEAM;
-        client->data = get_team_by_uuid(server->teams, command_parsed[1]);
+    string *command_parsed = str_to_word_array(data, "\"");
+    if (!set_team(server, client, command_parsed)) {
+        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the NONE"));
+        return;
     }
-    if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
-        team_t *team = client->data;
-        client->context = CHANNEL;
-        client->data = get_channel_by_uuid(team->channels, command_parsed[3]);
+    if (!set_channel(server, client, command_parsed)) {
+        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the TEAM"));
+        return;
     }
-    if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {
-        channel_t *channel = client->data;
-        client->context = THREAD;
-        client->data = get_thread_by_uuid(channel->threads, command_parsed[5]);
+    if (!set_thread(server, client, command_parsed)) {
+        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the CHANNEL"));
+        return;
     }
-    send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the context."));
+    send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the THREAD"));
+    free_array(command_parsed);
 }

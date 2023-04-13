@@ -9,6 +9,24 @@
 #include "stdbool.h"
 #include <time.h>
 
+bool is_good_create_team(server_t *server, client_t *client, string data)
+{
+    int nb_arg[] = {2, -1};
+    if (check_args(data, nb_arg, "/create") == 1) {
+        send_packet(client->socket_fd,create_packet(ERROR, "Bad command."));
+        return false;
+    }
+    string *command = str_to_word_array(data, "\"");
+    for (node *tmp = server->teams; tmp; tmp = tmp->next) {
+        team_t *team = tmp->data;
+        if (strcmp(team->name, command[1]) == 0) {
+            send_packet(client->socket_fd,create_packet(ALREADY_EXIST, ""));
+            return false;
+        }
+    }
+    return true;
+}
+
 /**
  * Create a new team.
  * @param server - server.
@@ -17,11 +35,8 @@
  */
 void create_team(server_t *server, client_t *client, string data)
 {
-    int nb_arg[] = {2, -1};
-    if (check_args(data, nb_arg, "/create") == 1) {
-        send_packet(client->socket_fd,create_packet(ERROR, "Bad command."));
+    if (!is_good_create_team(server, client, data))
         return;
-    }
     char **command = str_to_word_array(data, "\"");
     team_t *new_team = MALLOC(sizeof(team_t));
     new_team->name = my_strdup(command[1]);

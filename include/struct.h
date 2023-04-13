@@ -67,4 +67,8 @@ typedef struct {
     node *replies;
 } thread_t;
 
+thread_t *get_thread_by_uuid(node *threads, string str);
+channel_t *get_channel_by_uuid(node *channels, string str);
+team_t *get_team_by_uuid(node *teams, string str);
+
 #endif

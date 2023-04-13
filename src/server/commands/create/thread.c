@@ -23,10 +23,19 @@ bool is_good_create_thread(server_t *server, client_t *client, string data)
         send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
         return false;
     }
-    if (client->data == NULL) {
-        send_packet(client->socket_fd,create_packet(ERROR, "You are not in a team."));
+    if (client->channel == NULL) {
+        send_packet(client->socket_fd,create_packet(UNKNOW_CHANNEL, ""));
         return false;
     };
+    char **command = str_to_word_array(data, "\"");
+    for (node *tmp = client->channel->threads; tmp; tmp = tmp->next) {
+        thread_t *thread = ((thread_t *)tmp->data);
+        if (strcmp(thread->title, command[1]) == 0) {
+            send_packet(client->socket_fd,
+                create_packet(ALREADY_EXIST, ""));
+            return false;
+        }
+    }
     return true;
 }
 
@@ -41,17 +50,16 @@ void create_thread(server_t *server, client_t *client, string data)
     if (!is_good_create_thread(server, client, data))
         return;
     char **command = str_to_word_array(data, "\"");
-    channel_t *channel = ((channel_t *)client->data);
     thread_t *new_thread = MALLOC(sizeof(thread_t));
     new_thread->title = my_strdup(command[1]);
     new_thread->body = my_strdup(command[3]);
     new_thread->uuid = new_uuid();
     new_thread->time = time(NULL);
     new_thread->replies = NULL;
-    put_in_list(&channel->threads, new_thread);
-    server_event_thread_created(channel->uuid, new_thread->uuid, client->user->uuid,
+    put_in_list(&client->channel->threads, new_thread);
+    server_event_thread_created(client->channel->uuid, new_thread->uuid, client->user->uuid,
         new_thread->title, new_thread->body);
-    string info = my_multcat(9,channel->uuid, "|", new_thread->uuid, "|", itoa(new_thread->time), "|",
+    string info = my_multcat(9,client->channel->uuid, "|", new_thread->uuid, "|", itoa(new_thread->time), "|",
     new_thread->title, "|", new_thread->body);
     send_packet(client->socket_fd, create_packet(CREATE_THREAD_SUCCESS,info));
     free(info);

@@ -72,5 +72,6 @@ int my_count_char(char *string, char c);
 char **str_to_word_array(char *str, char *sep);
 char *my_strconcat(char *str1, char *str2);
 char *my_multcat(int nb, ...);
+void free_array(char **array);
 
 #endif
