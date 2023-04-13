@@ -36,6 +36,7 @@ typedef struct {
     node *users;
     node *teams;
     node *user_in_teams;
+    node *discusses;
 } server_t;
 
 void help_init(void);
@@ -52,5 +53,6 @@ int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
+client_t *correct_uuid(string uuid, server_t *server);
 
 #endif

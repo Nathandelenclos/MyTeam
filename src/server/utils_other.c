@@ -37,3 +37,24 @@ void exit_all(int code)
     FREE_ALL();
     exit(code == 84 ? 84 : 0);
 }
+
+/**
+ * Check if a uuid exists.
+ * @param uuid - uuid to check
+ * @param server - server
+ * @return user_t structure if exist otherwise NULL
+ */
+client_t *correct_uuid(string uuid, server_t *server)
+{
+    if (strlen(uuid) != 36)
+        return NULL;
+    for (node *clients = server->clients; clients != NULL;
+    clients = clients->next) {
+        client_t *client = (client_t *)clients->data;
+        if (client != NULL && client->user && client->user->uuid != NULL &&
+            strcmp(client->user->uuid, uuid) == 0) {
+            return client;
+        }
+    }
+    return NULL;
+}

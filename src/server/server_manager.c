@@ -35,6 +35,7 @@ server_t *create_server(int port)
     server->users = NULL;
     server->teams = NULL;
     server->user_in_teams = NULL;
+    server->discusses = NULL;
     int ret;
     server->socket_fd = create_socket();
     init_socketaddr(server, port);

@@ -30,6 +30,7 @@ void login_user(packet_t *socket);
 void logout_user(packet_t *socket);
 void give_users(packet_t *socket);
 void give_user_info(packet_t *packet);
+void message_sent(packet_t *packet);
 
 static const listener listeners[] = {
     {SUCCESS, success},
@@ -38,8 +39,9 @@ static const listener listeners[] = {
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
     {LOGOUT_SUCCESS, logout_user},
-    {UNFOUND, unfound},
     {INFO_USER_GIVEN_SUCCESS, give_user_info},
+    {MESSAGE_SENT, message_sent},
+    {UNFOUND, unfound},
     {QUIT, NULL}
 };
 
