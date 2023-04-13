@@ -23,7 +23,10 @@ void success(packet_t *packet)
  */
 void unfound(packet_t *packet)
 {
-    printf("Error: %s\n", packet->data);
+    string data = my_strdup(packet->data);
+    char **array = str_to_word_array(data, "|");
+    printf("Error: %s\n", array[1] ? array[1] : array[0]);
+    client_error_unknown_user(array[0]);
 }
 
 /**

@@ -54,5 +54,6 @@ string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
 client_t *correct_uuid(string uuid, server_t *server);
+user_t *correct_uuid_user(string uuid, server_t *server);
 
 #endif
