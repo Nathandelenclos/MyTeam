@@ -61,7 +61,10 @@ typedef struct {
 
 typedef struct {
     string uuid;
-    node *messages;
+    time_t time;
+    string title;
+    string body;
+    node *replies;
 } thread_t;
 
 #endif

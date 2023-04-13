@@ -84,7 +84,7 @@ bool good_actions_use(server_t *server, client_t *client, string data)
  */
 void use(server_t *server, client_t *client, string data)
 {
-    if (good_actions_use(server, client, data) == false)
+    if (!good_actions_use(server, client, data))
         return;
     char **command_parsed = str_to_word_array(data, "\"");
     client->context = NONE;
@@ -105,4 +105,3 @@ void use(server_t *server, client_t *client, string data)
     }
     send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the context."));
 }
-
