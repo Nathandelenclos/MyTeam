@@ -49,11 +49,11 @@ void perror_exit(const char *string);
 void disconect_client(server_t *server, client_t *client, int valread);
 void command_client(server_t *server, client_t *client, packet_t *socket);
 string *split(string str, char delim);
-int array_string_len(string *array);
 string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
 int check_args(char *data, int *nb_arg, char *command0);
 int len_array(string *array);
+string itoa(long n);
 
 #endif

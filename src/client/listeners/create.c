@@ -23,7 +23,10 @@ void create_channel(packet_t *packet)
 
 void create_thread(packet_t *packet)
 {
-    printf("Create thread: %s\n", packet->data);
+    string *data = str_to_word_array(packet->data, "|");
+    time_t time = atoi(data[2]);
+    client_event_thread_created(data[0], data[1], time, data[3], data[4]);
+    printf("New Thread \"%s - %s\" created (%s)\n", data[3], data[4], data[0]);
 }
 
 void create_reply(packet_t *packet)
