@@ -54,5 +54,6 @@ string my_strdup(string data);
 void exit_all(int code);
 int exist_dir(string dir);
 int check_args(char *data, int *nb_arg, char *command0);
+int len_array(string *array);
 
 #endif

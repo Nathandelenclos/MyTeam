@@ -24,8 +24,13 @@ void server_action(fd_set *fds, int client_socket, int *is_running);
 void exit_all(int code);
 void loop_actions(int client_socket);
 
-void success(packet_t *socket);
+// Errors:
+void default_error(packet_t *packet);
 void unfound(packet_t *socket);
+void unauthorized(packet_t *packet);
+
+// Success:
+void success(packet_t *socket);
 void login_user(packet_t *socket);
 void logout_user(packet_t *socket);
 void give_users(packet_t *socket);
@@ -36,10 +41,16 @@ void create_reply(packet_t *socket);
 void suscribe(packet_t *socket);
 void suscribed(packet_t *socket);
 void unsuscribe(packet_t *socket);
+void use_success(packet_t *packet);
 
 static const listener listeners[] = {
+    // Errors:
+    {ERROR, default_error},
+    {UNFOUND, unfound},
+    {UNAUTHORIZED, unauthorized},
+
+    // Success:
     {SUCCESS, success},
-    {ERROR, unfound},
     {USERS_SUCCESS_CODE, give_users},
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
@@ -51,7 +62,8 @@ static const listener listeners[] = {
     {SUSCRIBE_SUCCESS, suscribe},
     {SUSCRIBED_SUCCESS, suscribed},
     {UNSUSCRIBE_SUCCESS, unsuscribe},
-    {UNFOUND, unfound},
+    {USE_SUCCESS, use_success},
+    // Others:
     {QUIT, NULL}
 };
 

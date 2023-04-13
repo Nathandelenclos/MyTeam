@@ -37,3 +37,16 @@ void exit_all(int code)
     FREE_ALL();
     exit(code == 84 ? 84 : 0);
 }
+
+/**
+ * Get the length of an array.
+ * @param array - array to get length.
+ * @return - length of array.
+ */
+int len_array(string *array)
+{
+    int i = 0;
+
+    for (; array[i]; i++);
+    return i;
+}

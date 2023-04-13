@@ -13,6 +13,7 @@
     #define STRUCT_H
 
 typedef enum {
+    ANY,
     NONE,
     TEAM,
     CHANNEL,
@@ -54,6 +55,7 @@ typedef struct {
 typedef struct {
     string name;
     string uuid;
+    string description;
     node *threads;
 } channel_t;
 

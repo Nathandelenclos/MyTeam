@@ -8,71 +8,101 @@
 #include "server.h"
 #include "stdbool.h"
 
-// char *set_team(server_t *server, client_t *client, string name, string desc)
-// {
-//     team_t *new_team = MALLOC(sizeof(team_t));
-//     new_team->name = my_strdup(name);
-//     new_team->channels = NULL;
-//     new_team->uuid = new_uuid();
-//     new_team->description = desc;
-//     put_in_list(&server->teams, new_team);
-//     server_event_team_created(new_team->uuid, name, client->user->uuid);
-//     return my_multcat(4, "Team ", name, " ", new_team->uuid, " created");
-// }
-
-// void create_team(server_t *server, client_t *client, string data)
-// {
-//     int i = 0;
-//     char *msg_cli = NULL;
-//     packet_t *packet;
-//     char **command = str_to_word_array(data, " \t");
-//     int nb_arg[] = {2, -1};
-//     if (check_args(data, nb_arg, "/login") == 1) {
-//         packet = create_packet(ERROR, "bad command");
-//     } else if (client->user == NULL) {
-//         packet = create_packet(ERROR, "client not login");
-//     } else {
-//         char **command = str_to_word_array(data, "\"");
-//         string msg_cli = set_team(server, client, command[1], command[3]);
-//         packet = create_packet(CREATE_TEAM_SUCCESS, msg_cli);
-//     }
-//     send_packet(client->socket_fd, packet);
-// }
-
-void use_team(server_t *server, client_t *client, string data)
+/**
+ * get the team by uuid.
+ * @param teams - list of teams.
+ * @param str - uuid.
+ * @return - team.
+ */
+team_t *get_team_by_uuid(node *teams, string str)
 {
-    ;
+    for (node *tmp = teams; tmp; tmp = tmp->next) {
+        team_t *team = tmp->data;
+        if (strcmp(team->uuid, str) == 0) {
+            return team;
+        }
+    }
+    return NULL;
 }
 
-void use_channel(server_t *server, client_t *client, string data)
+/**
+ * get the channel by uuid.
+ * @param channels - list of channels.
+ * @param str - uuid.
+ * @return - channel.
+ */
+channel_t *get_channel_by_uuid(node *channels, string str)
 {
-    ;
+    for (node *tmp = channels; tmp; tmp = tmp->next) {
+        channel_t *channel = tmp->data;
+        if (strcmp(channel->uuid, str) == 0) {
+            return channel;
+        }
+    }
+    return NULL;
 }
 
-void use_thread(server_t *server, client_t *client, string data)
+/**
+ * get the thread by uuid.
+ * @param threads - list of threads.
+ * @param str - uuid.
+ * @return - thread.
+ */
+thread_t *get_thread_by_uuid(node *threads, string str)
 {
-    ;
+    for (node *tmp = threads; tmp; tmp = tmp->next) {
+        thread_t *thread = tmp->data;
+        if (strcmp(thread->uuid, str) == 0) {
+            return thread;
+        }
+    }
+    return NULL;
 }
 
-void use(server_t *server, client_t *client, string data)
+/**
+ * check if the command is good.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /use.
+ * @return - true or false.
+ */
+bool good_actions_use(server_t *server, client_t *client, string data)
 {
-    int i = 0;
-    char *msg_cli = NULL;
-    packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
     int nb_arg[] = {0, 1, 2, 3, -1};
     if (check_args(data, nb_arg, "/use") == 1) {
-        packet = create_packet(ERROR, "bad command");
-    } else if (client->user == NULL) {
-        packet = create_packet(ERROR, "client not login");
-    } else {
-        char **command = str_to_word_array(data, "\"");
-        for (/*parcourir tout les teams et trouver celui avec le bon uuid*/)
-        {
-            /**/
-        }
-        
-        packet = create_packet(CREATE_TEAM_SUCCESS, msg_cli);
+        send_packet(client->socket_fd,create_packet(ERROR, "bad command"));
+        return false;
     }
-    send_packet(client->socket_fd, packet);
+    return true;
 }
+
+/**
+ * use the context.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /use.
+ */
+void use(server_t *server, client_t *client, string data)
+{
+    if (good_actions_use(server, client, data) == false)
+        return;
+    char **command_parsed = str_to_word_array(data, "\"");
+    client->context = NONE;
+    client->data = NULL;
+    if (command_parsed[1] != NULL) {
+        client->context = TEAM;
+        client->data = get_team_by_uuid(server->teams, command_parsed[1]);
+    }
+    if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
+        team_t *team = client->data;
+        client->context = CHANNEL;
+        client->data = get_channel_by_uuid(team->channels, command_parsed[3]);
+    }
+    if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {
+        channel_t *channel = client->data;
+        client->context = THREAD;
+        client->data = get_thread_by_uuid(channel->threads, command_parsed[5]);
+    }
+    send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the context."));
+}
+

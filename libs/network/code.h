@@ -7,11 +7,13 @@
 
 #ifndef CODE_NETWORK_H
     #define CODE_NETWORK_H
-    #define SUCCESS 200
+// Errors:
     #define ERROR 500
-    #define QUIT 0
     #define UNFOUND 400
     #define UNAUTHORIZED 401
+
+// Success:
+    #define SUCCESS 200
     #define LIST_SUCCESS_CODE 201
     #define LOGIN_SUCCESS 202
     #define LOGOUT_SUCCESS 203
@@ -23,5 +25,9 @@
     #define SUSCRIBE_SUCCESS 209
     #define SUSCRIBED_SUCCESS 210
     #define UNSUSCRIBE_SUCCESS 211
+    #define USE_SUCCESS 212
+
+// Others:
+    #define QUIT 0
 
 #endif

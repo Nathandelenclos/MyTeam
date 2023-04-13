@@ -17,33 +17,6 @@ void success(packet_t *packet)
 }
 
 /**
- * Unfound listener.
- * @param packet - Packet to read.
- */
-void unfound(packet_t *packet)
-{
-    printf("Error: %s\n", packet->data);
-}
-
-/**
- * LOGIN_SUCCESS listener.
- * @param packet - Packet to read.
- */
-void login_user(packet_t *packet)
-{
-    printf("Login: %s\n", packet->data);
-}
-
-/**
- * LOGOUT_SUCCESS listener.
- * @param packet - Packet to read.
- */
-void logout_user(packet_t *packet)
-{
-    printf("Logout: %s\n", packet->data);
-}
-
-/**
  * USERS_SUCCESS_CODE listener.
  * @param packet - Packet to read.
  */
@@ -61,37 +34,11 @@ void give_users(packet_t *packet)
     FREE(user_uuid);
 }
 
-void create_team(packet_t *packet)
+/**
+ * USE_SUCCESS listener.
+ * @param packet - Packet to read.
+ */
+void use_success(packet_t *packet)
 {
-    printf("Create team: %s\n", packet->data);
-}
-
-void create_channel(packet_t *packet)
-{
-    printf("Create channel: %s\n", packet->data);
-}
-
-void create_thread(packet_t *packet)
-{
-    printf("Create thread: %s\n", packet->data);
-}
-
-void create_reply(packet_t *packet)
-{
-    printf("Create reply: %s\n", packet->data);
-}
-
-void suscribe(packet_t *packet)
-{
-    printf("Suscribe to team: %s\n", packet->data);
-}
-
-void suscribed(packet_t *packet)
-{
-    printf("Is suscribed to team: %s\n", packet->data);
-}
-
-void unsuscribe(packet_t *packet)
-{
-    printf("Unsuscribe to team: %s\n", packet->data);
+    printf("Info: %s\n", packet->data);
 }

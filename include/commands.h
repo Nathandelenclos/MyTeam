@@ -38,24 +38,24 @@ void give_info(server_t *server, client_t *client, string data);
 static const command commands[] = {
     {login_user, "/login", 0, "set the user_name used by client", NONE},
     {logout_user, "/logout", 0, "disconnect the client from the server", NONE},
-    {give_users, "/users", 0, "get the list of all users that exist on the\
-        domain", NONE},
-    {give_user_info, "/user", 0, "get information about a user", NONE},
-    {send_to_user, "/send", 0, "end a message to a user", NONE},
-    {message_exchanged, "/messages", 0, "list all messages exchange with an\
+    {give_users, "/users", 1, "get the list of all users that exist on the\
+        domain", ANY},
+    {give_user_info, "/user", 1, "get information about a user", NONE},
+    {send_to_user, "/send", 1, "end a message to a user", NONE},
+    {message_exchanged, "/messages", 1, "list all messages exchange with an\
         user", NONE},
-    {subscribe, "/subscribe", 0, "subscribe to the event of a team and its sub\
+    {subscribe, "/subscribe", 1, "subscribe to the event of a team and its sub\
         directories (enable reception of all events from a team)", NONE},
-    {subscribed, "/subscribed", 0, "list all subscribed teams or list all\
+    {subscribed, "/subscribed", 1, "list all subscribed teams or list all\
         users subscribed to a team", NONE},
-    {unsubscribe, "/unsubscribe", 0, "unsubscribe from a team", NONE},
-    {use, "/use", 0, "use specify a context team/channel/thread", NONE},
-    {create_team, "/create", 0, "create a team", NONE},
-    {create_channel, "/create", 0, "create a team", TEAM},
-    {create_thread, "/create", 0, "create a team", CHANNEL},
-    {create_reply, "/create", 0, "create a team", THREAD},
-    {list_team, "/list", 0, "list all existing teams", NONE},
-    {give_info, "/info", 0, "based on what is being used list the current",
+    {unsubscribe, "/unsubscribe", 1, "unsubscribe from a team", NONE},
+    {use, "/use", 1, "use specify a context team/channel/thread", NONE},
+    {create_channel, "/create", 1, "create a team", TEAM},
+    {create_thread, "/create", 1, "create a team", CHANNEL},
+    {create_reply, "/create", 1, "create a team", THREAD},
+    {create_team, "/create", 1, "create a team", NONE},
+    {list_team, "/list", 1, "list all existing teams", NONE},
+    {give_info, "/info", 1, "based on what is being used list the current",
         NONE},
     {NULL, "", 0, "None", NONE}
 };
