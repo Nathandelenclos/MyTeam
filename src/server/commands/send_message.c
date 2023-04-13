@@ -11,7 +11,7 @@
 #include "time.h"
 
 void add_to_disscus_list(p_discuss_t *discuss, client_t *client,
-                         user_t *user, message_t *message_sent)
+                            user_t *user, message_t *message_sent)
 {
     put_in_list(&discuss->users, client->user);
     put_in_list(&discuss->users, user);
@@ -19,7 +19,7 @@ void add_to_disscus_list(p_discuss_t *discuss, client_t *client,
 }
 
 p_discuss_t *send_message(packet_t *packet, client_t *client,
-                  client_t *user, char **command)
+                            client_t *user, char **command)
 {
     string message = my_multcat(5, client->user->uuid, "|",
                                 client->user->name, "|", command[2]);
@@ -42,7 +42,7 @@ p_discuss_t *send_message(packet_t *packet, client_t *client,
 }
 
 p_discuss_t *send_message_offline(client_t *client,
-                          user_t *user, char **command)
+                                    user_t *user, char **command)
 {
     string message = my_multcat(5, client->user->uuid, "|",
                                 client->user->name, "|", command[2]);

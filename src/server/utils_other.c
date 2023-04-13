@@ -43,7 +43,7 @@ user_t *correct_uuid_user(string uuid, server_t *server)
     if (strlen(uuid) != 36)
         return NULL;
     for (node *users = server->users; users != NULL;
-         users = users->next) {
+            users = users->next) {
         user_t *user = (user_t *)users->data;
         if (user != NULL && strcmp(user->uuid, uuid) == 0) {
             return user;
