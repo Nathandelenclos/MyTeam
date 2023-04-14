@@ -55,5 +55,13 @@ void exit_all(int code);
 int exist_dir(string dir);
 client_t *correct_uuid(string uuid, server_t *server);
 user_t *correct_uuid_user(string uuid, server_t *server);
+p_discuss_t *find_correct_user(int i, p_discuss_t *discussion,
+                               client_t *client, string data);
+p_discuss_t *find_correct_discussion(server_t *server,
+                                     client_t *client, string data);
+p_discuss_t *send_message_offline(client_t *client, server_t *server,
+                                  user_t *user, char **command);
+p_discuss_t *send_message(client_t *client, server_t *server,
+                          client_t *user, char **command);
 
 #endif
