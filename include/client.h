@@ -41,6 +41,7 @@ static const listener listeners[] = {
     {LOGOUT_SUCCESS, logout_user},
     {INFO_USER_GIVEN_SUCCESS, give_user_info},
     {MESSAGE_SENT, message_sent},
+    {LIST_MESSAGES_SUCCESS_CODE, success},
     {UNFOUND, unfound},
     {QUIT, NULL}
 };
