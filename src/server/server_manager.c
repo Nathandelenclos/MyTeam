@@ -55,13 +55,7 @@ server_t *create_server(int port)
 void new_connection(server_t *server)
 {
     if (FD_ISSET(server->socket_fd, &server->readfds)) {
-        client_t *client = MALLOC(sizeof(client_t));
-        client->user = NULL;
-        client->context = NONE;
-        client->socket_fd = accept(server->socket_fd,
-        (struct sockaddr *)
-        &client->sockaddr,
-        &client->len);
+        client_t *client = create_client(server->socket_fd);
         if (client->socket_fd < 0) {
             perror_exit("Erreur lors de l'acceptation de la connexion client");
         }
@@ -75,26 +69,6 @@ void new_connection(server_t *server)
 }
 
 /**
- * Handle message of user and execute commands.
- * @param server - Server to handle.
- */
-void read_action(server_t *server)
-{
-    client_t *tmp_client;
-
-    for (node *tmp_node = server->clients;
-        tmp_node != NULL; tmp_node = tmp_node->next) {
-        tmp_client = tmp_node->data;
-        if (FD_ISSET(tmp_client->socket_fd, &server->readfds)) {
-            packet_t *socket = read_packet(tmp_client->socket_fd);
-            disconect_client(server, tmp_client, strlen(socket->data));
-            command_client(server, tmp_client, socket);
-            FREE(socket);
-        }
-    }
-}
-
-/**
  * Manage all action of users.
  * @param server - Server to manage.
  */
@@ -102,19 +76,21 @@ void handle_client(server_t *server)
 {
     int activity;
     server->last_fd = server->socket_fd;
-    while (1) {
+    bool is_running = true;
+    while (is_running) {
         FD_ZERO(&server->readfds);
+        FD_SET(0, &server->readfds);
         FD_SET(server->socket_fd, &server->readfds);
-        for (node *tmp_node = server->clients;
-            tmp_node != NULL; tmp_node = tmp_node->next)
-            FD_SET(((client_t *) tmp_node->data)->socket_fd, &server->readfds);
+        for (node *tmp = server->clients;
+            tmp != NULL; tmp = tmp->next)
+            FD_SET(((client_t *) tmp->data)->socket_fd, &server->readfds);
 
         activity = select(server->last_fd + 1, &server->readfds, NULL, NULL,
             NULL);
         if ((activity < 0) && (errno != EINTR)) {
             printf("Erreur lors de la surveillance des sockets\n");
         }
-        read_action(server);
+        read_action(server, &is_running);
         new_connection(server);
     }
 }

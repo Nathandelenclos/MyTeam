@@ -10,6 +10,9 @@
         "stdio.h": "c",
         "typeinfo": "c",
         "sstream": "c",
-        "client.h": "c"
+        "client.h": "c",
+        "random": "c",
+        "algorithm": "c",
+        "type_traits": "c"
     }
 }
