@@ -55,6 +55,16 @@ bool is_good_create_channel(server_t *server, client_t *client, string data)
     return true;
 }
 
+channel_t *create_new_channel(string name, string description)
+{
+    channel_t *new_channel = MALLOC(sizeof(channel_t));
+    new_channel->name = my_strdup(name);
+    new_channel->threads = NULL;
+    new_channel->uuid = new_uuid();
+    new_channel->description = my_strdup(description);
+    return new_channel;
+}
+
 /**
  * Create a new channel.
  * @param server - server.
@@ -71,11 +81,7 @@ void create_channel(server_t *server, client_t *client, string data)
         return;
     }
     char **command = str_to_word_array(data, "\"");
-    channel_t *new_channel = MALLOC(sizeof(channel_t));
-    new_channel->name = my_strdup(command[1]);
-    new_channel->threads = NULL;
-    new_channel->uuid = new_uuid();
-    new_channel->description = my_strdup(command[3]);
+    channel_t *new_channel = create_new_channel(command[1], command[3]);
     put_in_list(&client->team->channels, new_channel);
     server_event_channel_created(client->team->uuid,
     new_channel->uuid, new_channel->name);

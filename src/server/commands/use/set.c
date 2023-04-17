@@ -35,6 +35,17 @@ bool set_team(server_t *server, client_t *client, string *command_parsed)
     return true;
 }
 
+bool set_channel_second_part(client_t *client)
+{
+    if (client->channel == NULL) {
+        client->context = TEAM;
+        send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL,
+            client->context_uuids->channel_uuid));
+        return false;
+    }
+    return true;
+}
+
 /**
  * Set channel at the client.
  * @param server - server info.
@@ -58,12 +69,8 @@ bool set_channel(server_t *server, client_t *client, string *command_parsed)
         if (client->context_uuids->channel_uuid != NULL)
             FREE(client->context_uuids->channel_uuid);
         client->context_uuids->channel_uuid = my_strdup(command_parsed[3]);
-        if (client->channel == NULL) {
-            client->context = TEAM;
-            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL,
-                client->context_uuids->channel_uuid));
+        if (!set_channel_second_part(client))
             return false;
-        }
     }
     return true;
 }
