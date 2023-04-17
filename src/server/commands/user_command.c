@@ -29,9 +29,9 @@ packet_t *create_info_from_client(client_t *given_user, client_t *client)
 {
     string msg_cli = NULL;
     packet_t *packet;
-    msg_cli = MALLOC(sizeof(char) * strlen(client->user->name) + 41);
+    msg_cli = MALLOC(sizeof(char) * strlen(given_user->user->name) + 41);
     sprintf(msg_cli, "the user with the given uuid's name is %s",
-            client->user->name);
+            given_user->user->name);
     string message = my_multcat(7, given_user->user->name, "|",
                                 given_user->user->uuid, "|", msg_cli, "|",
                                 given_user->user->online ? "1" : "0");

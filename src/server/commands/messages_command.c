@@ -7,6 +7,7 @@
 
 #include "server.h"
 #include "stdbool.h"
+#include "time.h"
 
 void send_all_messages(server_t *server, client_t *client,
                         p_discuss_t *discussion)
@@ -14,8 +15,9 @@ void send_all_messages(server_t *server, client_t *client,
     packet_t *packet;
     for (node *tmp = discussion->messages; tmp != NULL; tmp = tmp->next) {
         message_t *message = tmp->data;
-        string data = my_multcat(5, message->user->uuid, "|",
-                                message->user->name, "|", message->data);
+        string data = my_multcat(7, message->user->uuid, "|",
+                                message->user->name, "|", ctime(&message->time),
+                                "|", message->data);
         packet = create_packet(LIST_MESSAGES_SUCCESS_CODE, data);
         send_packet(client->socket_fd, packet);
         free(data);

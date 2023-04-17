@@ -40,8 +40,8 @@ static const command commands[] = {
     {give_users, "/users", 0, "get the list of all users that exist on the\
         domain", NONE},
     {give_user_info, "/user", 0, "get information about a user", NONE},
-    {send_to_user, "/send", 0, "end a message to a user", NONE},
-    {message_exchanged, "/messages", 0, "list all messages exchange with an\
+    {send_to_user, "/send", 1, "end a message to a user", NONE},
+    {message_exchanged, "/messages", 1, "list all messages exchange with an\
         user", NONE},
     {subscribe, "/subscribe", 0, "subscribe to the event of a team and its sub\
         directories (enable reception of all events from a team)", NONE},
