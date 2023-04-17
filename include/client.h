@@ -28,6 +28,11 @@ void loop_actions(int client_socket);
 void default_error(packet_t *packet);
 void unfound(packet_t *socket);
 void unauthorized(packet_t *packet);
+void already_exist(packet_t *packet);
+void unknow_team(packet_t *packet);
+void unknow_channel(packet_t *packet);
+void unknow_thread(packet_t *packet);
+void unknow_user(packet_t *packet);
 
 // Success:
 void success(packet_t *socket);
@@ -48,7 +53,11 @@ static const listener listeners[] = {
     {ERROR, default_error},
     {UNFOUND, unfound},
     {UNAUTHORIZED, unauthorized},
-
+    {ALREADY_EXIST, already_exist},
+    {UNKNOW_TEAM, unknow_team},
+    {UNKNOW_CHANNEL, unknow_channel},
+    {UNKNOW_THREAD, unknow_thread},
+    {UNKNOW_USER, unknow_user},
     // Success:
     {SUCCESS, success},
     {USERS_SUCCESS_CODE, give_users},

@@ -8,14 +8,14 @@
 #ifndef CODE_NETWORK_H
     #define CODE_NETWORK_H
 // Errors:
-    #define ERROR 500
-    #define UNFOUND 400
-    #define UNAUTHORIZED 401
-    #define UNKNOW_TEAM 402
-    #define UNKNOW_CHANNEL 403
-    #define UNKNOW_THREAD 404
-    #define UNKNOW_USER 405
-    #define ALREADY_EXIST 406
+    #define ERROR 400
+    #define UNFOUND 401
+    #define UNAUTHORIZED 402
+    #define UNKNOW_TEAM 403
+    #define UNKNOW_CHANNEL 404
+    #define UNKNOW_THREAD 405
+    #define UNKNOW_USER 406
+    #define ALREADY_EXIST 407
 
 // Success:
     #define SUCCESS 200
