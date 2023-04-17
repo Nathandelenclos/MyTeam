@@ -12,9 +12,8 @@
 
 /**
  * Close fd of user when he is disconnected.
- * @param server - server
- * @param client
- * @param valread
+ * @param server - server.
+ * @param client - client.
  */
 void disconect_client(server_t *server, client_t *client)
 {
@@ -27,10 +26,10 @@ void disconect_client(server_t *server, client_t *client)
 
 /**
  * Execute command.
- * @param server - server
- * @param client - client
- * @param cmd - command
- * @param data - data of command
+ * @param server - server.
+ * @param client - client.
+ * @param cmd - command.
+ * @param data - data of command.
  */
 void exec_command(server_t *server, client_t *client, command cmd, packet_t
 *socket)
@@ -45,10 +44,9 @@ void exec_command(server_t *server, client_t *client, command cmd, packet_t
 
 /**
  * Manage all commands of server by client.
- * @param server
- * @param client
- * @param valread
- * @param data
+ * @param server - server.
+ * @param client - client.
+ * @param data - data of command.
  */
 void command_client(server_t *server, client_t *client, packet_t *packet)
 {
