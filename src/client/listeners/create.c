@@ -29,7 +29,14 @@ void create_thread(packet_t *packet)
     printf("New Thread \"%s - %s\" created (%s)\n", data[3], data[4], data[0]);
 }
 
+/**
+ * Create reply listener.
+ * @param packet - Packet to read.
+ */
 void create_reply(packet_t *packet)
 {
+    string *data = str_to_word_array(packet->data, "|");
+    time_t time = atoi(data[2]);
+    client_print_reply_created(data[0], data[1], time, data[3]);
     printf("Create reply: %s\n", packet->data);
 }

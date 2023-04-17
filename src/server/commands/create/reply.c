@@ -71,7 +71,10 @@ void create_reply(server_t *server, client_t *client, string data)
     new_reply->time = time(NULL);
     new_reply->user = client->user;
     put_in_list(&client->thread->replies, new_reply);
-    string info = my_multcat(7, client->team->uuid, "|",  client->thread->uuid, "|", client->user->uuid, "|", new_reply->data);
+    string info = my_multcat(7, client->thread->uuid, "|",  client->user->uuid, "|",
+        itoa(new_reply->time), "|", new_reply->data);
+    server_event_reply_created(client->thread->uuid, client->user->uuid,
+        new_reply->data);
     send_packet(client->socket_fd,create_packet(CREATE_REPLY_SUCCESS, info));
     free_array(command_parsed);
     free(info);
