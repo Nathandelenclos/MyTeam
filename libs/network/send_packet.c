@@ -20,5 +20,6 @@ int send_packet(int fd, packet_t *packet)
     write(fd, &packet->code, sizeof(int));
     write(fd, &packet->len, sizeof(int));
     write(fd, packet->data, packet->len);
+    FREE(packet);
     return 0;
 }

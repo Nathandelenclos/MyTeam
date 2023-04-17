@@ -17,7 +17,12 @@
 packet_t *read_packet(int fd)
 {
     packet_t *skt = MALLOC(sizeof(packet_t));
+    skt->code = -1;
     read(fd, &skt->code, sizeof(int ));
+    if (skt->code == -1) {
+        FREE(skt);
+        return NULL;
+    }
     read(fd, &skt->len, sizeof(int ));
     skt->data = MALLOC(sizeof(char) * (skt->len + 1));
     memset(skt->data, 0, (skt->len + 1));

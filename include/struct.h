@@ -13,6 +13,7 @@
     #define STRUCT_H
 
 typedef enum {
+    ANY,
     NONE,
     TEAM,
     CHANNEL,
@@ -31,6 +32,7 @@ typedef struct {
     string name;
     string description;
     node *channels;
+    node *subscribers;
 } team_t;
 
 typedef struct {
@@ -55,12 +57,20 @@ typedef struct {
 typedef struct {
     string name;
     string uuid;
+    string description;
     node *threads;
 } channel_t;
 
 typedef struct {
     string uuid;
-    node *messages;
+    time_t time;
+    string title;
+    string body;
+    node *replies;
 } thread_t;
+
+thread_t *get_thread_by_uuid(node *threads, string str);
+channel_t *get_channel_by_uuid(node *channels, string str);
+team_t *get_team_by_uuid(node *teams, string str);
 
 #endif

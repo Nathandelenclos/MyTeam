@@ -23,10 +23,7 @@ void success(packet_t *packet)
  */
 void unfound(packet_t *packet)
 {
-    string data = my_strdup(packet->data);
-    char **array = str_to_word_array(data, "|");
-    printf("Error: %s\n", array[1] ? array[1] : array[0]);
-    client_error_unknown_user(array[0]);
+    printf("Error unfound: %s\n", packet->data);
 }
 
 /**
@@ -56,12 +53,22 @@ void give_users(packet_t *packet)
     string user_uuid = MALLOC(sizeof(char) * 37);
     string user_name = MALLOC(sizeof(char) * 33);
     int user_status;
-    char **users = str_to_word_array(packet->data, "\n");
+    string *users = str_to_word_array(packet->data, "\n");
     for (int i = 0; users[i] != NULL; i++) {
-        if (sscanf(users[i], "%s %s %d",
-                    user_uuid, user_name, &user_status) == 3)
+        if (sscanf(users[i],
+        "%s %s %d", user_uuid, user_name, &user_status) == 3)
             client_print_users(user_uuid, user_name, user_status);
     }
-    FREE(user_name);
+    free_array(users);
     FREE(user_uuid);
+    FREE(user_name);
+}
+
+/**
+ * USE_SUCCESS listener.
+ * @param packet - Packet to read.
+ */
+void use_success(packet_t *packet)
+{
+    printf("Info: %s\n", packet->data);
 }

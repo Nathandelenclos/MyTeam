@@ -50,18 +50,6 @@ string *split(string str, char delim)
 }
 
 /**
- * Len of array.
- * @param array - Array to count.
- * @return - Return len of array.
- */
-int array_string_len(string *array)
-{
-    int i = 0;
-    for (; array[i] != NULL; ++i);
-    return i;
-}
-
-/**
  * Check if dir exist.
  * @param dir - Dir to check.
  * @return - Return 1 if exist, 0 if not.
@@ -73,4 +61,29 @@ int exist_dir(string dir)
         return 1;
     }
     return 0;
+}
+
+/**
+ * Int to string.
+ * @param n - Int to convert.
+ * @return - Return string.
+ */
+string itoa(long n)
+{
+    string str = MALLOC(sizeof(char) * 255);
+    sprintf(str, "%ld", n);
+    return str;
+}
+
+/**
+ * Create context uuids.
+ * @return - Return context uuids.
+ */
+context_uuids_t *create_context_uuids(void)
+{
+    context_uuids_t *context_uuids = MALLOC(sizeof(context_uuids_t));
+    context_uuids->thread_uuid = NULL;
+    context_uuids->channel_uuid = NULL;
+    context_uuids->team_uuid = NULL;
+    return context_uuids;
 }

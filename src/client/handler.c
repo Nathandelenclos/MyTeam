@@ -77,9 +77,9 @@ void user_action(fd_set *fds, int client_socket, int *is_running)
         }
         socket->len = strlen(socket->data);
         socket->code = 200;
+        string data = socket->data;
         send_packet(client_socket, socket);
-        FREE(socket->data);
-        FREE(socket);
+        FREE(data);
     }
 }
 
