@@ -7,6 +7,10 @@
 
 #include "client.h"
 
+/**
+ * Create team listener.
+ * @param packet - Packet to read.
+ */
 void create_team(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
@@ -14,6 +18,10 @@ void create_team(packet_t *packet)
     printf("New Team \"%s - %s\" created (%s)\n", data[1], data[2], data[0]);
 }
 
+/**
+ * Create channel listener.
+ * @param packet - Packet to read.
+ */
 void create_channel(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
@@ -21,6 +29,10 @@ void create_channel(packet_t *packet)
     printf("New Channel \"%s - %s\" created (%s)\n", data[1], data[2], data[0]);
 }
 
+/**
+ * Create thread listener.
+ * @param packet - Packet to read.
+ */
 void create_thread(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
