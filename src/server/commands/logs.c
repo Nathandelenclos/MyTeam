@@ -16,15 +16,14 @@
  */
 char *login_user_exist(server_t *server, client_t *client, string name)
 {
-    if (client->user != NULL)
-        return ("You are already login");
     user_t *tmp;
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
         tmp = (user_t *)node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
             client->user = tmp;
-            return my_strconcat("Welcome back ", name);
+            client->user->online = true;
+            return my_multcat(3, client->user->uuid, "|", name);
         }
     }
     user_t *new_user = MALLOC(sizeof(user_t));
@@ -34,7 +33,8 @@ char *login_user_exist(server_t *server, client_t *client, string name)
     new_user->online = true;
     put_in_list(&server->users, new_user);
     client->user = new_user;
-    return my_multcat(4, "You are now login ", name, " ", client->user->uuid);
+    server_event_user_created(new_user->uuid, new_user->name);
+    return my_multcat(3, client->user->uuid, "|", name);
 }
 
 /**
@@ -48,14 +48,20 @@ void login_user(server_t *server, client_t *client, string data)
     int i = 0;
     char *msg_cli = NULL;
     packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
-    for (i; command[i] != NULL; i++);
-    if (i != 2) {
-        packet = create_packet(ERROR, "bad nb arg");
+    int nb_arg[] = {1, -1};
+    if (client->user != NULL) {
+        packet = create_packet(ERROR, "already logged in");
+        send_packet(client->socket_fd, packet);
+        return;
+    }
+    if (check_args(data, nb_arg, "/login") == 1) {
+        packet = create_packet(ERROR, "bad command");
     } else {
+        char **command = str_to_word_array(data, "\"");
         msg_cli = login_user_exist(server, client, command[1]);
         server_event_user_logged_in(client->user->uuid);
         packet = create_packet(LOGIN_SUCCESS, msg_cli);
+        free_array(command);
     }
     send_packet(client->socket_fd, packet);
 }
@@ -74,7 +80,7 @@ char *logout_user_exist(server_t *server, client_t *client, string name)
         node_tmp = node_tmp->next) {
         tmp = (user_t *)node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
-            str = my_strconcat(name, " is now logout");
+            str = my_multcat(3, client->user->uuid, "|", name);
             server_event_user_logged_out(client->user->uuid);
             client->user->online = false;
             client->user = NULL;
@@ -96,10 +102,9 @@ void logout_user(server_t *server, client_t *client, string data)
     int i = 0;
     char *msg_cli = NULL;
     packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
-    for (i; command[i] != NULL; i++);
-    if (i != 1) {
-        packet = create_packet(ERROR, "bad nb arg");
+    int nb_arg[] = {0, -1};
+    if (check_args(data, nb_arg, "/logout") == 1) {
+        packet = create_packet(ERROR, "bad command");
         send_packet(client->socket_fd, packet);
         return;
     } else if (client->user == NULL) {
@@ -126,9 +131,8 @@ void give_users(server_t *server, client_t *client, string data)
     int i = 0;
     char *msg_cli = "";
     packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
-    for (i; command[i] != NULL; i++);
-    if (i != 1) {
+    int nb_arg[] = {0, -1};
+    if (check_args(data, nb_arg, "/users") == 1) {
         packet = create_packet(ERROR, "bad nb arg");
         send_packet(client->socket_fd, packet);
         return;
