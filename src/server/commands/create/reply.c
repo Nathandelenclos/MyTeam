@@ -17,15 +17,18 @@
 bool id_good_context_reply(client_t *client)
 {
     if (client->team == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
+        send_packet(client->socket_fd,
+            create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
         return false;
     }
     if (client->channel == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_CHANNEL, client->context_uuids->channel_uuid));
+        send_packet(client->socket_fd,
+            create_packet(UNKNOW_CHANNEL, client->context_uuids->channel_uuid));
         return false;
     }
     if (client->thread == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_THREAD, client->context_uuids->thread_uuid));
+        send_packet(client->socket_fd,
+            create_packet(UNKNOW_THREAD, client->context_uuids->thread_uuid));
         return false;
     }
     return true;
@@ -42,15 +45,17 @@ bool is_good_create_reply(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {1, -1};
     if (check_args(data, nb_arg, "/create") == 1) {
-        send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
+        send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
         return false;
     }
     if (!is_subscribed(client->team, client->user)) {
-        send_packet(client->socket_fd,create_packet(UNAUTHORIZED, "You are not subscribed to this team."));
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED,
+            "You are not subscribed to this team."));
         return false;
     }
-    if (!id_good_context_reply(client))
+    if (!id_good_context_reply(client)) {
         return false;
+    }
     return true;
 }
 
@@ -71,11 +76,11 @@ void create_reply(server_t *server, client_t *client, string data)
     new_reply->time = time(NULL);
     new_reply->user = client->user;
     put_in_list(&client->thread->replies, new_reply);
-    string info = my_multcat(7, client->thread->uuid, "|",  client->user->uuid, "|",
-        itoa(new_reply->time), "|", new_reply->data);
+    string info = my_multcat(7, client->thread->uuid, "|", client->user->uuid,
+        "|", itoa(new_reply->time), "|", new_reply->data);
     server_event_reply_created(client->thread->uuid, client->user->uuid,
         new_reply->data);
-    send_packet(client->socket_fd,create_packet(CREATE_REPLY_SUCCESS, info));
+    send_packet(client->socket_fd, create_packet(CREATE_REPLY_SUCCESS, info));
     free_array(command_parsed);
     free(info);
 }

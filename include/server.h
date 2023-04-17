@@ -68,5 +68,8 @@ int broadcast(server_t *server, packet_t *packet);
 bool is_subscribed(team_t *team, user_t *user);
 context_uuids_t *create_context_uuids(void);
 client_t *create_client(int server_fd);
+bool set_thread(server_t *server, client_t *client, string *command_parsed);
+bool set_channel(server_t *server, client_t *client, string *command_parsed);
+bool set_team(server_t *server, client_t *client, string *command_parsed);
 
 #endif

@@ -46,7 +46,8 @@ string get_subscribers(team_t *team)
 }
 
 /**
- * Get all the subscribers of a team or all the teams where the user is subscribed.
+ * Get all the subscribers of a team or all the teams where
+ * the user is subscribed.
  * @param server - server info.
  * @param client - client info.
  * @param data - command data.
@@ -55,7 +56,7 @@ void subscribed(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {0, 1, -1};
     if (check_args(data, nb_arg, "/subscribed") == 1) {
-        send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
+        send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
         return;
     }
     string info = "";

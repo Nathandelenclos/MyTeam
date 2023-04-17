@@ -34,11 +34,11 @@ void disconect_client(server_t *server, client_t *client)
 void exec_command(server_t *server, client_t *client, command cmd, packet_t
 *socket)
 {
-    if (!cmd.auth_required || (cmd.auth_required && client->user) ) {
+    if (!cmd.auth_required || (cmd.auth_required && client->user)) {
         cmd.function(server, client, socket->data);
     } else {
         send_packet(client->socket_fd,
-            create_packet(UNAUTHORIZED,"You are not logged in."));
+            create_packet(UNAUTHORIZED, "You are not logged in."));
     }
 }
 
@@ -54,7 +54,8 @@ void command_client(server_t *server, client_t *client, packet_t *packet)
     for (int i = 0; commands[i].function != NULL; ++i) {
         buff = strstr(packet->data, commands[i].name);
         if (buff && strncmp(buff, packet->data, strlen(commands[i].name)) == 0
-            && (client->context == commands[i].context || commands[i].context == ANY)) {
+            && (client->context == commands[i].context ||
+            commands[i].context == ANY)) {
             return exec_command(server, client, commands[i], packet);
         }
     }

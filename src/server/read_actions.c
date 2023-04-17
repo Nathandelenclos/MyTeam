@@ -54,7 +54,7 @@ void read_action(server_t *server, bool *is_running)
 {
     client_t *tmp_client;
     stop_server(server, is_running);
-    if(!(*is_running))
+    if (!(*is_running))
         return;
     for (node *tmp = server->clients; tmp; tmp = tmp->next) {
         tmp_client = tmp->data;

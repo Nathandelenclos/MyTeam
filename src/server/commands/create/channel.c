@@ -19,7 +19,7 @@ bool already_exist_channel(client_t *client, string data)
 {
     char **command = str_to_word_array(data, "\"");
     for (node *tmp = client->team->channels; tmp; tmp = tmp->next) {
-        channel_t *channel = ((channel_t *)tmp->data);
+        channel_t *channel = ((channel_t *) tmp->data);
         if (strcmp(channel->name, command[1]) == 0) {
             send_packet(client->socket_fd,
                 create_packet(ALREADY_EXIST, ""));
@@ -41,19 +41,19 @@ bool is_good_create_channel(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {2, -1};
     if (check_args(data, nb_arg, "/create") == 1) {
-        send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
+        send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
         return false;
     }
     if (client->team == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_TEAM,
+        send_packet(client->socket_fd, create_packet(UNKNOW_TEAM,
             client->context_uuids->team_uuid));
         return false;
     }
-    if (!already_exist_channel(client, data))
+    if (!already_exist_channel(client, data)) {
         return false;
+    }
     return true;
 }
-
 
 /**
  * Create a new channel.
@@ -66,7 +66,8 @@ void create_channel(server_t *server, client_t *client, string data)
     if (!is_good_create_channel(server, client, data))
         return;
     if (!is_subscribed(client->team, client->user)) {
-        send_packet(client->socket_fd, create_packet(UNAUTHORIZED, "You are not subscribed to this team."));
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED,
+            "You are not subscribed to this team."));
         return;
     }
     char **command = str_to_word_array(data, "\"");
@@ -76,8 +77,10 @@ void create_channel(server_t *server, client_t *client, string data)
     new_channel->uuid = new_uuid();
     new_channel->description = my_strdup(command[3]);
     put_in_list(&client->team->channels, new_channel);
-    server_event_channel_created(client->team->uuid, new_channel->uuid, new_channel->name);
-    string info = my_multcat(5, new_channel->uuid, "|", new_channel->name, "|", new_channel->description);
-    send_packet(client->socket_fd, create_packet(CREATE_CHANNEL_SUCCESS,info));
+    server_event_channel_created(client->team->uuid, new_channel->uuid,
+        new_channel->name);
+    string info = my_multcat(5, new_channel->uuid, "|", new_channel->name, "|",
+        new_channel->description);
+    send_packet(client->socket_fd, create_packet(CREATE_CHANNEL_SUCCESS, info));
     free(info);
 }

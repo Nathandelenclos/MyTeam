@@ -109,4 +109,3 @@ void create_thread(server_t *server, client_t *client, string data)
     free(info);
     free_array(command);
 }
-
