@@ -57,11 +57,11 @@ void create_thread(server_t *server, client_t *client, string data)
     new_thread->time = time(NULL);
     new_thread->replies = NULL;
     put_in_list(&client->channel->threads, new_thread);
-    server_event_thread_created(client->channel->uuid, new_thread->uuid, client->user->uuid,
-        new_thread->title, new_thread->body);
-    string info = my_multcat(9,client->channel->uuid, "|", new_thread->uuid, "|", itoa(new_thread->time), "|",
+    server_event_thread_created(client->channel->uuid, new_thread->uuid,
+    client->user->uuid, new_thread->title, new_thread->body);
+    string info = my_multcat(9,client->channel->uuid, "|",
+    new_thread->uuid, "|", itoa(new_thread->time), "|",
     new_thread->title, "|", new_thread->body);
-    send_packet(client->socket_fd, create_packet(CREATE_THREAD_SUCCESS,info));
+    send_packet(client->socket_fd, create_packet(CREATE_THREAD_SUCCESS, info));
     free(info);
 }
-

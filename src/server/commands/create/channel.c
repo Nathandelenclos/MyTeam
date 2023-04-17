@@ -56,8 +56,10 @@ void create_channel(server_t *server, client_t *client, string data)
     new_channel->uuid = new_uuid();
     new_channel->description = my_strdup(command[3]);
     put_in_list(&client->team->channels, new_channel);
-    server_event_channel_created(client->team->uuid, new_channel->uuid, new_channel->name);
-    string info = my_multcat(5, new_channel->uuid, "|", new_channel->name, "|", new_channel->description);
+    server_event_channel_created(client->team->uuid,
+    new_channel->uuid, new_channel->name);
+    string info = my_multcat(5, new_channel->uuid, "|",
+    new_channel->name, "|", new_channel->description);
     send_packet(client->socket_fd, create_packet(CREATE_CHANNEL_SUCCESS,info));
     free(info);
 }

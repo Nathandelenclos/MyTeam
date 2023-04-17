@@ -31,7 +31,8 @@ bool set_team(server_t *server, client_t *client, string *command_parsed)
         client->context = TEAM;
         client->team = get_team_by_uuid(server->teams, command_parsed[1]);
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_TEAM, "Team not found."));
             return false;
         }
     }
@@ -43,12 +44,15 @@ bool set_channel(server_t *server, client_t *client, string *command_parsed)
     if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
         client->context = CHANNEL;
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_TEAM, "Team not found."));
             return false;
         }
-        client->channel = get_channel_by_uuid(client->team->channels, command_parsed[3]);
+        client->channel = get_channel_by_uuid
+        (client->team->channels, command_parsed[3]);
         if (client->channel == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_CHANNEL, "Channel not found."));
             return false;
         }
     }
@@ -60,16 +64,20 @@ bool set_thread(server_t *server, client_t *client, string *command_parsed)
     if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {
         client->context = THREAD;
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_TEAM, "Team not found."));
             return false;
         }
         if (client->channel == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_CHANNEL, "Channel not found."));
             return false;
         }
-        client->thread = get_thread_by_uuid(client->channel->threads, command_parsed[5]);
+        client->thread = get_thread_by_uuid
+        (client->channel->threads, command_parsed[5]);
         if (client->thread == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_THREAD, "Thread not found."));
+            send_packet(client->socket_fd, create_packet
+            (UNKNOW_THREAD, "Thread not found."));
             return false;
         }
     }
@@ -89,17 +97,21 @@ void use(server_t *server, client_t *client, string data)
     client->context = NONE;
     string *command_parsed = str_to_word_array(data, "\"");
     if (!set_team(server, client, command_parsed)) {
-        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the NONE"));
+        send_packet(client->socket_fd, create_packet
+        (USE_SUCCESS, "You are now in the NONE"));
         return;
     }
     if (!set_channel(server, client, command_parsed)) {
-        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the TEAM"));
+        send_packet(client->socket_fd, create_packet
+        (USE_SUCCESS, "You are now in the TEAM"));
         return;
     }
     if (!set_thread(server, client, command_parsed)) {
-        send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the CHANNEL"));
+        send_packet(client->socket_fd, create_packet
+        (USE_SUCCESS, "You are now in the CHANNEL"));
         return;
     }
-    send_packet(client->socket_fd, create_packet(USE_SUCCESS, "You are now in the THREAD"));
+    send_packet(client->socket_fd, create_packet
+    (USE_SUCCESS, "You are now in the THREAD"));
     free_array(command_parsed);
 }
