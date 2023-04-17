@@ -66,6 +66,7 @@ void create_team(server_t *server, client_t *client, string data)
     new_team->name = my_strdup(command[1]);
     new_team->channels = NULL;
     new_team->uuid = new_uuid();
+    new_team->subscribers = NULL;
     new_team->description = my_strdup(command[3]);
     put_in_list(&server->teams, new_team);
     server_event_team_created(new_team->uuid, new_team->name,
@@ -74,4 +75,5 @@ void create_team(server_t *server, client_t *client, string data)
         "|", new_team->description);
     send_packet(client->socket_fd, create_packet(CREATE_TEAM_SUCCESS, info));
     free(info);
+    free_array(command);
 }

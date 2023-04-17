@@ -26,6 +26,27 @@ bool good_actions_use(server_t *server, client_t *client, string data)
 }
 
 /**
+ * Second part of use.
+ * @param server - server info.
+ * @param client - client info.
+ * @param command_parsed - client command beginning by /use.
+ * @return - true or false.
+ */
+void use_second_condition(server_t *server, client_t *client,
+    string *command_parsed)
+{
+    if (!set_thread(server, client, command_parsed)) {
+        send_packet(client->socket_fd,
+            create_packet(USE_SUCCESS, "You are now in the CHANNEL"));
+        free_array(command_parsed);
+        return;
+    }
+    send_packet(client->socket_fd,
+        create_packet(USE_SUCCESS, "You are now in the THREAD"));
+    free_array(command_parsed);
+}
+
+/**
  * use the context.
  * @param server - server info.
  * @param client - client info.
@@ -41,19 +62,14 @@ void use(server_t *server, client_t *client, string data)
     if (!set_team(server, client, command_parsed)) {
         send_packet(client->socket_fd,
             create_packet(USE_SUCCESS, "You are now in the NONE"));
+        free_array(command_parsed);
         return;
     }
     if (!set_channel(server, client, command_parsed)) {
         send_packet(client->socket_fd,
             create_packet(USE_SUCCESS, "You are now in the TEAM"));
+        free_array(command_parsed);
         return;
     }
-    if (!set_thread(server, client, command_parsed)) {
-        send_packet(client->socket_fd,
-            create_packet(USE_SUCCESS, "You are now in the CHANNEL"));
-        return;
-    }
-    send_packet(client->socket_fd,
-        create_packet(USE_SUCCESS, "You are now in the THREAD"));
-    free_array(command_parsed);
+    use_second_condition(server, client, command_parsed);
 }

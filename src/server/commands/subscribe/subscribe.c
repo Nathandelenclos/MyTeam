@@ -25,6 +25,17 @@ bool is_subscribed(team_t *team, user_t *user)
     return false;
 }
 
+void subscribe_second_part(team_t *team, client_t *client, string *splited)
+{
+    put_in_list(&team->subscribers, client->user);
+    server_event_user_subscribed(team->uuid, client->user->uuid);
+    string info = my_multcat(3, client->user->uuid, "|", team->uuid);
+    send_packet(client->socket_fd,
+        create_packet(SUBSCRIBE_SUCCESS, info));
+    free(info);
+    free_array(splited);
+}
+
 /**
  * @brief Subscribe a user to a team.
  * @param server - server.
@@ -41,16 +52,8 @@ void subscribe(server_t *server, client_t *client, string data)
     string *splited = str_to_word_array(data, "\"");
     for (node *tmp = server->teams; tmp; tmp = tmp->next) {
         team_t *team = tmp->data;
-        if (strcmp(team->uuid, splited[1]) == 0) {
-            put_in_list(&team->subscribers, client->user);
-            server_event_user_subscribed(team->uuid, client->user->uuid);
-            string info = my_multcat(3, client->user->uuid, "|", team->uuid);
-            send_packet(client->socket_fd,
-                create_packet(SUBSCRIBE_SUCCESS, info));
-            free(info);
-            free_array(splited);
-            return;
-        }
+        if (strcmp(team->uuid, splited[1]) == 0)
+            return subscribe_second_part(team, client, splited);
     }
     send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, splited[1]));
     free_array(splited);

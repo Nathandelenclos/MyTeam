@@ -43,8 +43,11 @@ int check_arg_content(char *str)
 int check_others_args(char **command)
 {
     for (int i = 1; command[i]; i++)
-        if (i % 2 == 0 && check_arg_content(command[i]) == 1)
+        if (i % 2 == 0 && check_arg_content(command[i]) == 1) {
+            free_array(command);
             return (1);
+        }
+    free_array(command);
     return (0);
 }
 
@@ -87,6 +90,8 @@ int check_args(char *data, int *nb_arg, char *command0)
     char **command = str_to_word_array(data, "\"");
     if (check_first_arg(command[0], command0) == 0) {
         return (check_others_args(command));
-    } else
+    } else {
+        free_array(command);
         return (0);
+    }
 }

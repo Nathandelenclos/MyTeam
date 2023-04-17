@@ -49,6 +49,11 @@ void login_user(server_t *server, client_t *client, string data)
     char *msg_cli = NULL;
     packet_t *packet;
     int nb_arg[] = {1, -1};
+    if (client->user != NULL) {
+        packet = create_packet(ERROR, "already logged in");
+        send_packet(client->socket_fd, packet);
+        return;
+    }
     if (check_args(data, nb_arg, "/login") == 1) {
         packet = create_packet(ERROR, "bad command");
     } else {
@@ -56,6 +61,7 @@ void login_user(server_t *server, client_t *client, string data)
         msg_cli = login_user_exist(server, client, command[1]);
         server_event_user_logged_in(client->user->uuid);
         packet = create_packet(LOGIN_SUCCESS, msg_cli);
+        free_array(command);
     }
     send_packet(client->socket_fd, packet);
 }

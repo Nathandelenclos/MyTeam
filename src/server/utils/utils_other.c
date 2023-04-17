@@ -51,6 +51,11 @@ int len_array(string *array)
     return i;
 }
 
+/**
+ * create a client.
+ * @param server_fd - server fd.
+ * @return - client.
+ */
 client_t *create_client(int server_fd)
 {
     client_t *client = MALLOC(sizeof(client_t));

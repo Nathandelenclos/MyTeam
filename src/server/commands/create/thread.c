@@ -44,6 +44,7 @@ bool already_exist_thread(client_t *client, string data)
         if (strcmp(thread->title, command[1]) == 0) {
             send_packet(client->socket_fd,
                 create_packet(ALREADY_EXIST, ""));
+            free_array(command);
             return false;
         }
     }
