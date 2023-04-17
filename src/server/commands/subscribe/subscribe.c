@@ -24,6 +24,12 @@ bool is_subscribed(team_t *team, user_t *user)
     return false;
 }
 
+/**
+ * @brief Subscribe a user to a team.
+ * @param server - server.
+ * @param client - client.
+ * @param data - data.
+ */
 void subscribe(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {1, -1};
@@ -40,6 +46,7 @@ void subscribe(server_t *server, client_t *client, string data)
             string info = my_multcat(3, client->user->uuid, "|", team->uuid);
             send_packet(client->socket_fd, create_packet(SUBSCRIBE_SUCCESS, info));
             free(info);
+            free_array(splited);
             return;
         }
     }
@@ -47,8 +54,49 @@ void subscribe(server_t *server, client_t *client, string data)
     free_array(splited);
 }
 
+/**
+ * Unsubscribe user in team
+ * @param team - team.
+ * @param client - client.
+ * @param splited - command splited.
+ * @return - true or false.
+ */
+bool unsubscribe_(team_t *team, client_t *client, string *splited)
+{
+    if (!is_subscribed(team, client->user)) {
+        send_packet(client->socket_fd, create_packet(ERROR, "You are not subscribe at this team !"));
+        return false;
+    }
+    delete_in_list(&team->subscribers, client->user);
+    server_event_user_unsubscribed(team->uuid, client->user->uuid);
+    string info = my_multcat(3, client->user->uuid, "|", team->uuid);
+    send_packet(client->socket_fd, create_packet(UNSUBSCRIBE_SUCCESS, info));
+    free(info);
+    free_array(splited);
+    return true;
+}
+
+/**
+ * @brief Unsubscribe a user to a team.
+ * @param server - server.
+ * @param client - client.
+ * @param data - data.
+ */
 void unsubscribe(server_t *server, client_t *client, string data)
 {
-    packet_t *packet = create_packet(LOGIN_SUCCESS, "test");
-    send_packet(client->socket_fd, packet);
+    int nb_arg[] = {1, -1};
+    if (check_args(data, nb_arg, "/unsubscribe") == 1) {
+        send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
+        return;
+    }
+    string *splited = str_to_word_array(data, "\"");
+    for (node *tmp = server->teams; tmp; tmp = tmp->next) {
+        team_t *team = tmp->data;
+        if (strcmp(team->uuid, splited[1]) == 0 && unsubscribe_(team, client, splited)) {
+            free_array(splited);
+            return;
+        }
+    }
+    send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, splited[1]));
+    free_array(splited);
 }
