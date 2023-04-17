@@ -9,20 +9,28 @@
 #include "stdbool.h"
 #include "time.h"
 
+void send_in_reverse_order(node* tmp, client_t *client)
+{
+    if (tmp == NULL) {
+        return;
+    }
+    send_in_reverse_order(tmp->next, client);
+    packet_t *packet;
+    message_t *message = tmp->data;
+    string data = my_multcat(7, message->user->uuid, "|",
+                                message->user->name, "|",
+                                ctime(&message->time),
+                                "|", message->data);
+    packet = create_packet(LIST_MESSAGES_SUCCESS_CODE, data);
+    send_packet(client->socket_fd, packet);
+    free(data);
+    FREE(packet);
+}
+
 void send_all_messages(server_t *server, client_t *client,
                         p_discuss_t *discussion)
 {
-    packet_t *packet;
-    for (node *tmp = discussion->messages; tmp != NULL; tmp = tmp->next) {
-        message_t *message = tmp->data;
-        string data = my_multcat(7, message->user->uuid, "|",
-                                message->user->name, "|", ctime(&message->time),
-                                "|", message->data);
-        packet = create_packet(LIST_MESSAGES_SUCCESS_CODE, data);
-        send_packet(client->socket_fd, packet);
-        free(data);
-        FREE(packet);
-    }
+    send_in_reverse_order(discussion->messages, client);
 }
 
 void message_exchanged(server_t *server, client_t *client, string data)
