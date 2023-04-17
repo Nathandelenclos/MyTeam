@@ -22,7 +22,6 @@ void disconect_client(server_t *server, client_t *client)
         inet_ntoa(client->sockaddr.sin_addr),
         ntohs(client->sockaddr.sin_port));
     close(client->socket_fd);
-    client->socket_fd = 0;
     delete_in_list(&server->clients, client);
 }
 

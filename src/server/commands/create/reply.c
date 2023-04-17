@@ -9,22 +9,62 @@
 #include "stdbool.h"
 #include <time.h>
 
-void create_reply(server_t *server, client_t *client, string data)
+/**
+ * Check if the context is good.
+ * @param client - client.
+ * @return - true or false.
+ */
+bool id_good_context_reply(client_t *client)
+{
+    if (client->team == NULL) {
+        send_packet(client->socket_fd,create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
+        return false;
+    }
+    if (client->channel == NULL) {
+        send_packet(client->socket_fd,create_packet(UNKNOW_CHANNEL, client->context_uuids->channel_uuid));
+        return false;
+    }
+    if (client->thread == NULL) {
+        send_packet(client->socket_fd,create_packet(UNKNOW_THREAD, client->context_uuids->thread_uuid));
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Check if the command is good.
+ * @param server - server.
+ * @param client - client.
+ * @param data - data.
+ * @return - true or false.
+ */
+bool is_good_create_reply(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {1, -1};
     if (check_args(data, nb_arg, "/create") == 1) {
         send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
-        return;
+        return false;
     }
     if (!is_subscribed(client->team, client->user)) {
         send_packet(client->socket_fd,create_packet(UNAUTHORIZED, "You are not subscribed to this team."));
-        return;
+        return false;
     }
+    if (!id_good_context_reply(client))
+        return false;
+    return true;
+}
+
+/**
+ * Create a new reply.
+ * @param server - server.
+ * @param client - client.
+ * @param data - data.
+ */
+void create_reply(server_t *server, client_t *client, string data)
+{
+    if (!is_good_create_reply(server, client, data))
+        return;
     string *command_parsed = str_to_word_array(data, " ");
-    if (client->thread == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_THREAD, client->context_uuids->thread_uuid));
-        return;
-    }
     message_t *new_reply = MALLOC(sizeof(message_t));
     new_reply->data = my_strdup(command_parsed[1]);
     new_reply->uuid = new_uuid();
