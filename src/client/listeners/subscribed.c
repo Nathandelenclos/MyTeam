@@ -10,7 +10,9 @@
 
 void suscribe(packet_t *packet)
 {
-    printf("Suscribe to team: %s\n", packet->data);
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_subscribed(data[0], data[1]);
+    printf("Suscribe to team: \"%s\"\n", data[1]);
 }
 
 void suscribed(packet_t *packet)
@@ -20,5 +22,7 @@ void suscribed(packet_t *packet)
 
 void unsuscribe(packet_t *packet)
 {
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_unsubscribed(data[0], data[1]);
     printf("Unsuscribe to team: %s\n", packet->data);
 }
