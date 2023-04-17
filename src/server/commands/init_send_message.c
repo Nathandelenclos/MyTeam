@@ -11,7 +11,7 @@
 #include "time.h"
 
 void init_structs(p_discuss_t *discuss, client_t *client,
-                  char **command, message_t *message_sent)
+                    char **command, message_t *message_sent)
 {
     discuss->uuid = new_uuid();
     discuss->users = NULL;

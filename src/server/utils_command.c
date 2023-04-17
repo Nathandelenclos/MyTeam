@@ -9,7 +9,7 @@
 #include <dirent.h>
 
 p_discuss_t *find_correct_user(int i, p_discuss_t *discussion,
-                               client_t *client, string data)
+                                client_t *client, string data)
 {
     for (node *tmp2 = discussion->users; tmp2 != NULL; tmp2 = tmp2->next) {
         user_t *users = tmp2->data;
@@ -23,7 +23,7 @@ p_discuss_t *find_correct_user(int i, p_discuss_t *discussion,
 }
 
 p_discuss_t *find_correct_discussion(server_t *server,
-                                     client_t *client, string data)
+                                        client_t *client, string data)
 {
     int i = 0;
     p_discuss_t *discussion;

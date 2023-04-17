@@ -34,9 +34,9 @@ void list_messages(packet_t *packet)
     printf("[%s] User %s said %s\n", array[2], array[1], array[3]);
     struct tm tm_time = {0};
     sscanf(array[2], "%*s %*s %d %d:%d:%d %d",
-           &tm_time.tm_mday, &tm_time.tm_hour,
-           &tm_time.tm_min, &tm_time.tm_sec,
-           &tm_time.tm_year);
+            &tm_time.tm_mday, &tm_time.tm_hour,
+            &tm_time.tm_min, &tm_time.tm_sec,
+            &tm_time.tm_year);
     tm_time.tm_year -= 1900;
     tm_time.tm_mon += 3;
     time_t my_time = mktime(&tm_time);

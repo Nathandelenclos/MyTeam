@@ -37,10 +37,10 @@ void message_exchanged(server_t *server, client_t *client, string data)
         return;
     }
     p_discuss_t *discussion = find_correct_discussion(server, client,
-                                                      command[1]);
+                                                        command[1]);
     if (discussion == NULL) {
         packet = create_packet(LIST_MESSAGES_ERROR_CODE,
-                               "no messages exchanged with this user");
+                                "no messages exchanged with this user");
         send_packet(client->socket_fd, packet);
         return;
     }
