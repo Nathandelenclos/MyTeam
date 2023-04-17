@@ -68,9 +68,9 @@ static const listener listeners[] = {
     {CREATE_CHANNEL_SUCCESS, create_channel},
     {CREATE_THREAD_SUCCESS, create_thread},
     {CREATE_REPLY_SUCCESS, create_reply},
-    {SUSCRIBE_SUCCESS, suscribe},
-    {SUSCRIBED_SUCCESS, suscribed},
-    {UNSUSCRIBE_SUCCESS, unsuscribe},
+    {SUBSCRIBE_SUCCESS, suscribe},
+    {SUBSCRIBED_SUCCESS, suscribed},
+    {UNSUBSCRIBE_SUCCESS, unsuscribe},
     {USE_SUCCESS, use_success},
     // Others:
     {QUIT, NULL}

@@ -20,7 +20,6 @@ void delete_in_list(node **head_ref, void *key)
     if (temp != NULL && temp->data == key) {
         *head_ref = temp->next;
         FREE(temp);
-        printf("Deleted first node\n");
         return;
     }
 
@@ -30,10 +29,8 @@ void delete_in_list(node **head_ref, void *key)
     }
 
     if (temp == NULL) {
-        printf("Key not found\n");
         return;
     }
-    printf("Deleted node\n");
     prev->next = temp->next;
     FREE(temp);
 }
