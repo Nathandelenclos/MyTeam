@@ -16,15 +16,14 @@
  * @param client
  * @param valread
  */
-void disconect_client(server_t *server, client_t *client, int valread)
+void disconect_client(server_t *server, client_t *client)
 {
-    if (valread == 0) {
-        printf("Client déconnecté : %s:%d\r\n",
-            inet_ntoa(client->sockaddr.sin_addr),
-            ntohs(client->sockaddr.sin_port));
-        close(client->socket_fd);
-        client->socket_fd = 0;
-    }
+    printf("Client déconnecté : %s:%d\r\n",
+        inet_ntoa(client->sockaddr.sin_addr),
+        ntohs(client->sockaddr.sin_port));
+    close(client->socket_fd);
+    client->socket_fd = 0;
+    delete_in_list(&server->clients, client);
 }
 
 /**

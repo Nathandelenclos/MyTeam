@@ -7,6 +7,7 @@
 
 #include "list.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * Delete a node in the list.
@@ -16,18 +17,23 @@
 void delete_in_list(node **head_ref, void *key)
 {
     node *temp = *head_ref, *prev;
-
     if (temp != NULL && temp->data == key) {
         *head_ref = temp->next;
         FREE(temp);
+        printf("Deleted first node\n");
         return;
     }
+
     while (temp != NULL && temp->data != key) {
         prev = temp;
         temp = temp->next;
     }
-    if (temp == NULL)
+
+    if (temp == NULL) {
+        printf("Key not found\n");
         return;
+    }
+    printf("Deleted node\n");
     prev->next = temp->next;
     FREE(temp);
 }

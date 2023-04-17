@@ -17,7 +17,6 @@
     #define UNKNOW_USER 405
     #define ALREADY_EXIST 406
 
-
 // Success:
     #define SUCCESS 200
     #define LIST_SUCCESS_CODE 201

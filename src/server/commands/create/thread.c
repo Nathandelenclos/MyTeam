@@ -61,7 +61,7 @@ void create_thread(server_t *server, client_t *client, string data)
     if (!is_good_create_thread(server, client, data))
         return;
     if (!is_subscribed(client->team, client->user)) {
-        send_packet(client->socket_fd, create_packet(UNAUTHORIZED, client->team->uuid));
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED, "You are not subscribed to this team."));
         return;
     }
     string *command = str_to_word_array(data, "\"");

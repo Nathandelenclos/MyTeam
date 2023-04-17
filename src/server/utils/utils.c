@@ -74,3 +74,16 @@ string itoa(long n)
     sprintf(str, "%ld", n);
     return str;
 }
+
+/**
+ * Create context uuids.
+ * @return - Return context uuids.
+ */
+context_uuids_t *create_context_uuids(void)
+{
+    context_uuids_t *context_uuids = MALLOC(sizeof(context_uuids_t));
+    context_uuids->thread_uuid = NULL;
+    context_uuids->channel_uuid = NULL;
+    context_uuids->team_uuid = NULL;
+    return context_uuids;
+}

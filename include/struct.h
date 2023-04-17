@@ -44,6 +44,8 @@ typedef struct {
 typedef struct {
     string uuid;
     string data;
+    time_t time;
+    user_t *user;
 } message_t;
 
 typedef struct {
