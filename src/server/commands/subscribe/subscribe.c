@@ -72,7 +72,6 @@ bool unsubscribe_(team_t *team, client_t *client, string *splited)
     string info = my_multcat(3, client->user->uuid, "|", team->uuid);
     send_packet(client->socket_fd, create_packet(UNSUBSCRIBE_SUCCESS, info));
     free(info);
-    free_array(splited);
     return true;
 }
 
