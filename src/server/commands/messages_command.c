@@ -27,12 +27,6 @@ void send_in_reverse_order(node* tmp, client_t *client)
     FREE(packet);
 }
 
-void send_all_messages(server_t *server, client_t *client,
-                        p_discuss_t *discussion)
-{
-    send_in_reverse_order(discussion->messages, client);
-}
-
 void message_exchanged(server_t *server, client_t *client, string data)
 {
     int i = 0;
@@ -52,5 +46,5 @@ void message_exchanged(server_t *server, client_t *client, string data)
         send_packet(client->socket_fd, packet);
         return;
     }
-    send_all_messages(server, client, discussion);
+    send_in_reverse_order(discussion->messages, client);
 }

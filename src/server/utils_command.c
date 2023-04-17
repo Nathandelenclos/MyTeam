@@ -26,7 +26,7 @@ p_discuss_t *find_correct_discussion(server_t *server,
                                         client_t *client, string data)
 {
     int i = 0;
-    p_discuss_t *discussion;
+    p_discuss_t *discussion = NULL;
     for (node *tmp = server->discusses; tmp != NULL; tmp = tmp->next) {
         discussion = tmp->data;
         if (find_correct_user(i, discussion, client, data) != NULL)

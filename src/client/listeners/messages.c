@@ -42,3 +42,12 @@ void list_messages(packet_t *packet)
     time_t my_time = mktime(&tm_time);
     client_private_message_print_messages(array[0], my_time, array[3]);
 }
+
+/**
+ * Message listener.
+ * @param packet - Packet to read.
+ */
+void list_messages_error(packet_t *packet)
+{
+    printf("Error: %s\n", packet->data);
+}

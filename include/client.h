@@ -32,6 +32,7 @@ void give_users(packet_t *socket);
 void give_user_info(packet_t *packet);
 void message_sent(packet_t *packet);
 void list_messages(packet_t *packet);
+void list_messages_error(packet_t *packet);
 
 static const listener listeners[] = {
     {SUCCESS, success},
@@ -43,6 +44,7 @@ static const listener listeners[] = {
     {INFO_USER_GIVEN_SUCCESS, give_user_info},
     {MESSAGE_SENT, message_sent},
     {LIST_MESSAGES_SUCCESS_CODE, list_messages},
+    {LIST_MESSAGES_ERROR_CODE, list_messages_error},
     {UNFOUND, unfound},
     {QUIT, NULL}
 };
