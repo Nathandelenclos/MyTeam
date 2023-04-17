@@ -25,14 +25,15 @@ void give_users(packet_t *packet)
     string user_uuid = MALLOC(sizeof(char) * 37);
     string user_name = MALLOC(sizeof(char) * 33);
     int user_status;
-    char **users = str_to_word_array(packet->data, "\n");
+    string *users = str_to_word_array(packet->data, "\n");
     for (int i = 0; users[i] != NULL; i++) {
         if (sscanf(users[i],
         "%s %s %d", user_uuid, user_name, &user_status) == 3)
             client_print_users(user_uuid, user_name, user_status);
     }
-    FREE(user_name);
+    free_array(users);
     FREE(user_uuid);
+    FREE(user_name);
 }
 
 /**

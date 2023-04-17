@@ -24,5 +24,6 @@ int main(int ac, char **av)
     signal(SIGINT, exit_all);
     server_t *server = create_server(atoi(av[1]));
     handle_client(server);
+    FREE_ALL();
     return 0;
 }

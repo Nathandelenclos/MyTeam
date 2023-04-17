@@ -10,6 +10,27 @@
 #include <time.h>
 
 /**
+ * Check if the channel already exist.
+ * @param client - client.
+ * @param data - data.
+ * @return - true or false.
+ */
+bool already_exist_channel(client_t *client, string data)
+{
+    char **command = str_to_word_array(data, "\"");
+    for (node *tmp = client->team->channels; tmp; tmp = tmp->next) {
+        channel_t *channel = ((channel_t *) tmp->data);
+        if (strcmp(channel->name, command[1]) == 0) {
+            send_packet(client->socket_fd,
+                create_packet(ALREADY_EXIST, ""));
+            return false;
+        }
+    }
+    free_array(command);
+    return true;
+}
+
+/**
  * Check if the command is good.
  * @param server - server.
  * @param client - client.
@@ -20,21 +41,16 @@ bool is_good_create_channel(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {2, -1};
     if (check_args(data, nb_arg, "/create") == 1) {
-        send_packet(client->socket_fd,create_packet(ERROR, "Bad command"));
+        send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
         return false;
     }
     if (client->team == NULL) {
-        send_packet(client->socket_fd,create_packet(UNKNOW_TEAM, ""));
+        send_packet(client->socket_fd, create_packet(UNKNOW_TEAM,
+            client->context_uuids->team_uuid));
         return false;
     }
-    char **command = str_to_word_array(data, "\"");
-    for (node *tmp = client->team->channels; tmp; tmp = tmp->next) {
-        channel_t *channel = ((channel_t *)tmp->data);
-        if (strcmp(channel->name, command[1]) == 0) {
-            send_packet(client->socket_fd,
-                create_packet(ALREADY_EXIST, ""));
-            return false;
-        }
+    if (!already_exist_channel(client, data)) {
+        return false;
     }
     return true;
 }
@@ -49,6 +65,11 @@ void create_channel(server_t *server, client_t *client, string data)
 {
     if (!is_good_create_channel(server, client, data))
         return;
+    if (!is_subscribed(client->team, client->user)) {
+        send_packet(client->socket_fd, create_packet(UNAUTHORIZED,
+            "You are not subscribed to this team."));
+        return;
+    }
     char **command = str_to_word_array(data, "\"");
     channel_t *new_channel = MALLOC(sizeof(channel_t));
     new_channel->name = my_strdup(command[1]);

@@ -50,3 +50,26 @@ int len_array(string *array)
     for (; array[i]; i++);
     return i;
 }
+
+client_t *create_client(int server_fd)
+{
+    client_t *client = MALLOC(sizeof(client_t));
+
+    if (!client) {
+        return NULL;
+    }
+    struct sockaddr_in address;
+    client->len = sizeof(address);
+    client->socket_fd = accept(server_fd,
+        (struct sockaddr *)
+            &address,
+        &client->len);
+    client->sockaddr = address;
+    client->user = NULL;
+    client->context = NONE;
+    client->team = NULL;
+    client->channel = NULL;
+    client->thread = NULL;
+    client->context_uuids = create_context_uuids();
+    return client;
+}

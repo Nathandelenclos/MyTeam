@@ -7,7 +7,6 @@
 
 #include "client.h"
 
-
 /**
  * Default error listener.
  * @param packet - Packet to read.
@@ -33,4 +32,13 @@ void unfound(packet_t *packet)
 void unauthorized(packet_t *packet)
 {
     printf("Error unauthorized command: %s\n", packet->data);
+}
+
+/**
+ * Already exist listener.
+ * @param packet - Packet to read.
+ */
+void already_exist(packet_t *packet)
+{
+    printf("Error already exist: %s\n", packet->data);
 }

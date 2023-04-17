@@ -31,7 +31,7 @@ void use(server_t *server, client_t *client, string data);
 void create_team(server_t *server, client_t *client, string data);
 void create_channel(server_t *server, client_t *client, string data);
 void create_thread(server_t *server, client_t *client, string data);
-//void create_reply(server_t *server, client_t *client, string data);
+void create_reply(server_t *server, client_t *client, string data);
 void list_team(server_t *server, client_t *client, string data);
 void give_info(server_t *server, client_t *client, string data);
 
@@ -52,7 +52,7 @@ static const command commands[] = {
     {use, "/use", 1, "use specify a context team/channel/thread", ANY},
     {create_channel, "/create", 1, "create a team", TEAM},
     {create_thread, "/create", 1, "create a team", CHANNEL},
-    //{create_reply, "/create", 1, "create a team", THREAD},
+    {create_reply, "/create", 1, "create a team", THREAD},
     {create_team, "/create", 1, "create a team", NONE},
     {list_team, "/list", 1, "list all existing teams", NONE},
     {give_info, "/info", 1, "based on what is being used list the current",

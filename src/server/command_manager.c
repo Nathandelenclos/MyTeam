@@ -12,45 +12,41 @@
 
 /**
  * Close fd of user when he is disconnected.
- * @param server - server
- * @param client
- * @param valread
+ * @param server - server.
+ * @param client - client.
  */
-void disconect_client(server_t *server, client_t *client, int valread)
+void disconect_client(server_t *server, client_t *client)
 {
-    if (valread == 0) {
-        printf("Client déconnecté : %s:%d\r\n",
-            inet_ntoa(client->sockaddr.sin_addr),
-            ntohs(client->sockaddr.sin_port));
-        close(client->socket_fd);
-        client->socket_fd = 0;
-    }
+    printf("Client déconnecté : %s:%d\r\n",
+        inet_ntoa(client->sockaddr.sin_addr),
+        ntohs(client->sockaddr.sin_port));
+    close(client->socket_fd);
+    delete_in_list(&server->clients, client);
 }
 
 /**
  * Execute command.
- * @param server - server
- * @param client - client
- * @param cmd - command
- * @param data - data of command
+ * @param server - server.
+ * @param client - client.
+ * @param cmd - command.
+ * @param data - data of command.
  */
 void exec_command(server_t *server, client_t *client, command cmd, packet_t
 *socket)
 {
-    if (!cmd.auth_required || (cmd.auth_required && client->user) ) {
+    if (!cmd.auth_required || (cmd.auth_required && client->user)) {
         cmd.function(server, client, socket->data);
     } else {
         send_packet(client->socket_fd,
-            create_packet(UNAUTHORIZED,"You are not logged in."));
+            create_packet(UNAUTHORIZED, "You are not logged in."));
     }
 }
 
 /**
  * Manage all commands of server by client.
- * @param server
- * @param client
- * @param valread
- * @param data
+ * @param server - server.
+ * @param client - client.
+ * @param data - data of command.
  */
 void command_client(server_t *server, client_t *client, packet_t *packet)
 {
