@@ -40,7 +40,7 @@ bool set_team(server_t *server, client_t *client, string *command_parsed)
             FREE(client->context_uuids->team_uuid);
         client->context_uuids->team_uuid = my_strdup(command_parsed[1]);
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
             return false;
         }
     }
@@ -59,7 +59,7 @@ bool set_channel(server_t *server, client_t *client, string *command_parsed)
     if (len_array(command_parsed) >= 4 && command_parsed[3] != NULL) {
         client->context = CHANNEL;
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
             return false;
         }
         client->channel = get_channel_by_uuid(client->team->channels, command_parsed[3]);
@@ -67,7 +67,7 @@ bool set_channel(server_t *server, client_t *client, string *command_parsed)
             FREE(client->context_uuids->channel_uuid);
         client->context_uuids->channel_uuid = my_strdup(command_parsed[3]);
         if (client->channel == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, client->context_uuids->channel_uuid));
             return false;
         }
     }
@@ -86,11 +86,11 @@ bool set_thread(server_t *server, client_t *client, string *command_parsed)
     if (len_array(command_parsed) >= 6 && command_parsed[5] != NULL) {
         client->context = THREAD;
         if (client->team == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, "Team not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, client->context_uuids->team_uuid));
             return false;
         }
         if (client->channel == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, "Channel not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_CHANNEL, client->context_uuids->channel_uuid));
             return false;
         }
         client->thread = get_thread_by_uuid(client->channel->threads, command_parsed[5]);
@@ -98,7 +98,7 @@ bool set_thread(server_t *server, client_t *client, string *command_parsed)
             FREE(client->context_uuids->thread_uuid);
         client->context_uuids->thread_uuid = my_strdup(command_parsed[5]);
         if (client->thread == NULL) {
-            send_packet(client->socket_fd, create_packet(UNKNOW_THREAD, "Thread not found."));
+            send_packet(client->socket_fd, create_packet(UNKNOW_THREAD, client->context_uuids->thread_uuid));
             return false;
         }
     }

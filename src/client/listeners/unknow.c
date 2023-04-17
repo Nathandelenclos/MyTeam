@@ -14,7 +14,7 @@
 void unknow_team(packet_t *packet)
 {
     client_error_unknown_team(packet->data);
-    printf("Unknow: %s\n", packet->data);
+    printf("Unknow Team: \"%s\"\n", packet->data);
 }
 
 /**
@@ -24,7 +24,7 @@ void unknow_team(packet_t *packet)
 void unknow_channel(packet_t *packet)
 {
     client_error_unknown_channel(packet->data);
-    printf("Unknow: %s\n", packet->data);
+    printf("Unknow Channel: \"%s\"\n", packet->data);
 }
 
 /**
@@ -34,7 +34,7 @@ void unknow_channel(packet_t *packet)
 void unknow_thread(packet_t *packet)
 {
     client_error_unknown_thread(packet->data);
-    printf("Unknow: %s\n", packet->data);
+    printf("Unknow Thread: \"%s\"\n", packet->data);
 }
 
 /**
@@ -44,5 +44,5 @@ void unknow_thread(packet_t *packet)
 void unknow_user(packet_t *packet)
 {
     client_error_unknown_user(packet->data);
-    printf("Unknow: %s\n", packet->data);
+    printf("Unknow User: \"%s\"\n", packet->data);
 }
