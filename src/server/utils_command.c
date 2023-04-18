@@ -8,6 +8,14 @@
 #include "server.h"
 #include <dirent.h>
 
+/**
+ * Find the correct user in the discussion
+ * @param i - number of users
+ * @param discussion - discussion_t struct
+ * @param client - client_t struct
+ * @param data - data of the user
+ * @return
+ */
 p_discuss_t *find_correct_user(int i, p_discuss_t *discussion,
                                 client_t *client, string data)
 {
@@ -22,6 +30,13 @@ p_discuss_t *find_correct_user(int i, p_discuss_t *discussion,
     return NULL;
 }
 
+/**
+ * Find the correct discussion
+ * @param server - server_t struct
+ * @param client - client_t struct
+ * @param data - data of the user
+ * @return
+ */
 p_discuss_t *find_correct_discussion(server_t *server,
                                         client_t *client, string data)
 {
