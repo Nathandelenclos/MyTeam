@@ -16,7 +16,8 @@
  * @param command - Message to send.
  * @param client - Client structure.
  */
-int send_to_online_user(server_t *server, message_t *message, client_t *client, user_t *user)
+int send_to_online_user(server_t *server, message_t *message,
+    client_t *client, user_t *user)
 {
     int count = 0;
     string message_str = my_multcat(5, client->user->uuid, "|",
@@ -24,7 +25,8 @@ int send_to_online_user(server_t *server, message_t *message, client_t *client, 
     for (node *tmp = server->clients; tmp; tmp = tmp->next) {
         client_t *clt = tmp->data;
         if (strcmp(clt->user ? clt->user->uuid : "Invalid", user->uuid) == 0) {
-            send_packet(clt->socket_fd, create_packet(MESSAGE_SENT, message_str));
+            send_packet(clt->socket_fd,
+                create_packet(MESSAGE_SENT, message_str));
             count++;
         }
     }
@@ -51,7 +53,8 @@ void send_to_user(server_t *server, client_t *client, string data)
     if (offline_user) {
         p_discuss_t *discuss = send_message_offline(client, server,
                                                     offline_user, command);
-        send_to_online_user(server, discuss->messages->data, client, offline_user);
+        send_to_online_user(
+            server, discuss->messages->data, client, offline_user);
         put_in_list(&server->discusses, discuss);
     } else {
         packet = create_packet(UNKNOW_USER, command[1]);

@@ -6,9 +6,30 @@
 */
 
 #include "list.h"
+/**
+ * Insert a node into a sorted list (in ascending order).
+ * @param head - Head of the list.
+ * @param newnode - Node to insert.
+ * @param cmp - Compare function.
+ */
+void insert_node_sorted(node **head, node *newnode, int (*cmp)(void *, void *))
+{
+    if (*head == NULL || cmp(newnode->data, (*head)->data) < 0) {
+        newnode->next = *head;
+        *head = newnode;
+        return;
+    }
+    node *current = *head;
+    while (current->next != NULL &&
+        cmp(newnode->data, current->next->data) > 0) {
+        current = current->next;
+    }
+    newnode->next = current->next;
+    current->next = newnode;
+}
 
 /**
- * Insertion sort.
+ * Sorts a linked list using insertion sort.
  * @param headRef - Head of the list.
  * @param cmp - Compare function.
  */
@@ -18,18 +39,7 @@ void insertion_sort(node **headRef, int (*cmp)(void *, void *))
     node *current = *headRef;
     while (current != NULL) {
         node *nextnode = current->next;
-        if (sorted == NULL || cmp(current->data, sorted->data) < 0) {
-            current->next = sorted;
-            sorted = current;
-        } else {
-            node *temp = sorted;
-            while (temp->next != NULL &&
-                cmp(current->data, temp->next->data) > 0) {
-                temp = temp->next;
-            }
-            current->next = temp->next;
-            temp->next = current;
-        }
+        insert_node_sorted(&sorted, current, cmp);
         current = nextnode;
     }
     *headRef = sorted;

@@ -42,6 +42,6 @@ node *search_in_list(node *list, void *ptr);
 node *get_end(node *list);
 node *find_list(node *list, int (*function)(each_t each));
 void map_list(node *list, void (*function)(each_t each));
-void insertion_sort(node** headRef, int (*cmp)(void*, void*));
+void insertion_sort(node **headRef, int (*cmp)(void *, void *));
 
 #endif

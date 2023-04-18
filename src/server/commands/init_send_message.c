@@ -65,6 +65,7 @@ p_discuss_t *send_message_offline(client_t *client, server_t *server,
     } else {
         put_in_list(&discuss->messages, message_sent);
     }
-    server_event_private_message_sended(client->user->uuid, user->uuid, command[3]);
+    server_event_private_message_sended(
+        client->user->uuid, user->uuid, command[3]);
     return discuss;
 }
