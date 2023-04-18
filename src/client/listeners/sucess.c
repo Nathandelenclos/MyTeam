@@ -18,33 +18,6 @@ void success(packet_t *packet)
 }
 
 /**
- * Unfound listener.
- * @param packet - Packet to read.
- */
-void unfound(packet_t *packet)
-{
-    printf("Error unfound: %s\n", packet->data);
-}
-
-/**
- * LOGIN_SUCCESS listener.
- * @param packet - Packet to read.
- */
-void login_user(packet_t *packet)
-{
-    printf("Login: %s\n", packet->data);
-}
-
-/**
- * LOGOUT_SUCCESS listener.
- * @param packet - Packet to read.
- */
-void logout_user(packet_t *packet)
-{
-    printf("Logout: %s\n", packet->data);
-}
-
-/**
  * USERS_SUCCESS_CODE listener.
  * @param packet - Packet to read.
  */
