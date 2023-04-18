@@ -58,3 +58,20 @@ thread_t *get_thread_by_uuid(node *threads, string str)
     }
     return NULL;
 }
+
+/**
+ * Check if the user is active.
+ * @param server - server info.
+ * @param user - user to check.
+ * @return - true if the user is active, false otherwise.
+ */
+bool is_active(server_t *server, user_t *user)
+{
+    for (node *tmp = server->clients; tmp; tmp = tmp->next) {
+        client_t *client = tmp->data;
+        if (client->user == user) {
+            return true;
+        }
+    }
+    return false;
+}

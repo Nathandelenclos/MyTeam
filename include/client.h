@@ -44,7 +44,8 @@ void create_channel(packet_t *socket);
 void create_thread(packet_t *socket);
 void create_reply(packet_t *socket);
 void suscribe(packet_t *socket);
-void suscribed(packet_t *socket);
+void suscribed_team(packet_t *packet);
+void suscribed_user(packet_t *packet);
 void unsuscribe(packet_t *socket);
 void use_success(packet_t *packet);
 
@@ -69,7 +70,8 @@ static const listener listeners[] = {
     {CREATE_THREAD_SUCCESS, create_thread},
     {CREATE_REPLY_SUCCESS, create_reply},
     {SUBSCRIBE_SUCCESS, suscribe},
-    {SUBSCRIBED_SUCCESS, suscribed},
+    {SUBSCRIBED_TEAM_SUCCESS, suscribed_team},
+    {SUBSCRIBED_USER_SUCCESS, suscribed_user},
     {UNSUBSCRIBE_SUCCESS, unsuscribe},
     {USE_SUCCESS, use_success},
     // Others:

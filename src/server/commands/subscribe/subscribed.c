@@ -14,35 +14,39 @@
  * @param client - client info.
  * @return - string with all the teams.
  */
-string get_my_subscribe(server_t *server, client_t *client)
+int get_my_subscribe(server_t *server, client_t *client)
 {
-    string info = "";
+    int len = 0;
     for (node *tmp = server->teams; tmp; tmp = tmp->next) {
         team_t *team = tmp->data;
         if (is_subscribed(team, client->user)) {
-            string temp = my_multcat(3, info, team->uuid, "|");
+            string info = my_multcat(8, client->user->uuid, "|", team->uuid, "|", team->name, "|",
+                team->description, "|");
+            send_packet(client->socket_fd, create_packet(SUBSCRIBED_USER_SUCCESS, info));
             free(info);
-            info = temp;
         }
     }
-    return info;
+    return len;
 }
 
 /**
  * Get all the subscribers of a team.
+ * @param server - server info.
  * @param team - team to check.
  * @return - string with all the subscribers.
  */
-string get_subscribers(team_t *team)
+int get_subscribers(server_t *server, client_t *client, team_t *team)
 {
-    string info = "";
+    int len = 0;
     for (node *tmp = team->subscribers; tmp; tmp = tmp->next) {
         user_t *subscriber = tmp->data;
-        string temp = my_multcat(3, info, subscriber->uuid, "|");
+        string info = my_multcat(8, team->uuid, "|", subscriber->uuid, "|", subscriber->name, "|",
+            is_active(server, subscriber) ? "1" : "0", "|");
+        send_packet(client->socket_fd, create_packet(SUBSCRIBED_TEAM_SUCCESS, info));
         free(info);
-        info = temp;
+        len++;
     }
-    return info;
+    return len;
 }
 
 /**
@@ -59,14 +63,11 @@ void subscribed(server_t *server, client_t *client, string data)
         send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
         return;
     }
-    string info = "";
     string *splited = str_to_word_array(data, "\"");
     if (len_array(splited) == 1) {
-        info = get_my_subscribe(server, client);
+        get_my_subscribe(server, client);
     } else {
-        info = get_subscribers(get_team_by_uuid(server->teams, splited[1]));
+        get_subscribers(server, client, get_team_by_uuid(server->teams, splited[1]));
     }
-    send_packet(client->socket_fd, create_packet(SUBSCRIBED_SUCCESS, info));
     free_array(splited);
-    free(info);
 }

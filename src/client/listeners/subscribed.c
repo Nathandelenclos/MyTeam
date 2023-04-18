@@ -23,9 +23,22 @@ void suscribe(packet_t *packet)
  * Subscribed listener.
  * @param packet - Packet to read.
  */
-void suscribed(packet_t *packet)
+void suscribed_team(packet_t *packet)
 {
-    printf("Is suscribed to team: %s\n", packet->data);
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_users(data[1], data[2], atoi(data[3]));
+    printf("User \"%s\" suscribed to team: \"%s\"\n", data[1], data[0]);
+}
+
+/**
+ * Subscribed listener.
+ * @param packet - Packet to read.
+ */
+void suscribed_user(packet_t *packet)
+{
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_teams(data[1], data[2], data[3]);
+    printf("User \"%s\" suscribed to team: \"%s\"\n", data[0], data[1]);
 }
 
 /**

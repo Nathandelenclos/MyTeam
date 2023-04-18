@@ -35,7 +35,15 @@ bool action(server_t *server, client_t *client)
 {
     if (FD_ISSET(client->socket_fd, &server->readfds)) {
         packet_t *socket = read_packet(client->socket_fd);
-        if (socket == NULL) {
+        if (socket == NULL && client->user != NULL) {
+            disconect_client(server, client);
+            string info = my_multcat(3, client->user->uuid, "|",
+                client->user->name);
+            broadcast_logged(server, create_packet(LOGOUT_SUCCESS, info));
+            server_event_user_logged_out(client->user->uuid);
+            free(info);
+            return false;
+        } else if (socket == NULL) {
             disconect_client(server, client);
             return false;
         }
