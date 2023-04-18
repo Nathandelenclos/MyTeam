@@ -108,5 +108,6 @@ var searchData=
   ['my_5fstrupcase_2ec_314',['my_strupcase.c',['../my__strupcase_8c.html',1,'']]],
   ['my_5fswap_315',['my_swap',['../my_8h.html#aab3acec01fe02d352623d33a2e27f3eb',1,'my_swap(int *, int *):&#160;my_swap.c'],['../my__swap_8c.html#a2cd02d2d23c5c4edd026ad1fd3dafc8f',1,'my_swap(int *a, int *b):&#160;my_swap.c']]],
   ['my_5fswap_2ec_316',['my_swap.c',['../my__swap_8c.html',1,'']]],
-  ['my_5fteams_20protocol_317',['My_Teams Protocol',['../md_DOC.html',1,'']]]
+  ['my_5fteams_317',['My_Teams',['../index.html',1,'']]],
+  ['my_5fteams_20protocol_318',['My_Teams Protocol',['../md_DOC.html',1,'']]]
 ];
