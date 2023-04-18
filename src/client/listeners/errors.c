@@ -41,5 +41,6 @@ void unauthorized(packet_t *packet)
  */
 void already_exist(packet_t *packet)
 {
+    client_error_already_exist();
     printf("Error already exist: %s\n", packet->data);
 }
