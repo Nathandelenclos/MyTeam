@@ -23,6 +23,7 @@ char *login_user_exist(server_t *server, client_t *client, string name)
         if (strcmp(tmp->name, name) == 0) {
             client->user = tmp;
             client->user->online = true;
+            server_event_user_loaded(client->user->uuid, client->user->name);
             return my_multcat(3, client->user->uuid, "|", name);
         }
     }
