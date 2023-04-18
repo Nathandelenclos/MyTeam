@@ -72,7 +72,8 @@ bool set_thread(server_t *server, client_t *client, string *command_parsed);
 bool set_channel(server_t *server, client_t *client, string *command_parsed);
 bool set_team(server_t *server, client_t *client, string *command_parsed);
 int broadcast_logged(server_t *server, packet_t *packet);
-int broadcast_subscribed_logged(server_t *server, team_t *team, packet_t *packet);
+int broadcast_subscribed_logged(server_t *server, team_t *team,
+    packet_t *packet);
 bool is_active(server_t *server, user_t *user);
 
 #endif

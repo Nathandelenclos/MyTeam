@@ -53,7 +53,8 @@ int broadcast_logged(server_t *server, packet_t *packet)
  * @param packet - packet to send.
  * @return - Return number of clients.
  */
-int broadcast_subscribed_logged(server_t *server, team_t *team, packet_t *packet)
+int
+broadcast_subscribed_logged(server_t *server, team_t *team, packet_t *packet)
 {
     int len = 0;
     for (node *tmp = server->clients; tmp; tmp = tmp->next) {

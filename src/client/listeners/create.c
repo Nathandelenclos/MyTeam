@@ -51,8 +51,8 @@ void create_thread(packet_t *packet)
 void create_reply(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
-    time_t time = atoi(data[2]);
-    client_print_reply_created(data[0], data[1], time, data[3]);
-    printf("Create reply: %s\n", packet->data);
+    time_t time = atoi(data[3]);
+    client_event_thread_reply_received(data[0], data[1], data[2], data[4]);
+    client_print_reply_created(data[1], data[2], time, data[4]);
     free_array(data);
 }

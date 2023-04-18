@@ -67,7 +67,8 @@ void subscribe(server_t *server, client_t *client, string data)
  * @param splited - command splited.
  * @return - true or false.
  */
-bool unsubscribe_second_part(server_t *server, team_t *team, client_t *client, string *splited)
+bool unsubscribe_second_part(server_t *server, team_t *team,
+    client_t *client, string *splited)
 {
     if (!is_subscribed(team, client->user)) {
         send_packet(client->socket_fd,
@@ -93,7 +94,8 @@ void unsubscribe(server_t *server, client_t *client, string data)
 {
     int nb_arg[] = {1, -1};
     if (check_args(data, nb_arg, "/unsubscribe") == 1) {
-        send_packet(client->socket_fd, create_packet(ERROR, "Bad command"));
+        send_packet(client->socket_fd,
+            create_packet(ERROR, "Bad command"));
         return;
     }
     string *splited = str_to_word_array(data, "\"");
@@ -105,6 +107,7 @@ void unsubscribe(server_t *server, client_t *client, string data)
             return;
         }
     }
-    send_packet(client->socket_fd, create_packet(UNKNOW_TEAM, splited[1]));
+    send_packet(client->socket_fd,
+        create_packet(UNKNOW_TEAM, splited[1]));
     free_array(splited);
 }

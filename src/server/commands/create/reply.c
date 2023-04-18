@@ -67,8 +67,9 @@ bool is_good_create_reply(server_t *server, client_t *client, string data)
  */
 void create_reply(server_t *server, client_t *client, string data)
 {
-    if (!is_good_create_reply(server, client, data))
+    if (!is_good_create_reply(server, client, data)) {
         return;
+    }
     string *command_parsed = str_to_word_array(data, " ");
     message_t *new_reply = MALLOC(sizeof(message_t));
     new_reply->data = my_strdup(command_parsed[1]);
@@ -76,7 +77,8 @@ void create_reply(server_t *server, client_t *client, string data)
     new_reply->time = time(NULL);
     new_reply->user = client->user;
     put_in_list(&client->thread->replies, new_reply);
-    string info = my_multcat(7, client->thread->uuid, "|", client->user->uuid,
+    string info = my_multcat(9, client->team->uuid, "|", client->thread->uuid,
+        "|", client->user->uuid,
         "|", itoa(new_reply->time), "|", new_reply->data);
     server_event_reply_created(client->thread->uuid, client->user->uuid,
         new_reply->data);

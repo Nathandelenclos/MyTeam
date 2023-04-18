@@ -128,12 +128,9 @@ void logout_user(server_t *server, client_t *client, string data)
 void give_users(server_t *server, client_t *client, string data)
 {
     int i = 0;
-    char *msg_cli = "";
-    packet_t *packet;
     int nb_arg[] = {0, -1};
     if (check_args(data, nb_arg, "/users") == 1) {
-        packet = create_packet(ERROR, "bad nb arg");
-        send_packet(client->socket_fd, packet);
+        send_packet(client->socket_fd, create_packet(ERROR, "bad nb arg"));
         return;
     }
     user_t *tmp;
@@ -141,10 +138,11 @@ void give_users(server_t *server, client_t *client, string data)
         node_tmp = node_tmp->next) {
         tmp = (user_t *) node_tmp->data;
         if (tmp != NULL) {
-            msg_cli = my_multcat(7, msg_cli, "\n",
-                tmp->name, " ", tmp->uuid, " ", (tmp->online ? "1" : "0"));
+            string info = my_multcat(3, tmp->uuid, "|", tmp->name, "|",
+                is_active(server, tmp) ? "1" : "0");
+            send_packet(client->socket_fd,
+                create_packet(USERS_SUCCESS_CODE,info));
+            free(info);
         }
     }
-    packet = create_packet(USERS_SUCCESS_CODE, msg_cli);
-    send_packet(client->socket_fd, packet);
 }
