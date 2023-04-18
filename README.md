@@ -1,91 +1,75 @@
-# My_Teams Protocol
+# My_Teams
 ***
-## Serveur
-### Usage
-```bash
-./myteams_server port
-```
-- port is the port number on which the server socket listens.
+[![version](https://img.shields.io/badge/Version-1.0-vert)](https://github.com/Nathandelenclos/MyRPG)
+
+The project aims to rebuild a server and a command-line interface (CLI) 
+representing [Teams](https://www.microsoft.com/fr-fr/microsoft-teams/group-chat-software).
+
+This repository contains:
+
+1.  The description of the application
+2.  The technical documentation
+3.  Code in production and code in development
 ***
-## Command Line Interface (CLI) Client
-### Usage launching client
-```bash
-./myteams_client ip port
-```
-- ip is the server ip address on which the server socket listens
-- port is the port number on which the server socket listens
-### Usage commands in client
-```bash
-/help
-```
-show help
-```bash
-/login [“user_name”]
-```
-set the user_name used by client
-```bash
-/logout
-```
-disconnect the client from the server
-```bash
-/users
-```
-get the list of all users that exist on the domain
-```bash
-/user [“user_uuid”]
-```
-get information about a user
-```bash
-/send [“user_uuid”] [“message_body”]
-```
-send a message to a user
-```bash
-/messages [“user_uuid”]
-```
-list all messages exchange with an user
-```bash
-/subscribe [“team_uuid”]
-```
-subscribe to the event of a team and its sub directories (enable reception of all events from a team)
-```bash
-/subscribed ?[“team_uuid”]
-```
-list all subscribed teams or list all users subscribed to a team
-```bash
-/unsubscribe [“team_uuid”]
-```
-unsubscribe from a team
-```bash
-/use ?[“team_uuid”] ?[“channel_uuid”] ?[“thread_uuid”]
-```
-use specify a context team/channel/thread
-```bash
-/create [“team_name”] [“team_description”]
-```
-create a new team when the context is not defined (/use)
-```bash
-/create [“channel_name”] [“channel_description”]
-```
-create a new channel when team_uuid is defined (/use “team_uuid”)
-```bash
-/create [“thread_title”] [“thread_message”]
-```
-create a new thread when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)
-```bash
-/create [“comment_body”]
-```
-create a new reply when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)
-```bash
-/list
-```
-- list all existing teams when the context is not defined (/use)
-- list all existing channels when team_uuid is defined (/use “team_uuid”)
-- list all existing threads when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)
-- list all existing replies when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)
-```bash
-/info
-```
-- display currently logged user infos when the context is not defined (/use)
-- display currently selected team infos when team_uuid is defined (/use “team_uuid”)
-- display currently selected channel infos when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)
-- display currently selected thread infos when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)
+## Table of Contents
+
+-  [About](#about)
+-  [Install](#installation)
+-  [Documentation](#documentation)
+-  [Languages](#languages)
+-  [Demo](#demo)
+-  [Contact](#contact)
+-  [License](#license)
+***
+
+## About
+<div id="about"></div>
+The aim of the project was to provide a practical and hands-on experience in setting up a network system by developing a server and a command-line interface (CLI) representing a Teams-like application. Throughout the development process, we were required to explore and learn the fundamental principles of networking such as sockets and connections, while focusing on the practical aspects of programming in the C language. Moreover, the innovative and stimulating aspect of the project was that we were encouraged to design our own communication protocol to facilitate data exchanges between the server and the CLI interface. In summary, this project offered a unique opportunity to acquire key technical skills in the field of network programming and protocol design.
+
+***
+
+## Installation
+<div id="installation"></div>
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Nathandelenclos/MyTeam.git
+   ```
+2. Build Project
+    ```shell
+    make
+    ```
+3. Export ENV variable
+    ```shell
+    export LD_LIBRARY_PATH=./libs/myteams/
+    ```   
+
+***
+## Documentation
+<div id="documentation"></div>
+
+- [Doxygen](https://nathandelenclos.github.io/MyTeams/)
+- [Protocol Documentation](https://nathandelenclos.github.io/MyTeam/md_DOC.html)
+
+## Languages
+<div id="languages"></div>
+
+[![C](https://img.shields.io/badge/-C-grey)](https://github.com/dktunited/jetlane-gmao/search?l=javascript)
+
+## Demo
+<div id="demo"></div>
+
+_soon_
+
+## Contact
+<div id="contact"></div>
+
+-  [Epitech](https://www.epitech.eu/) - Product Owner.
+-  [Nathan DELENCLOS](mailto:nathan.delenclos@epitech.eu) - Developer
+-  [Simon RIEMBAULT](mailto:simon.riembault@epitech.eu) - Developer
+-  [David PLOUVIER](mailto:david.plouvier@epitech.eu) - Developer
+
+## License
+<div id="license"></div>
+
+[ISC](LICENSE) © EPITECH
