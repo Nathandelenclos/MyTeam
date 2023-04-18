@@ -30,7 +30,7 @@ message_t *init_message_struct(char **command, client_t *client)
 {
     message_t *message_sent = MALLOC(sizeof(message_t));
     message_sent->uuid = new_uuid();
-    message_sent->data = my_strdup(command[2]);
+    message_sent->data = my_strdup(command[3]);
     time(&message_sent->time);
     message_sent->user = client->user;
     return message_sent;
@@ -40,7 +40,7 @@ p_discuss_t *send_message(client_t *client, server_t *server,
                             client_t *user, char **command)
 {
     string message = my_multcat(5, client->user->uuid, "|",
-                                client->user->name, "|", command[2]);
+                                client->user->name, "|", command[3]);
     packet_t *packet = create_packet(MESSAGE_SENT, message);
     p_discuss_t *discuss =
             find_correct_discussion(server, client, user->user->uuid);
@@ -53,7 +53,7 @@ p_discuss_t *send_message(client_t *client, server_t *server,
     add_to_discuss_list(discuss, client, user->user, message_sent);
     send_packet(user->socket_fd, packet);
     server_event_private_message_sended(client->user->uuid, user->user->uuid,
-                                        command[2]);
+                                        command[3]);
     free(message);
     return discuss;
 }
@@ -62,7 +62,7 @@ p_discuss_t *send_message_offline(client_t *client, server_t *server,
                                     user_t *user, char **command)
 {
     string message = my_multcat(5, client->user->uuid, "|",
-                                client->user->name, "|", command[2]);
+                                client->user->name, "|", command[3]);
     p_discuss_t *discuss =
             find_correct_discussion(server, client, user->uuid);
     message_t *message_sent = NULL;
@@ -70,7 +70,7 @@ p_discuss_t *send_message_offline(client_t *client, server_t *server,
     message_sent = init_message_struct(command, client);
     add_to_discuss_list(discuss, client, user, message_sent);
     server_event_private_message_sended(client->user->uuid, user->uuid,
-                                        command[2]);
+                                        command[3]);
     free(message);
     return discuss;
 }

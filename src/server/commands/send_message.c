@@ -10,35 +10,46 @@
 #include "logging_server.h"
 #include "time.h"
 
-int check_arg_nbr(char **command, client_t *client, packet_t *packet)
+/**
+ * @brief Send a message to an online user.
+ * @param server - Server structure.
+ * @param command - Message to send.
+ * @param client - Client structure.
+ */
+int send_to_online_user(server_t *server, char **command, client_t *client)
 {
-    int i = 0;
-    for (i; command[i] != NULL; i++);
-    if (i != 3) {
-        packet = create_packet(ERROR, "invalid number of arguments");
-        send_packet(client->socket_fd, packet);
-        return 1;
+    int count = 0;
+    for (node *tmp = server->clients; tmp; tmp = tmp->next) {
+        client_t *clt = tmp->data;
+        if (strcmp(clt->user ? clt->user->uuid : "Invalid", command[1]) == 0) {
+            p_discuss_t *discuss = send_message(client, server, clt, command);
+            put_in_list(&server->discusses, discuss);
+            count++;
+        }
     }
-    return 0;
+    if (count == 0)
+        return 0;
+    else
+        return 1;
 }
 
 void send_to_user(server_t *server, client_t *client, string data)
 {
     packet_t *packet = NULL;
-    char **command = str_to_word_array(data, " \t");
-    if (check_arg_nbr(command, client, packet))
+    int nb_arg[] = {2, -1};
+    if (check_args(data, nb_arg, "/send") == 1) {
+        send_packet(client->socket_fd, create_packet(ERROR, "bad command"));
         return;
-    client_t *user = correct_uuid(command[1], server);
+    }
+    char **command = str_to_word_array(data, "\"");
+    int found = send_to_online_user(server, command, client);
     user_t *offline_user = correct_uuid_user(command[1], server);
-    if (user) {
-        p_discuss_t *discuss = send_message(client, server, user, command);
-        put_in_list(&server->discusses, discuss);
-    } else if (offline_user) {
+    if (!found && offline_user) {
         p_discuss_t *discuss = send_message_offline(client, server,
                                                     offline_user, command);
         put_in_list(&server->discusses, discuss);
-    } else {
-        packet = create_packet(UNFOUND, "invalid uuid");
+    } else if (!found) {
+        packet = create_packet(UNKNOW_USER, command[1]);
         send_packet(client->socket_fd, packet);
     }
 }

@@ -61,15 +61,13 @@ packet_t *create_packet_to_send(client_t *client,
 
 void give_user_info(server_t *server, client_t *client, string data)
 {
-    int i = 0;
     packet_t *packet;
-    char **command = str_to_word_array(data, " \t");
-    for (i; command[i] != NULL; i++);
-    if (i != 2) {
-        packet = create_packet(ERROR, "invalid number of arguments");
-        send_packet(client->socket_fd, packet);
+    int nb_arg[] = {1, -1};
+    if (check_args(data, nb_arg, "/user") == 1) {
+        send_packet(client->socket_fd, create_packet(ERROR, "bad command"));
         return;
     }
+    char **command = str_to_word_array(data, "\"");
     packet = create_packet_to_send(client, command, server);
     send_packet(client->socket_fd, packet);
 }
