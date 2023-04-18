@@ -32,6 +32,10 @@ void loop_actions(int client_socket)
     }
 }
 
+/**
+ * Execute the server action
+ * @param socket - packet_t struct
+ */
 void exec_server_action(packet_t *socket)
 {
     for (int i = 0; listeners[i].code != 0; i++) {

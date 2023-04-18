@@ -39,6 +39,10 @@ void success(packet_t *socket);
 void login_user(packet_t *socket);
 void logout_user(packet_t *socket);
 void give_users(packet_t *socket);
+void give_user_info(packet_t *packet);
+void message_sent(packet_t *packet);
+void list_messages(packet_t *packet);
+void list_messages_error(packet_t *packet);
 void create_team(packet_t *socket);
 void team_created(packet_t *packet);
 void create_channel(packet_t *socket);
@@ -63,12 +67,16 @@ static const listener listeners[] = {
     {UNKNOW_CHANNEL, unknow_channel},
     {UNKNOW_THREAD, unknow_thread},
     {UNKNOW_USER, unknow_user},
+    {LIST_MESSAGES_ERROR_CODE, list_messages_error},
     // Success:
     {SUCCESS, success},
     {USERS_SUCCESS_CODE, give_users},
     {LIST_SUCCESS_CODE, success},
     {LOGIN_SUCCESS, login_user},
     {LOGOUT_SUCCESS, logout_user},
+    {INFO_USER_GIVEN_SUCCESS, give_user_info},
+    {MESSAGE_SENT, message_sent},
+    {LIST_MESSAGES_SUCCESS_CODE, list_messages},
     {CREATE_TEAM_SUCCESS, create_team},
     {TEAM_CREATED, team_created},
     {CREATE_CHANNEL_SUCCESS, create_channel},

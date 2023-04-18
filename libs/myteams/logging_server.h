@@ -140,7 +140,7 @@ int server_event_user_logged_out(char const *user_uuid);
 ** @param message_body The message body
 **
 ** Commands:
-** /send "user_uuid" "message_body"
+**  "user_uuid" "message_body"
 **/
 int server_event_private_message_sended(
     char const *sender_uuid,

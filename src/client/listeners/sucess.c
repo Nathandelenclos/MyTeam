@@ -6,6 +6,7 @@
 */
 
 #include "client.h"
+#include "logging_client.h"
 
 /**
  * Success listener.

@@ -1,23 +1,26 @@
 /*
 ** EPITECH PROJECT, 2023
-** Network
+** B-NWP-400-LIL-4-1-myteams-simon.riembault
 ** File description:
 ** code result
 */
 
 #ifndef CODE_NETWORK_H
     #define CODE_NETWORK_H
-// Errors:
-    #define ERROR 400
-    #define UNFOUND 401
-    #define UNAUTHORIZED 402
-    #define UNKNOW_TEAM 403
-    #define UNKNOW_CHANNEL 404
-    #define UNKNOW_THREAD 405
-    #define UNKNOW_USER 406
-    #define ALREADY_EXIST 407
 
-// Success:
+    // Errors:
+    #define ERROR 500
+    #define UNFOUND 400
+    #define UNAUTHORIZED 401
+    #define UNKNOW_TEAM 402
+    #define UNKNOW_CHANNEL 403
+    #define UNKNOW_THREAD 404
+    #define UNKNOW_USER 405
+    #define ALREADY_EXIST 406
+    #define LIST_MESSAGES_ERROR_CODE 407
+
+
+    // Success:
     #define SUCCESS 200
     #define LIST_SUCCESS_CODE 201
     #define LOGIN_SUCCESS 202
@@ -37,8 +40,11 @@
     #define SUBSCRIBED_USER_SUCCESS 216
     #define SUBSCRIBED_TEAM_SUCCESS 217
     #define UNSUBSCRIBE_SUCCESS 218
+    #define INFO_USER_GIVEN_SUCCESS 219
+    #define MESSAGE_SENT 220
+    #define LIST_MESSAGES_SUCCESS_CODE 221
 
-// Others:
+    // Others:
     #define QUIT 0
 
 #endif
