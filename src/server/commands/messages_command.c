@@ -46,14 +46,14 @@ void message_exchanged(server_t *server, client_t *client, string data)
         return;
     }
     char **command = str_to_word_array(data, "\"");
-    p_discuss_t *discussion = find_correct_discussion(server, client,
-                                                        command[1]);
-    if (discussion == NULL) {
+    p_discuss_t *discus = find_correct_discussion(server, client,command[1]);
+    if (discus == NULL) {
         packet = create_packet(LIST_MESSAGES_ERROR_CODE,
                                 "no messages exchanged with this user");
         send_packet(client->socket_fd, packet);
         return;
     }
-    send_in_reverse_order(discussion->messages, client);
+    insertion_sort(&discus->messages, sort_message);
+    send_in_reverse_order(discus->messages, client);
     free_array(command);
 }

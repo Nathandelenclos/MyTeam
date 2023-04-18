@@ -16,23 +16,20 @@
  * @param command - Message to send.
  * @param client - Client structure.
  */
-int send_to_online_user(server_t *server, char **command, client_t *client)
+int send_to_online_user(server_t *server, message_t *message, client_t *client, user_t *user)
 {
-    p_discuss_t *discuss;
     int count = 0;
+    string message_str = my_multcat(5, client->user->uuid, "|",
+        client->user->name, "|", message->data);
     for (node *tmp = server->clients; tmp; tmp = tmp->next) {
         client_t *clt = tmp->data;
-        if (strcmp(clt->user ? clt->user->uuid : "Invalid", command[1]) == 0) {
-            discuss = send_message(client, server, clt, command);
+        if (strcmp(clt->user ? clt->user->uuid : "Invalid", user->uuid) == 0) {
+            send_packet(clt->socket_fd, create_packet(MESSAGE_SENT, message_str));
             count++;
         }
     }
-    if (count == 0)
-        return 0;
-    else {
-        put_in_list(&server->discusses, discuss);
-        return 1;
-    }
+    free(message_str);
+    return count;
 }
 
 /**
@@ -50,13 +47,13 @@ void send_to_user(server_t *server, client_t *client, string data)
         return;
     }
     char **command = str_to_word_array(data, "\"");
-    int found = send_to_online_user(server, command, client);
     user_t *offline_user = correct_uuid_user(command[1], server);
-    if (!found && offline_user) {
+    if (offline_user) {
         p_discuss_t *discuss = send_message_offline(client, server,
                                                     offline_user, command);
+        send_to_online_user(server, discuss->messages->data, client, offline_user);
         put_in_list(&server->discusses, discuss);
-    } else if (!found) {
+    } else {
         packet = create_packet(UNKNOW_USER, command[1]);
         send_packet(client->socket_fd, packet);
     }

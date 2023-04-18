@@ -47,3 +47,15 @@ client_t *create_client(int server_fd)
     client->context_uuids = create_context_uuids();
     return client;
 }
+
+/**
+ * Create a new context uuids.
+ * @return - context uuids.
+ */
+int sort_message(void *a, void *b)
+{
+    message_t *message_a = (message_t *)a;
+    message_t *message_b = (message_t *)b;
+
+    return message_b->time - message_a->time;
+}

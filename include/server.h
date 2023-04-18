@@ -86,5 +86,6 @@ int broadcast_logged(server_t *server, packet_t *packet);
 int broadcast_subscribed_logged(server_t *server, team_t *team,
     packet_t *packet);
 bool is_active(server_t *server, user_t *user);
+int sort_message(void *a, void *b);
 
 #endif
