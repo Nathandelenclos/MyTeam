@@ -17,10 +17,10 @@
  */
 void message_sent(packet_t *packet)
 {
-    string data = my_strdup(packet->data);
-    char **array = str_to_word_array(data, "|");
+    char **array = str_to_word_array(packet->data, "|");
     printf("Message: %s\n", array[2]);
     client_event_private_message_received(array[0], array[2]);
+    free_array(array);
 }
 
 /**
@@ -29,8 +29,7 @@ void message_sent(packet_t *packet)
  */
 void list_messages(packet_t *packet)
 {
-    string data = my_strdup(packet->data);
-    char **array = str_to_word_array(data, "|");
+    char **array = str_to_word_array(packet->data, "|");
     printf("[%s] User %s said %s\n", array[2], array[1], array[3]);
     struct tm tm_time = {0};
     sscanf(array[2], "%*s %*s %d %d:%d:%d %d",
@@ -41,6 +40,7 @@ void list_messages(packet_t *packet)
     tm_time.tm_mon += 3;
     time_t my_time = mktime(&tm_time);
     client_private_message_print_messages(array[0], my_time, array[3]);
+    free_array(array);
 }
 
 /**
