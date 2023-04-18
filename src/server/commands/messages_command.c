@@ -44,4 +44,5 @@ void message_exchanged(server_t *server, client_t *client, string data)
         return;
     }
     send_in_reverse_order(discussion->messages, client);
+    free_array(command);
 }

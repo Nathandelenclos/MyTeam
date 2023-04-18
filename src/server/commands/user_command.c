@@ -70,4 +70,5 @@ void give_user_info(server_t *server, client_t *client, string data)
     char **command = str_to_word_array(data, "\"");
     packet = create_packet_to_send(client, command, server);
     send_packet(client->socket_fd, packet);
+    free_array(command);
 }

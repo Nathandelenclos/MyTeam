@@ -47,4 +47,5 @@ void unknow_user(packet_t *packet)
     char **array = str_to_word_array(data, "|");
     printf("Unknow User: \"%s\"\n", array[1] ? array[1] : array[0]);
     client_error_unknown_user(array[0]);
+    free_array(array);
 }

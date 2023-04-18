@@ -33,6 +33,12 @@ int send_to_online_user(server_t *server, char **command, client_t *client)
         return 1;
 }
 
+/**
+ * @brief Send a message to an offline user.
+ * @param server - Server structure.
+ * @param client - Client structure.
+ * @param data - Message to send.
+ */
 void send_to_user(server_t *server, client_t *client, string data)
 {
     packet_t *packet = NULL;
@@ -52,4 +58,5 @@ void send_to_user(server_t *server, client_t *client, string data)
         packet = create_packet(UNKNOW_USER, command[1]);
         send_packet(client->socket_fd, packet);
     }
+    free_array(command);
 }
