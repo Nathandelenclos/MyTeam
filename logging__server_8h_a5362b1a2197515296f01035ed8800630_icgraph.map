@@ -1,0 +1,4 @@
+<map id="server_event_thread_created" name="server_event_thread_created">
+<area shape="rect" id="node1" title="Must be called when a new thread is created." alt="" coords="165,5,321,47"/>
+<area shape="rect" id="node2" href="$commands_8h.html#a15905fbd3e91591b32d52e1a619df213" title=" " alt="" coords="5,13,117,39"/>
+</map>

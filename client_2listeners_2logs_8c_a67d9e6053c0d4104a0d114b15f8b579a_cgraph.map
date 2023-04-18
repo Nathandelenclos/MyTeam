@@ -1,0 +1,8 @@
+<map id="logout_user" name="logout_user">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,104,83"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a0fb920316557dc093cc7cabbacbc12a3" title="Must be called when a user logged out (/logout or lost connexion). When you log out (/logout) you sho..." alt="" coords="152,5,333,32"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="198,56,287,83"/>
+<area shape="rect" id="node4" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="173,107,312,133"/>
+<area shape="rect" id="node5" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="576,107,683,133"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="381,132,528,159"/>
+</map>

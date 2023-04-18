@@ -1,0 +1,8 @@
+<map id="create_channel" name="create_channel">
+<area shape="rect" id="node1" title=" " alt="" coords="5,71,127,98"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a088366720e152893f6ddea53ee71bf94" title="Must be called when a channel is created inside of a team." alt="" coords="175,5,335,47"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="210,71,299,98"/>
+<area shape="rect" id="node4" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="185,122,324,149"/>
+<area shape="rect" id="node5" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="577,122,684,149"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="383,147,529,174"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="server_event_team_created" name="server_event_team_created">
+<area shape="rect" id="node1" title="Must be called when a new team is created." alt="" coords="157,5,361,32"/>
+<area shape="rect" id="node2" href="$commands_8h.html#a6abaed03a3c5df318afb0ebcf34cfdae" title=" " alt="" coords="5,5,109,32"/>
+</map>

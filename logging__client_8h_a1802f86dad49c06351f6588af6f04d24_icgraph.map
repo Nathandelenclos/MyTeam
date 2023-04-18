@@ -1,0 +1,4 @@
+<map id="client_event_thread_created" name="client_event_thread_created">
+<area shape="rect" id="node1" title="Must be called when a thread is created inside of a channel." alt="" coords="165,5,316,47"/>
+<area shape="rect" id="node2" href="$client_8h.html#aa0e4f58a4663b581406baa1902de53ac" title=" " alt="" coords="5,13,117,39"/>
+</map>

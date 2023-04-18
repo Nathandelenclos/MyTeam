@@ -1,0 +1,8 @@
+<map id="create_team" name="create_team">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,109,83"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a2ab00478a2d49e1bfe6bb024ed1db065" title="Must be called when a new team is created Every logged user should receive this event (the creator of..." alt="" coords="157,5,356,32"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="212,56,301,83"/>
+<area shape="rect" id="node4" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="187,107,326,133"/>
+<area shape="rect" id="node5" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="599,107,705,133"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="404,132,551,159"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="put_in_list" name="put_in_list">
+<area shape="rect" id="node1" title=" " alt="" coords="595,259,684,285"/>
+<area shape="rect" id="node2" href="$commands_8h.html#a5576b9bfe77a74e1596f28386c8bc982" title=" " alt="" coords="401,5,522,32"/>
+<area shape="rect" id="node3" href="$commands_8h.html#abf1164e3ab82df3d5bb260643ad589f5" title=" " alt="" coords="410,56,513,83"/>
+<area shape="rect" id="node4" href="$commands_8h.html#a6abaed03a3c5df318afb0ebcf34cfdae" title=" " alt="" coords="409,107,513,133"/>
+<area shape="rect" id="node5" href="$commands_8h.html#a15905fbd3e91591b32d52e1a619df213" title=" " alt="" coords="405,157,517,184"/>
+<area shape="rect" id="node6" href="$init__send__message_8c.html#aa68bd409e035d54e6e75520b5d128a84" title=" " alt="" coords="414,208,509,235"/>
+<area shape="rect" id="node7" href="$server_8h.html#adb318439c968f6904f5beb981a1a29d2" title=" " alt="" coords="161,259,328,285"/>
+<area shape="rect" id="node8" href="$commands_8h.html#ac4c4cf18291dceba5c75f8f905342f9c" title="Send a message to an offline user." alt="" coords="5,284,113,311"/>
+<area shape="rect" id="node9" href="$server_2commands_2logs_8c.html#a6ad811675c7891774a3ceabfa0979f8c" title=" " alt="" coords="397,360,525,387"/>
+<area shape="rect" id="node11" href="$server_8h.html#a87cf0563b758871303c802cb937da383" title=" " alt="" coords="398,411,525,437"/>
+<area shape="rect" id="node14" href="$list_8h.html#ad018aae96e81be4f7ad0753b7907e2fd" title=" " alt="" coords="415,461,508,488"/>
+<area shape="rect" id="node15" href="$subscribe_8c.html#a404174015b8da845a66e8c32be659623" title=" " alt="" coords="376,512,547,539"/>
+<area shape="rect" id="node10" href="$commands_8h.html#a888406aa179ec6716f2a1cb9f5536479" title=" " alt="" coords="200,360,289,387"/>
+<area shape="rect" id="node12" href="$server_8h.html#a0729fcaf0d9bcce682a1587b8be22097" title=" " alt="" coords="190,411,299,437"/>
+<area shape="rect" id="node13" href="$server_2main_8c.html#a0c99d968a34e803d378692bde2e3f18f" title=" " alt="" coords="32,411,87,437"/>
+<area shape="rect" id="node16" href="$commands_8h.html#a8b6bd78fc07ae3b0178b1858f5ba2b30" title="Subscribe a user to a team." alt="" coords="203,512,287,539"/>
+</map>

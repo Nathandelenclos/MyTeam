@@ -1,0 +1,4 @@
+<map id="server_event_reply_created" name="server_event_reply_created">
+<area shape="rect" id="node1" title="Must be called when a new reply is created in a thread." alt="" coords="156,5,303,47"/>
+<area shape="rect" id="node2" href="$commands_8h.html#abf1164e3ab82df3d5bb260643ad589f5" title=" " alt="" coords="5,13,108,39"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="init_message_struct" name="init_message_struct">
+<area shape="rect" id="node1" title=" " alt="" coords="5,122,159,149"/>
+<area shape="rect" id="node2" href="$client_8h.html#ae9aa9e35057d7d8cac6f9189a2c48abc" title=" " alt="" coords="207,71,323,98"/>
+<area shape="rect" id="node8" href="$server_8h.html#acf6ee4a693e94634aaffbb5758fd702b" title=" " alt="" coords="219,122,310,149"/>
+<area shape="rect" id="node9" href="$network_8h.html#a63c1588e2854a2246019bfad11985c05" title=" " alt="" coords="223,173,307,199"/>
+<area shape="rect" id="node3" href="$logging__client_8h.html#a8ec48ae178086c4383ca2a7cf091b9dc" title="Must be called when the current logged user receives a private message." alt="" coords="371,5,525,47"/>
+<area shape="rect" id="node4" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="403,71,493,98"/>
+<area shape="rect" id="node5" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="379,122,517,149"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="768,122,875,149"/>
+<area shape="rect" id="node7" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="573,147,720,174"/>
+</map>

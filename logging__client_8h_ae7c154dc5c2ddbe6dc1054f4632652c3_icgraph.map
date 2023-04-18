@@ -1,0 +1,4 @@
+<map id="client_error_already_exist" name="client_error_already_exist">
+<area shape="rect" id="node1" title="Must be called when the user try to do an action and the resource already exist. Ex: create a team wi..." alt="" coords="164,5,316,47"/>
+<area shape="rect" id="node2" href="$client_8h.html#ab0c07afbbd295053b63372b79f6f0b2f" title=" " alt="" coords="5,13,116,39"/>
+</map>

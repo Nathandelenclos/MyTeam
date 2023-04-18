@@ -1,0 +1,4 @@
+<map id="send_to_online_user" name="send_to_online_user">
+<area shape="rect" id="node1" title="Send a message to an online user." alt="" coords="161,5,316,32"/>
+<area shape="rect" id="node2" href="$commands_8h.html#ac4c4cf18291dceba5c75f8f905342f9c" title="Send a message to an offline user." alt="" coords="5,5,113,32"/>
+</map>

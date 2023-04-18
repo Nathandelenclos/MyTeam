@@ -1,0 +1,4 @@
+<map id="client_event_logged_out" name="client_event_logged_out">
+<area shape="rect" id="node1" title="Must be called when a user logged out (/logout or lost connexion). When you log out (/logout) you sho..." alt="" coords="152,5,333,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#a447fdd15630be2b198119d88ebef8509" title=" " alt="" coords="5,5,104,32"/>
+</map>

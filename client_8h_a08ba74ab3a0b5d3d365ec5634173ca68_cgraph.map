@@ -1,0 +1,10 @@
+<map id="give_user_info" name="give_user_info">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,123,108"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#acb7a15930ae49adc52f501755513a54b" title="Must be called when you requested an individual user ex: get the current logged user,..." alt="" coords="175,5,305,32"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="195,56,285,83"/>
+<area shape="rect" id="node4" href="$my_8h.html#a7fe6bff3bb42ccfb9812404663f0af97" title=" " alt="" coords="185,107,295,133"/>
+<area shape="rect" id="node6" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="171,157,309,184"/>
+<area shape="rect" id="node5" href="$my_8h.html#ac28280f5855c8be3487eeb0f77d34122" title=" " alt="" coords="387,107,474,133"/>
+<area shape="rect" id="node7" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="552,183,659,209"/>
+<area shape="rect" id="node8" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="357,208,504,235"/>
+</map>

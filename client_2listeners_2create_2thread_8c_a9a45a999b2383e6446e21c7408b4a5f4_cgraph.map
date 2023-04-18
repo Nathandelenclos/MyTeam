@@ -1,0 +1,8 @@
+<map id="create_thread" name="create_thread">
+<area shape="rect" id="node1" title=" " alt="" coords="5,71,117,98"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a1802f86dad49c06351f6588af6f04d24" title="Must be called when a thread is created inside of a channel." alt="" coords="165,5,316,47"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="196,71,285,98"/>
+<area shape="rect" id="node4" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="171,122,310,149"/>
+<area shape="rect" id="node5" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="559,122,665,149"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="364,147,511,174"/>
+</map>

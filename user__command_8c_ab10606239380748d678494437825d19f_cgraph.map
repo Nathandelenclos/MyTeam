@@ -1,0 +1,11 @@
+<map id="create_packet_to_send" name="create_packet_to_send">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,176,159"/>
+<area shape="rect" id="node2" href="$server_8h.html#a911f677425334f3c440615e7142a61a3" title=" " alt="" coords="261,5,363,32"/>
+<area shape="rect" id="node3" href="$server_8h.html#a3272ddf5e2fb5cfaf7d762cd400669c9" title=" " alt="" coords="243,56,381,83"/>
+<area shape="rect" id="node4" href="$user__command_8c.html#a22cfe8eeac1c72f564540b09725e6e26" title=" " alt="" coords="224,157,400,184"/>
+<area shape="rect" id="node5" href="$create__packet_8c.html#a17909a2ea2cec4f744cd828f0c9ebb7b" title=" " alt="" coords="448,157,561,184"/>
+<area shape="rect" id="node7" href="$my_8h.html#a7304906e036e5ccc2cc782c1c382a9cc" title=" " alt="" coords="455,208,555,235"/>
+<area shape="rect" id="node9" href="$user__command_8c.html#a0daebeddd90d634253ad789a6c7fdbfb" title=" " alt="" coords="228,208,396,235"/>
+<area shape="rect" id="node6" href="$server_8h.html#acf6ee4a693e94634aaffbb5758fd702b" title=" " alt="" coords="619,157,710,184"/>
+<area shape="rect" id="node8" href="$my__strcat_8c.html#a7ab72802c1da841d106ad9d5056544fa" title=" " alt="" coords="609,208,720,235"/>
+</map>

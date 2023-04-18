@@ -1,0 +1,4 @@
+<map id="client_error_unknown_channel" name="client_error_unknown_channel">
+<area shape="rect" id="node1" title="Must be called when the user try to do an action with a channel that does not exist (list threads,..." alt="" coords="184,5,347,47"/>
+<area shape="rect" id="node2" href="$client_8h.html#ad204a058a64b4132523f168d9e963a59" title=" " alt="" coords="5,13,136,39"/>
+</map>

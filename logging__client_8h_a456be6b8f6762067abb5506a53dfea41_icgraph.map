@@ -1,0 +1,4 @@
+<map id="client_error_unknown_user" name="client_error_unknown_user">
+<area shape="rect" id="node1" title="Must be called when the user try to do an action with a user that does not exist (send private messag..." alt="" coords="161,5,359,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#afdd266e8e6fa2c6cd6a628504fbeb2fe" title=" " alt="" coords="5,5,113,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="server_event_user_unsubscribed" name="server_event_user_unsubscribed">
+<area shape="rect" id="node1" title="Must be called when a user unsubscribe from a team." alt="" coords="388,5,623,32"/>
+<area shape="rect" id="node2" href="$subscribe_8c.html#a78928e2d5d1d33d7f0511efe9e29a810" title=" " alt="" coords="153,5,340,32"/>
+<area shape="rect" id="node3" href="$commands_8h.html#a6c54f83cdc666f3f2aa8db05f4587b9f" title="Unsubscribe a user to a team." alt="" coords="5,5,105,32"/>
+</map>

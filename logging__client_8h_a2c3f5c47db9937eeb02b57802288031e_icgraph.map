@@ -1,0 +1,4 @@
+<map id="client_event_logged_in" name="client_event_logged_in">
+<area shape="rect" id="node1" title="Must be called when a user successfully login to the server (/login). When you log in (/login) you sh..." alt="" coords="143,5,315,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#ab9bdbe5a705829740175fb54bacae5b0" title=" " alt="" coords="5,5,95,32"/>
+</map>

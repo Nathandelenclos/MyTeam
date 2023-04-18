@@ -1,0 +1,7 @@
+<map id="message_sent" name="message_sent">
+<area shape="rect" id="node1" title=" " alt="" coords="577,56,693,83"/>
+<area shape="rect" id="node2" href="$init__send__message_8c.html#a0e2c00600b76c1ea8bb7849f8794f10a" title=" " alt="" coords="376,5,529,32"/>
+<area shape="rect" id="node3" href="$server_8h.html#adb318439c968f6904f5beb981a1a29d2" title=" " alt="" coords="161,56,328,83"/>
+<area shape="rect" id="node5" href="$init__send__message_8c.html#aa68bd409e035d54e6e75520b5d128a84" title=" " alt="" coords="405,107,500,133"/>
+<area shape="rect" id="node4" href="$commands_8h.html#ac4c4cf18291dceba5c75f8f905342f9c" title="Send a message to an offline user." alt="" coords="5,56,113,83"/>
+</map>

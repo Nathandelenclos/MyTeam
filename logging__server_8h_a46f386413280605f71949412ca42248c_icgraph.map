@@ -1,0 +1,5 @@
+<map id="server_event_private_message_sended" name="server_event_private_message_sended">
+<area shape="rect" id="node1" title="Must be called when a private message was sent between users." alt="" coords="376,5,536,47"/>
+<area shape="rect" id="node2" href="$server_8h.html#adb318439c968f6904f5beb981a1a29d2" title=" " alt="" coords="161,13,328,39"/>
+<area shape="rect" id="node3" href="$commands_8h.html#ac4c4cf18291dceba5c75f8f905342f9c" title="Send a message to an offline user." alt="" coords="5,13,113,39"/>
+</map>

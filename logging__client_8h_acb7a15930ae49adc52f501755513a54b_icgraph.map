@@ -1,0 +1,5 @@
+<map id="client_print_user" name="client_print_user">
+<area shape="rect" id="node1" title="Must be called when you requested an individual user ex: get the current logged user,..." alt="" coords="171,31,301,57"/>
+<area shape="rect" id="node2" href="$client_8h.html#a08ba74ab3a0b5d3d365ec5634173ca68" title=" " alt="" coords="5,5,123,32"/>
+<area shape="rect" id="node3" href="$client_8h.html#a37e88098e9080a4f12423ad3c1f24477" title=" " alt="" coords="23,56,105,83"/>
+</map>

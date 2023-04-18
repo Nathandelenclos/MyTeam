@@ -1,0 +1,5 @@
+<map id="server_event_user_created" name="server_event_user_created">
+<area shape="rect" id="node1" title="Must be called when a user didn&#39;t existed in save and was created." alt="" coords="319,5,517,32"/>
+<area shape="rect" id="node2" href="$server_2commands_2logs_8c.html#a6ad811675c7891774a3ceabfa0979f8c" title=" " alt="" coords="143,5,271,32"/>
+<area shape="rect" id="node3" href="$commands_8h.html#a888406aa179ec6716f2a1cb9f5536479" title=" " alt="" coords="5,5,95,32"/>
+</map>

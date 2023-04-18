@@ -1,0 +1,4 @@
+<map id="unknow_channel" name="unknow_channel">
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,136,39"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#aec7092d867b6071d81fe8e80a859fec4" title="Must be called when the user try to do an action with a channel that does not exist (list threads,..." alt="" coords="184,5,347,47"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="server_event_user_logged_in" name="server_event_user_logged_in">
+<area shape="rect" id="node1" title="Must be called when a user logged in." alt="" coords="143,5,355,32"/>
+<area shape="rect" id="node2" href="$commands_8h.html#a888406aa179ec6716f2a1cb9f5536479" title=" " alt="" coords="5,5,95,32"/>
+</map>

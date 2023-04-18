@@ -1,0 +1,4 @@
+<map id="client_event_team_created" name="client_event_team_created">
+<area shape="rect" id="node1" title="Must be called when a new team is created Every logged user should receive this event (the creator of..." alt="" coords="157,5,356,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#acdaeac3386bc0c7dbb72d2576a7f57ac" title=" " alt="" coords="5,5,109,32"/>
+</map>

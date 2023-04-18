@@ -1,0 +1,25 @@
+<map id="create_reply" name="create_reply">
+<area shape="rect" id="node1" title=" " alt="" coords="5,541,108,568"/>
+<area shape="rect" id="node2" href="$server_8h.html#ab6b25c372d3d3d48aa6f5dc2779e1fca" title=" " alt="" coords="156,179,319,220"/>
+<area shape="rect" id="node3" href="$create__packet_8c.html#a17909a2ea2cec4f744cd828f0c9ebb7b" title=" " alt="" coords="599,110,712,137"/>
+<area shape="rect" id="node4" href="$server_8h.html#acf6ee4a693e94634aaffbb5758fd702b" title=" " alt="" coords="803,60,893,86"/>
+<area shape="rect" id="node6" href="$network_8h.html#a84f6b2928580ea22fe6270c8229467bf" title=" " alt="" coords="604,262,707,289"/>
+<area shape="rect" id="node7" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="803,465,893,492"/>
+<area shape="rect" id="node8" href="$server_2commands_2create_2reply_8c.html#a8844aadcd4c71d68bbe9535361c03e65" title=" " alt="" coords="157,338,317,365"/>
+<area shape="rect" id="node14" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="586,566,725,593"/>
+<area shape="rect" id="node18" href="$server_8h.html#ac50bee28bfdea78ece45e78876b09f2b" title=" " alt="" coords="214,617,261,644"/>
+<area shape="rect" id="node19" href="$my_8h.html#a7304906e036e5ccc2cc782c1c382a9cc" title=" " alt="" coords="187,668,287,694"/>
+<area shape="rect" id="node21" href="$network_8h.html#a63c1588e2854a2246019bfad11985c05" title=" " alt="" coords="195,718,279,745"/>
+<area shape="rect" id="node22" href="$list_8h.html#ac66ab13e622d43e341341a85a0d234c8" title=" " alt="" coords="193,769,282,796"/>
+<area shape="rect" id="node23" href="$logging__server_8h.html#a21e4ba0d9c10c6f83929ea95eee1ce40" title="Must be called when a new reply is created in a thread." alt="" coords="164,820,311,862"/>
+<area shape="rect" id="node5" href="$server_8h.html#ad01c32c91dd56d54a3eb8db32ae8c8c3" title="Check if a user is subscribed to a team." alt="" coords="396,212,507,238"/>
+<area shape="rect" id="node9" href="$server_8h.html#a3d5561005ffec1ff174fda9f907eb4b6" title=" " alt="" coords="404,465,499,492"/>
+<area shape="rect" id="node17" href="$server_2commands_2create_2reply_8c.html#acae3822cc9638cd1acb8f0ff29a60ded" title=" " alt="" coords="367,313,536,340"/>
+<area shape="rect" id="node10" href="$utils__quote__parseur_8c.html#a7a802929b1144589b49f09abe5871e82" title=" " alt="" coords="595,414,715,441"/>
+<area shape="rect" id="node11" href="$utils__quote__parseur_8c.html#a63180ba074e4bed8d159fdc1c7395eb2" title=" " alt="" coords="584,364,727,390"/>
+<area shape="rect" id="node13" href="$utils__quote__parseur_8c.html#a27368aee9cb5715f3ff3cb3ddf5f66f8" title=" " alt="" coords="612,313,699,340"/>
+<area shape="rect" id="node12" href="$utils__quote__parseur_8c.html#a9b5016035af5005b59391234b65b35be" title=" " alt="" coords="776,364,920,390"/>
+<area shape="rect" id="node15" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="969,566,1076,593"/>
+<area shape="rect" id="node16" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="775,592,921,618"/>
+<area shape="rect" id="node20" href="$my__strcat_8c.html#a7ab72802c1da841d106ad9d5056544fa" title=" " alt="" coords="396,668,507,694"/>
+</map>

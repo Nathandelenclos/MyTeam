@@ -1,0 +1,15 @@
+<map id="action" name="action">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,68,83"/>
+<area shape="rect" id="node2" href="$server_8h.html#af41116a9612f8e721f2d66913e1e372c" title=" " alt="" coords="116,5,247,32"/>
+<area shape="rect" id="node3" href="$network_8h.html#ad0b8e18883cf29fbe33001bb88138ad7" title=" " alt="" coords="131,56,232,83"/>
+<area shape="rect" id="node4" href="$read__actions_8c.html#a7bf1434cf52a3b16efa2a7bf8bd23b99" title=" " alt="" coords="134,107,229,133"/>
+<area shape="rect" id="node5" href="$server_8h.html#ab97887a67ef760120d014d834a8d707d" title=" " alt="" coords="337,56,474,83"/>
+<area shape="rect" id="node6" href="$create__packet_8c.html#a17909a2ea2cec4f744cd828f0c9ebb7b" title=" " alt="" coords="564,5,677,32"/>
+<area shape="rect" id="node9" href="$server_8h.html#aa7b7907d89ecf1855427e018855c04e5" title=" " alt="" coords="342,107,469,133"/>
+<area shape="rect" id="node11" href="$my_8h.html#a7304906e036e5ccc2cc782c1c382a9cc" title=" " alt="" coords="355,157,455,184"/>
+<area shape="rect" id="node13" href="$logging__server_8h.html#ae4f1a01f09f2026a16e1b0193715f7ff" title="Must be called when a user logged out." alt="" coords="295,208,516,235"/>
+<area shape="rect" id="node8" href="$network_8h.html#a84f6b2928580ea22fe6270c8229467bf" title=" " alt="" coords="569,56,672,83"/>
+<area shape="rect" id="node7" href="$server_8h.html#acf6ee4a693e94634aaffbb5758fd702b" title=" " alt="" coords="725,5,816,32"/>
+<area shape="rect" id="node10" href="$delete__in__list_8c.html#aeea2f03c38c160ca0a144b73a3b72f06" title=" " alt="" coords="566,107,675,133"/>
+<area shape="rect" id="node12" href="$my__strcat_8c.html#a7ab72802c1da841d106ad9d5056544fa" title=" " alt="" coords="565,157,676,184"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="message_sent" name="message_sent">
+<area shape="rect" id="node1" title=" " alt="" coords="5,71,121,98"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a8ec48ae178086c4383ca2a7cf091b9dc" title="Must be called when the current logged user receives a private message." alt="" coords="169,5,324,47"/>
+<area shape="rect" id="node3" href="$my_8h.html#a81a8163a838ff55d33697de5148af1d4" title=" " alt="" coords="202,71,291,98"/>
+<area shape="rect" id="node4" href="$my_8h.html#ac24f1f75c62e83085f79b00f1324a7cf" title=" " alt="" coords="177,122,316,149"/>
+<area shape="rect" id="node5" href="$str__to__word__array_8c.html#a2d091cbbe65508874c39573ba18fa61d" title=" " alt="" coords="567,122,673,149"/>
+<area shape="rect" id="node6" href="$str__to__word__array_8c.html#af0191a420cd55b1a48ece9f505e82b53" title=" " alt="" coords="372,147,519,174"/>
+</map>

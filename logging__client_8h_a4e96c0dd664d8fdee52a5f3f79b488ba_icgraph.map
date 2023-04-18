@@ -1,0 +1,4 @@
+<map id="client_private_message_print_messages" name="client_private_message_print_messages">
+<area shape="rect" id="node1" title="Must be called when you requested a list of private messages ex: asking the private messages with a u..." alt="" coords="168,5,345,47"/>
+<area shape="rect" id="node2" href="$client_8h.html#a958cf4a9e6abcb0299d94703b23fb13f" title=" " alt="" coords="5,13,120,39"/>
+</map>

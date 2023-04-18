@@ -1,0 +1,5 @@
+<map id="client_print_teams" name="client_print_teams">
+<area shape="rect" id="node1" title="Must be called when you requested a list of teams from the server ex: asking the teams you are subscr..." alt="" coords="172,31,315,57"/>
+<area shape="rect" id="node2" href="$client_8h.html#aa0c86932de688ee5b6233b1ba779c676" title=" " alt="" coords="19,5,110,32"/>
+<area shape="rect" id="node3" href="$client_8h.html#a450c7f3f352b9a62e4f7ea33a9f302b4" title=" " alt="" coords="5,56,124,83"/>
+</map>

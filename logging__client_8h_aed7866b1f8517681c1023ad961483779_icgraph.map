@@ -1,0 +1,4 @@
+<map id="client_error_unknown_team" name="client_error_unknown_team">
+<area shape="rect" id="node1" title="Must be called when the user try to do an action with a team that does not exist (list channels,..." alt="" coords="168,5,371,32"/>
+<area shape="rect" id="node2" href="$client_8h.html#a54d2bfa9d6d537fe42bfe8f971eefc87" title=" " alt="" coords="5,5,120,32"/>
+</map>

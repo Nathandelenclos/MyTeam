@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['get_5fby_5fuuid_2ec_129',['get_by_uuid.c',['../get__by__uuid_8c.html',1,'']]],
+  ['get_5fchannel_5fby_5fuuid_130',['get_channel_by_uuid',['../struct_8h.html#a017a6e0c516c44e392548c14b42af78d',1,'get_channel_by_uuid(node *channels, string str):&#160;get_by_uuid.c'],['../get__by__uuid_8c.html#a017a6e0c516c44e392548c14b42af78d',1,'get_channel_by_uuid(node *channels, string str):&#160;get_by_uuid.c']]],
+  ['get_5fend_131',['get_end',['../get__end_8c.html#a6ed7ab3cacea8a4f3168d63738945b2b',1,'get_end(node *list):&#160;get_end.c'],['../list_8h.html#a6ed7ab3cacea8a4f3168d63738945b2b',1,'get_end(node *list):&#160;get_end.c']]],
+  ['get_5fend_2ec_132',['get_end.c',['../get__end_8c.html',1,'']]],
+  ['get_5fmy_5fsubscribe_133',['get_my_subscribe',['../server_2commands_2subscribe_2subscribed_8c.html#a0acb2baf309e52b168b0855f3e6301f2',1,'subscribed.c']]],
+  ['get_5fsubscribers_134',['get_subscribers',['../server_2commands_2subscribe_2subscribed_8c.html#a203a81fea731cc5cb696c36605667b42',1,'subscribed.c']]],
+  ['get_5fteam_5fby_5fuuid_135',['get_team_by_uuid',['../struct_8h.html#a92dc8773cceed76c6b489d3d2cec73d6',1,'get_team_by_uuid(node *teams, string str):&#160;get_by_uuid.c'],['../get__by__uuid_8c.html#a92dc8773cceed76c6b489d3d2cec73d6',1,'get_team_by_uuid(node *teams, string str):&#160;get_by_uuid.c']]],
+  ['get_5fthread_5fby_5fuuid_136',['get_thread_by_uuid',['../struct_8h.html#a8f3a8fe8b6e5e2c8890204a1aa0fc799',1,'get_thread_by_uuid(node *threads, string str):&#160;get_by_uuid.c'],['../get__by__uuid_8c.html#a8f3a8fe8b6e5e2c8890204a1aa0fc799',1,'get_thread_by_uuid(node *threads, string str):&#160;get_by_uuid.c']]],
+  ['give_5finfo_137',['give_info',['../commands_8h.html#a4469a64f027060ca128e256e09b19aaa',1,'give_info(server_t *server, client_t *client, string data):&#160;user3.c'],['../user3_8c.html#a4469a64f027060ca128e256e09b19aaa',1,'give_info(server_t *server, client_t *client, string data):&#160;user3.c']]],
+  ['give_5fuser_5finfo_138',['give_user_info',['../client_8h.html#a08ba74ab3a0b5d3d365ec5634173ca68',1,'give_user_info(packet_t *packet):&#160;give_user_info.c'],['../commands_8h.html#a531574b43bd716cc49b6aa3e01c9d6d2',1,'give_user_info(server_t *server, client_t *client, string data):&#160;user_command.c'],['../give__user__info_8c.html#a08ba74ab3a0b5d3d365ec5634173ca68',1,'give_user_info(packet_t *packet):&#160;give_user_info.c'],['../user__command_8c.html#a531574b43bd716cc49b6aa3e01c9d6d2',1,'give_user_info(server_t *server, client_t *client, string data):&#160;user_command.c']]],
+  ['give_5fuser_5finfo_2ec_139',['give_user_info.c',['../give__user__info_8c.html',1,'']]],
+  ['give_5fusers_140',['give_users',['../client_8h.html#acdc15d83bd07e9fc8459109b2c367320',1,'give_users(packet_t *socket):&#160;sucess.c'],['../commands_8h.html#a975753b79f2dc1c020b4327406d89865',1,'give_users(server_t *server, client_t *client, string data):&#160;logs.c'],['../sucess_8c.html#a1beaeaf6188f60d8c7dc431c4d9d29d3',1,'give_users(packet_t *packet):&#160;sucess.c'],['../server_2commands_2logs_8c.html#a975753b79f2dc1c020b4327406d89865',1,'give_users(server_t *server, client_t *client, string data):&#160;logs.c']]],
+  ['good_5factions_5fuse_141',['good_actions_use',['../use_8c.html#af4573dbd832948f8fac65874d82035a0',1,'use.c']]]
+];

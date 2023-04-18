@@ -1,0 +1,4 @@
+<map id="unauthorized" name="unauthorized">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node2" href="$logging__client_8h.html#a8e3c325114b0419c7c98c67fee62b188" title="Must be called when the user try to do an action he is not allowed to perform. Ex: create a thread in..." alt="" coords="160,5,348,32"/>
+</map>
