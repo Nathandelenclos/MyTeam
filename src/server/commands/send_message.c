@@ -18,19 +18,21 @@
  */
 int send_to_online_user(server_t *server, char **command, client_t *client)
 {
+    p_discuss_t *discuss;
     int count = 0;
     for (node *tmp = server->clients; tmp; tmp = tmp->next) {
         client_t *clt = tmp->data;
         if (strcmp(clt->user ? clt->user->uuid : "Invalid", command[1]) == 0) {
-            p_discuss_t *discuss = send_message(client, server, clt, command);
-            put_in_list(&server->discusses, discuss);
+            discuss = send_message(client, server, clt, command);
             count++;
         }
     }
     if (count == 0)
         return 0;
-    else
+    else {
+        put_in_list(&server->discusses, discuss);
         return 1;
+    }
 }
 
 /**

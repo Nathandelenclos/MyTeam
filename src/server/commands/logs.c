@@ -139,7 +139,7 @@ void give_users(server_t *server, client_t *client, string data)
         node_tmp = node_tmp->next) {
         tmp = (user_t *) node_tmp->data;
         if (tmp != NULL) {
-            string info = my_multcat(3, tmp->uuid, "|", tmp->name, "|",
+            string info = my_multcat(5, tmp->uuid, "|", tmp->name, "|",
                 is_active(server, tmp) ? "1" : "0");
             send_packet(client->socket_fd,
                 create_packet(USERS_SUCCESS_CODE,info));
