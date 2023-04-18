@@ -115,6 +115,7 @@ void logout_user(server_t *server, client_t *client, string data)
         return;
     } else {
         broadcast_logged(server, create_packet(LOGOUT_SUCCESS, msg_cli));
+        disconect_client(server, client);
     }
 }
 
