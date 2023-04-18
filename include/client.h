@@ -60,6 +60,10 @@ void list_teams(packet_t *packet);
 void list_channel(packet_t *packet);
 void list_thread(packet_t *packet);
 void list_reply(packet_t *packet);
+void info_user(packet_t *packet);
+void info_team(packet_t *packet);
+void info_channel(packet_t *packet);
+void info_thread(packet_t *packet);
 
 static const listener listeners[] = {
     // Errors:
@@ -98,6 +102,10 @@ static const listener listeners[] = {
     {LIST_CHANNEL_SUCCESS, list_channel},
     {LIST_THREAD_SUCCESS, list_thread},
     {LIST_REPLY_SUCCESS, list_reply},
+    {INFO_USER_SUCCESS, info_user},
+    {INFO_TEAM_SUCCESS, info_team},
+    {INFO_CHANNEL_SUCCESS, info_channel},
+    {INFO_THREAD_SUCCESS, info_thread},
     // Others:
     {QUIT, NULL}
 };

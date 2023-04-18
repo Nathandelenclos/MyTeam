@@ -45,7 +45,10 @@
     #define LIST_CHANNEL_SUCCESS 223
     #define LIST_THREAD_SUCCESS 224
     #define LIST_REPLY_SUCCESS 225
-
+    #define INFO_TEAM_SUCCESS 226
+    #define INFO_CHANNEL_SUCCESS 227
+    #define INFO_THREAD_SUCCESS 228
+    #define INFO_USER_SUCCESS 229
     // Others:
     #define QUIT 0
 
