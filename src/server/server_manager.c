@@ -64,7 +64,8 @@ void new_connection(server_t *server)
             ntohs(client->sockaddr.sin_port));
         server->last_fd = client->socket_fd;
         put_in_list(&server->clients, client);
-        send_packet(client->socket_fd, create_packet(SUCCESS, "test"));
+        send_packet(client->socket_fd, create_packet(SUCCESS, "You are now "
+            "connected to the server."));
     }
 }
 
