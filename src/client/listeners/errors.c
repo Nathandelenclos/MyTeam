@@ -31,6 +31,7 @@ void unfound(packet_t *packet)
  */
 void unauthorized(packet_t *packet)
 {
+    client_error_unauthorized();
     printf("Error unauthorized command: %s\n", packet->data);
 }
 

@@ -19,10 +19,11 @@ char *login_user_exist(server_t *server, client_t *client, string name)
     user_t *tmp;
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
-        tmp = (user_t *)node_tmp->data;
+        tmp = (user_t *) node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
             client->user = tmp;
             client->user->online = true;
+            server_event_user_loaded(client->user->uuid, client->user->name);
             return my_multcat(3, client->user->uuid, "|", name);
         }
     }
@@ -50,20 +51,20 @@ void login_user(server_t *server, client_t *client, string data)
     packet_t *packet;
     int nb_arg[] = {1, -1};
     if (client->user != NULL) {
-        packet = create_packet(ERROR, "already logged in");
-        send_packet(client->socket_fd, packet);
+        send_packet(client->socket_fd,
+            create_packet(ERROR, "already logged in"));
         return;
     }
     if (check_args(data, nb_arg, "/login") == 1) {
-        packet = create_packet(ERROR, "bad command");
+        send_packet(client->socket_fd, create_packet(ERROR, "bad command"));
+        return;
     } else {
         char **command = str_to_word_array(data, "\"");
         msg_cli = login_user_exist(server, client, command[1]);
         server_event_user_logged_in(client->user->uuid);
-        packet = create_packet(LOGIN_SUCCESS, msg_cli);
+        broadcast_logged(server, create_packet(LOGIN_SUCCESS, msg_cli));
         free_array(command);
     }
-    send_packet(client->socket_fd, packet);
 }
 
 /**
@@ -78,10 +79,11 @@ char *logout_user_exist(server_t *server, client_t *client, string name)
     char *str = NULL;
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
-        tmp = (user_t *)node_tmp->data;
+        tmp = (user_t *) node_tmp->data;
         if (strcmp(tmp->name, name) == 0) {
             str = my_multcat(3, client->user->uuid, "|", name);
             server_event_user_logged_out(client->user->uuid);
+            broadcast_logged(server, create_packet(LOGOUT_SUCCESS, str));
             client->user->online = false;
             client->user = NULL;
             return str;
@@ -101,23 +103,21 @@ void logout_user(server_t *server, client_t *client, string data)
 {
     int i = 0;
     char *msg_cli = NULL;
-    packet_t *packet;
     int nb_arg[] = {0, -1};
     if (check_args(data, nb_arg, "/logout") == 1) {
-        packet = create_packet(ERROR, "bad command");
-        send_packet(client->socket_fd, packet);
+        send_packet(client->socket_fd, create_packet(ERROR, "bad command."));
         return;
     } else if (client->user == NULL) {
-        packet = create_packet(ERROR, "No user login");
-        send_packet(client->socket_fd, packet);
+        send_packet(client->socket_fd, create_packet(ERROR, "No user login."));
         return;
     }
     msg_cli = logout_user_exist(server, client, client->user->name);
-    if (strcmp(msg_cli, "Missed logout") == 0)
-        packet = create_packet(ERROR, "Missed logout");
-    else
-        packet = create_packet(LOGOUT_SUCCESS, msg_cli);
-    send_packet(client->socket_fd, packet);
+    if (strcmp(msg_cli, "Missed logout") == 0) {
+        send_packet(client->socket_fd, create_packet(ERROR, "Missed logout."));
+        return;
+    } else {
+        disconect_client(server, client);
+    }
 }
 
 /**
@@ -129,22 +129,21 @@ void logout_user(server_t *server, client_t *client, string data)
 void give_users(server_t *server, client_t *client, string data)
 {
     int i = 0;
-    char *msg_cli = "";
-    packet_t *packet;
     int nb_arg[] = {0, -1};
     if (check_args(data, nb_arg, "/users") == 1) {
-        packet = create_packet(ERROR, "bad nb arg");
-        send_packet(client->socket_fd, packet);
+        send_packet(client->socket_fd, create_packet(ERROR, "bad nb arg"));
         return;
     }
     user_t *tmp;
     for (node *node_tmp = server->users; node_tmp != NULL;
         node_tmp = node_tmp->next) {
-        tmp = (user_t *)node_tmp->data;
-        if (tmp != NULL)
-            msg_cli = my_multcat(7, msg_cli, "\n",
-            tmp->name, " ", tmp->uuid, " ", (tmp->online ? "1" : "0"));
+        tmp = (user_t *) node_tmp->data;
+        if (tmp != NULL) {
+            string info = my_multcat(3, tmp->uuid, "|", tmp->name, "|",
+                is_active(server, tmp) ? "1" : "0");
+            send_packet(client->socket_fd,
+                create_packet(USERS_SUCCESS_CODE,info));
+            free(info);
+        }
     }
-    packet = create_packet(USERS_SUCCESS_CODE, msg_cli);
-    send_packet(client->socket_fd, packet);
 }

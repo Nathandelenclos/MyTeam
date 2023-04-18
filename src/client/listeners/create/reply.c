@@ -2,29 +2,31 @@
 ** EPITECH PROJECT, 2022
 ** B-NWP-400-LIL-4-1-myteams-simon.riembault
 ** File description:
-** sucess.c
+** reply.c
 */
 
 #include "client.h"
 
 /**
- * LOGIN_SUCCESS listener.
+ * Create reply listener.
  * @param packet - Packet to read.
  */
-void login_user(packet_t *packet)
+void create_reply(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
-    client_event_logged_in(data[0], data[1]);
+    time_t time = atoi(data[3]);
+    client_event_thread_reply_received(data[0], data[1], data[2], data[4]);
     free_array(data);
 }
 
 /**
- * LOGOUT_SUCCESS listener.
+ * Create reply listener.
  * @param packet - Packet to read.
  */
-void logout_user(packet_t *packet)
+void reply_created(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
-    client_event_logged_out(data[0], data[1]);
+    time_t time = atoi(data[3]);
+    client_print_reply_created(data[1], data[2], time, data[4]);
     free_array(data);
 }

@@ -26,6 +26,27 @@ void stop_server(server_t *server, bool *is_running)
 }
 
 /**
+ * Socket is null.
+ * @param server - Server to handle.
+ * @param client - Client to handle.
+ * @return - False if client is disconnected.
+ */
+bool socket_null(server_t *server, client_t *client)
+{
+    if (client->user != NULL) {
+        disconect_client(server, client);
+        string info = my_multcat(3, client->user->uuid, "|",
+            client->user->name);
+        broadcast_logged(server, create_packet(LOGOUT_SUCCESS, info));
+        server_event_user_logged_out(client->user->uuid);
+        free(info);
+    } else {
+        disconect_client(server, client);
+    }
+    return false;
+}
+
+/**
  * Handle client actions.
  * @param server - Server to handle.
  * @param client - Client to handle.
@@ -36,8 +57,7 @@ bool action(server_t *server, client_t *client)
     if (FD_ISSET(client->socket_fd, &server->readfds)) {
         packet_t *socket = read_packet(client->socket_fd);
         if (socket == NULL) {
-            disconect_client(server, client);
-            return false;
+            return socket_null(server, client);
         }
         command_client(server, client, socket);
         FREE(socket);

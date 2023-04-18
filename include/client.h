@@ -44,11 +44,16 @@ void message_sent(packet_t *packet);
 void list_messages(packet_t *packet);
 void list_messages_error(packet_t *packet);
 void create_team(packet_t *socket);
+void team_created(packet_t *packet);
 void create_channel(packet_t *socket);
+void channel_created(packet_t *packet);
 void create_thread(packet_t *socket);
+void thread_created(packet_t *packet);
 void create_reply(packet_t *socket);
+void reply_created(packet_t *packet);
 void suscribe(packet_t *socket);
-void suscribed(packet_t *socket);
+void suscribed_team(packet_t *packet);
+void suscribed_user(packet_t *packet);
 void unsuscribe(packet_t *socket);
 void use_success(packet_t *packet);
 
@@ -73,11 +78,16 @@ static const listener listeners[] = {
     {MESSAGE_SENT, message_sent},
     {LIST_MESSAGES_SUCCESS_CODE, list_messages},
     {CREATE_TEAM_SUCCESS, create_team},
+    {TEAM_CREATED, team_created},
     {CREATE_CHANNEL_SUCCESS, create_channel},
+    {CHANNEL_CREATED, channel_created},
     {CREATE_THREAD_SUCCESS, create_thread},
+    {THREAD_CREATED, thread_created},
     {CREATE_REPLY_SUCCESS, create_reply},
+    {REPLY_CREATED, reply_created},
     {SUBSCRIBE_SUCCESS, suscribe},
-    {SUBSCRIBED_SUCCESS, suscribed},
+    {SUBSCRIBED_TEAM_SUCCESS, suscribed_team},
+    {SUBSCRIBED_USER_SUCCESS, suscribed_user},
     {UNSUBSCRIBE_SUCCESS, unsuscribe},
     {USE_SUCCESS, use_success},
     // Others:

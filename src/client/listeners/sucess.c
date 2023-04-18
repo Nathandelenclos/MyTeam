@@ -23,18 +23,8 @@ void success(packet_t *packet)
  */
 void give_users(packet_t *packet)
 {
-    string user_uuid = MALLOC(sizeof(char) * 37);
-    string user_name = MALLOC(sizeof(char) * 33);
-    int user_status;
-    string *users = str_to_word_array(packet->data, "\n");
-    for (int i = 0; users[i] != NULL; i++) {
-        if (sscanf(users[i],
-        "%s %s %d", user_uuid, user_name, &user_status) == 3)
-            client_print_users(user_uuid, user_name, user_status);
-    }
-    free_array(users);
-    FREE(user_uuid);
-    FREE(user_name);
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_users(data[0], data[1], atoi(data[2]));
 }
 
 /**

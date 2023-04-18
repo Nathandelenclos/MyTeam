@@ -87,7 +87,10 @@ void create_channel(server_t *server, client_t *client, string data)
     new_channel->uuid, new_channel->name);
     string info = my_multcat(5, new_channel->uuid, "|",
     new_channel->name, "|", new_channel->description);
-    send_packet(client->socket_fd, create_packet(CREATE_CHANNEL_SUCCESS,info));
+    send_packet(client->socket_fd,
+        create_packet(CREATE_CHANNEL_SUCCESS, info));
+    broadcast_subscribed_logged(server, client->team,
+        create_packet(CHANNEL_CREATED,info));
     free_array(command);
     free(info);
 }

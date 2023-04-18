@@ -7,7 +7,6 @@
 
 #include "client.h"
 
-
 /**
  * Subscribe listener.
  * @param packet - Packet to read.
@@ -16,7 +15,7 @@ void suscribe(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
     client_print_subscribed(data[0], data[1]);
-    printf("Suscribe to team: \"%s\"\n", data[1]);
+    printf("User \"%s\" suscribe to team: \"%s\"\n", data[0], data[1]);
     free_array(data);
 }
 
@@ -24,9 +23,22 @@ void suscribe(packet_t *packet)
  * Subscribed listener.
  * @param packet - Packet to read.
  */
-void suscribed(packet_t *packet)
+void suscribed_team(packet_t *packet)
 {
-    printf("Is suscribed to team: %s\n", packet->data);
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_users(data[1], data[2], atoi(data[3]));
+    printf("User \"%s\" suscribed to team: \"%s\"\n", data[1], data[0]);
+}
+
+/**
+ * Subscribed listener.
+ * @param packet - Packet to read.
+ */
+void suscribed_user(packet_t *packet)
+{
+    string *data = str_to_word_array(packet->data, "|");
+    client_print_teams(data[1], data[2], data[3]);
+    printf("User \"%s\" suscribed to team: \"%s\"\n", data[0], data[1]);
 }
 
 /**
@@ -37,6 +49,6 @@ void unsuscribe(packet_t *packet)
 {
     string *data = str_to_word_array(packet->data, "|");
     client_print_unsubscribed(data[0], data[1]);
-    printf("Unsuscribe to team: %s\n", packet->data);
+    printf("User \"%s\" unsuscribe to team: \"%s\"\n", data[0], data[1]);
     free_array(data);
 }

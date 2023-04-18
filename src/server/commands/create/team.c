@@ -74,6 +74,7 @@ void create_team(server_t *server, client_t *client, string data)
     string info = my_multcat(5, new_team->uuid, "|", new_team->name,
         "|", new_team->description);
     send_packet(client->socket_fd, create_packet(CREATE_TEAM_SUCCESS, info));
+    broadcast_logged(server, create_packet(TEAM_CREATED, info));
     free(info);
     free_array(command);
 }
