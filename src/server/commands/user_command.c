@@ -9,6 +9,11 @@
 #include "stdbool.h"
 #include "server.h"
 
+/**
+ * create packet to send.
+ * @param given_user - user info
+ * @param client - client info
+ */
 packet_t *create_info_from_user(user_t *given_user, client_t *client)
 {
     string msg_cli = NULL;
@@ -25,6 +30,11 @@ packet_t *create_info_from_user(user_t *given_user, client_t *client)
     return packet;
 }
 
+/**
+ * create packet with info from client.
+ * @param given_user - user info.
+ * @param client - client info.
+ */
 packet_t *create_info_from_client(client_t *given_user, client_t *client)
 {
     string msg_cli = NULL;
@@ -40,6 +50,12 @@ packet_t *create_info_from_client(client_t *given_user, client_t *client)
     return packet;
 }
 
+/**
+ * create packet to send.
+ * @param client - client info
+ * @param command - command given by the client.
+ * @param server - server info.
+ */
 packet_t *create_packet_to_send(client_t *client,
                                 char **command, server_t *server)
 {
@@ -59,6 +75,12 @@ packet_t *create_packet_to_send(client_t *client,
     return packet;
 }
 
+/**
+ * give the user info about the given user.
+ * @param server - server info.
+ * @param client - client info.
+ * @param data - client command beginning by /user.
+ */
 void give_user_info(server_t *server, client_t *client, string data)
 {
     packet_t *packet;

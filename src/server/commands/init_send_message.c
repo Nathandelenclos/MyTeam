@@ -10,6 +10,13 @@
 #include "logging_server.h"
 #include "time.h"
 
+/**
+ * Initialize structures inside p_discuss_t struct
+ * @param discuss - p_discuss_t struct
+ * @param client - client_t struct
+ * @param command - command received
+ * @param message_sent - message_t struct
+ */
 void init_structs(p_discuss_t *discuss, client_t *client,
                     char **command, message_t *message_sent)
 {
@@ -18,6 +25,13 @@ void init_structs(p_discuss_t *discuss, client_t *client,
     discuss->messages = NULL;
 }
 
+/**
+ * Add the user and the message to the discussion
+ * @param discuss - p_discuss_t struct
+ * @param client - client_t struct
+ * @param user - user_t struct
+ * @param message_sent - message_t struct
+ */
 void add_to_discuss_list(p_discuss_t *discuss, client_t *client,
                             user_t *user, message_t *message_sent)
 {
@@ -26,6 +40,12 @@ void add_to_discuss_list(p_discuss_t *discuss, client_t *client,
     put_in_list(&discuss->messages, message_sent);
 }
 
+/**
+ * Initialize the message struct
+ * @param command - command received
+ * @param client - client_t struct
+ * @return message_t * - message_t struct
+ */
 message_t *init_message_struct(char **command, client_t *client)
 {
     message_t *message_sent = MALLOC(sizeof(message_t));
@@ -36,6 +56,14 @@ message_t *init_message_struct(char **command, client_t *client)
     return message_sent;
 }
 
+/**
+ * Send a message to a user
+ * @param client - client_t struct
+ * @param server - server_t struct
+ * @param user - user_t struct
+ * @param command - command received
+ * @return p_discuss_t * - p_discuss_t struct
+ */
 p_discuss_t *send_message(client_t *client, server_t *server,
                             client_t *user, char **command)
 {
@@ -58,6 +86,14 @@ p_discuss_t *send_message(client_t *client, server_t *server,
     return discuss;
 }
 
+/**
+ * Send a message to a user when he is offline
+ * @param client - client_t struct
+ * @param server - server_t struct
+ * @param user - user_t struct
+ * @param command - command received
+ * @return p_discuss_t * - p_discuss_t struct
+ */
 p_discuss_t *send_message_offline(client_t *client, server_t *server,
                                     user_t *user, char **command)
 {

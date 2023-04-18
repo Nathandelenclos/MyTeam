@@ -9,6 +9,11 @@
 #include "stdbool.h"
 #include "time.h"
 
+/**
+ * Send the messages in reverse order
+ * @param tmp - message_t node
+ * @param client - client_t struct
+ */
 void send_in_reverse_order(node* tmp, client_t *client)
 {
     if (tmp == NULL) {
@@ -26,6 +31,12 @@ void send_in_reverse_order(node* tmp, client_t *client)
     free(data);
 }
 
+/**
+ * Send the correct discussion to the correct user
+ * @param server - server_t struct
+ * @param client - client_t struct
+ * @param user_uuid - uuid of the user
+ */
 void message_exchanged(server_t *server, client_t *client, string data)
 {
     packet_t *packet = NULL;

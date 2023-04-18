@@ -10,6 +10,12 @@
 #include "stdbool.h"
 #include "commands.h"
 
+/**
+ * Display the help
+ * @param server - server_t struct
+ * @param client - client_t struct
+ * @param data - data received
+ */
 void display_help(server_t *server, client_t *client, string data)
 {
     packet_t *packet = create_packet(SUCCESS,"Help");
