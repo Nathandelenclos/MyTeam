@@ -4,6 +4,7 @@ include/network.h
 include/code.h
 include/logging_client.h
 include/logging_server.h
+.vscode/
 myTeams
 *.o
 vgcore.*
