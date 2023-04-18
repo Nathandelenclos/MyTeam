@@ -48,7 +48,7 @@ git clone https://github.com/Nathandelenclos/MyTeam.git
 ## Documentation
 <div id="documentation"></div>
 
-- [Doxygen](https://nathandelenclos.github.io/MyTeams/)
+- [Doxygen](https://nathandelenclos.github.io/MyTeam/index.html)
 - [Protocol Documentation](https://nathandelenclos.github.io/MyTeam/md_DOC.html)
 
 ## Languages
