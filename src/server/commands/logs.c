@@ -82,6 +82,7 @@ char *logout_user_exist(server_t *server, client_t *client, string name)
         if (strcmp(tmp->name, name) == 0) {
             str = my_multcat(3, client->user->uuid, "|", name);
             server_event_user_logged_out(client->user->uuid);
+            broadcast_logged(server, create_packet(LOGOUT_SUCCESS, str));
             client->user->online = false;
             client->user = NULL;
             return str;
@@ -114,7 +115,6 @@ void logout_user(server_t *server, client_t *client, string data)
         send_packet(client->socket_fd, create_packet(ERROR, "Missed logout."));
         return;
     } else {
-        broadcast_logged(server, create_packet(LOGOUT_SUCCESS, msg_cli));
         disconect_client(server, client);
     }
 }
