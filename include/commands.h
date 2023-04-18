@@ -35,11 +35,15 @@ void create_reply(server_t *server, client_t *client, string data);
 void list_team(server_t *server, client_t *client, string data);
 void give_info(server_t *server, client_t *client, string data);
 void display_help(server_t *server, client_t *client, string data);
+void list_teams(server_t *server, client_t *client, string data);
+void list_channels(server_t *server, client_t *client, string data);
+void list_thread(server_t *server, client_t *client, string data);
+void list_reply(server_t *server, client_t *client, string data);
 
 static const command commands[] = {
-    {display_help, "/help", 0, "show help", NONE},
     {login_user, "/login", 0, "set the user_name used by client", NONE},
     {logout_user, "/logout", 0, "disconnect the client from the server", NONE},
+    {display_help, "/help", 1, "show help", NONE},
     {give_users, "/users", 1, "get the list of all users that exist on the\
         domain", ANY},
     {give_user_info, "/user", 1, "get information about a user", ANY},
@@ -56,7 +60,10 @@ static const command commands[] = {
     {create_thread, "/create", 1, "create a team", CHANNEL},
     {create_reply, "/create", 1, "create a team", THREAD},
     {create_team, "/create", 1, "create a team", NONE},
-    {list_team, "/list", 1, "list all existing teams", NONE},
+    {list_teams, "/list", 1, "list all existing teams", NONE},
+    {list_channels, "/list", 1, "list all existing channels in team", TEAM},
+    {list_thread, "/list", 1, "list all existing thread in channel", CHANNEL},
+    {list_reply, "/list", 1, "list all existing replies in thread", THREAD},
     {give_info, "/info", 1, "based on what is being used list the current",
         NONE},
     {NULL, "", 0, "None", NONE}

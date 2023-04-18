@@ -56,6 +56,10 @@ void suscribed_team(packet_t *packet);
 void suscribed_user(packet_t *packet);
 void unsuscribe(packet_t *socket);
 void use_success(packet_t *packet);
+void list_teams(packet_t *packet);
+void list_channel(packet_t *packet);
+void list_thread(packet_t *packet);
+void list_reply(packet_t *packet);
 
 static const listener listeners[] = {
     // Errors:
@@ -90,6 +94,10 @@ static const listener listeners[] = {
     {SUBSCRIBED_USER_SUCCESS, suscribed_user},
     {UNSUBSCRIBE_SUCCESS, unsuscribe},
     {USE_SUCCESS, use_success},
+    {LIST_TEAMS_SUCCESS, list_teams},
+    {LIST_CHANNEL_SUCCESS, list_channel},
+    {LIST_THREAD_SUCCESS, list_thread},
+    {LIST_REPLY_SUCCESS, list_reply},
     // Others:
     {QUIT, NULL}
 };

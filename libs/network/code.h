@@ -19,7 +19,6 @@
     #define ALREADY_EXIST 406
     #define LIST_MESSAGES_ERROR_CODE 407
 
-
     // Success:
     #define SUCCESS 200
     #define LIST_SUCCESS_CODE 201
@@ -34,7 +33,6 @@
     #define THREAD_CREATED 210
     #define CREATE_REPLY_SUCCESS 211
     #define REPLY_CREATED 212
-    #define UNSUSCRIBE_SUCCESS 213
     #define USE_SUCCESS 214
     #define SUBSCRIBE_SUCCESS 215
     #define SUBSCRIBED_USER_SUCCESS 216
@@ -43,6 +41,10 @@
     #define INFO_USER_GIVEN_SUCCESS 219
     #define MESSAGE_SENT 220
     #define LIST_MESSAGES_SUCCESS_CODE 221
+    #define LIST_TEAMS_SUCCESS 222
+    #define LIST_CHANNEL_SUCCESS 223
+    #define LIST_THREAD_SUCCESS 224
+    #define LIST_REPLY_SUCCESS 225
 
     // Others:
     #define QUIT 0
