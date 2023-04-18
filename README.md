@@ -32,17 +32,17 @@ The aim of the project was to provide a practical and hands-on experience in set
 <div id="installation"></div>
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/Nathandelenclos/MyTeam.git
-   ```
+```sh
+git clone https://github.com/Nathandelenclos/MyTeam.git
+```
 2. Build Project
-    ```shell
-    make
-    ```
+ ```shell
+ make
+ ```
 3. Export ENV variable
-    ```shell
-    export LD_LIBRARY_PATH=./libs/myteams/
-    ```   
+ ```shell
+ export LD_LIBRARY_PATH=./libs/myteams/
+ ```   
 
 ***
 ## Documentation
