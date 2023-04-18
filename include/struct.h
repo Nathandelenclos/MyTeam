@@ -63,6 +63,7 @@ typedef struct {
 
 typedef struct {
     string uuid;
+    user_t *user;
     time_t time;
     string title;
     string body;

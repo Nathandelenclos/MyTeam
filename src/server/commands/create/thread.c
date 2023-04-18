@@ -73,11 +73,12 @@ bool is_good_create_thread(server_t *server, client_t *client, string data)
     return true;
 }
 
-thread_t *new_thread(string title, string body)
+thread_t *new_thread(string title, string body, user_t *user)
 {
     thread_t *thread = MALLOC(sizeof(thread_t));
     thread->title = my_strdup(title);
     thread->body = my_strdup(body);
+    thread->user = user;
     thread->uuid = new_uuid();
     thread->time = time(NULL);
     thread->replies = NULL;
@@ -100,7 +101,7 @@ void create_thread(server_t *server, client_t *client, string data)
         return;
     }
     string *command = str_to_word_array(data, "\"");
-    thread_t *thread = new_thread(command[1], command[3]);
+    thread_t *thread = new_thread(command[1], command[3], client->user);
     put_in_list(&client->channel->threads, thread);
     server_event_thread_created(client->channel->uuid, thread->uuid,
         client->user->uuid,thread->title, thread->body);
