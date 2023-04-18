@@ -39,6 +39,10 @@ void list_teams(server_t *server, client_t *client, string data);
 void list_channels(server_t *server, client_t *client, string data);
 void list_thread(server_t *server, client_t *client, string data);
 void list_reply(server_t *server, client_t *client, string data);
+void info_user(server_t *server, client_t *client, string data);
+void info_team(server_t *server, client_t *client, string data);
+void info_channel(server_t *server, client_t *client, string data);
+void info_thread(server_t *server, client_t *client, string data);
 
 static const command commands[] = {
     {login_user, "/login", 0, "set the user_name used by client", NONE},
@@ -56,16 +60,18 @@ static const command commands[] = {
         users subscribed to a team", ANY},
     {unsubscribe, "/unsubscribe", 1, "unsubscribe from a team", ANY},
     {use, "/use", 1, "use specify a context team/channel/thread", ANY},
-    {create_channel, "/create", 1, "create a team", TEAM},
-    {create_thread, "/create", 1, "create a team", CHANNEL},
-    {create_reply, "/create", 1, "create a team", THREAD},
-    {create_team, "/create", 1, "create a team", NONE},
+    {create_team, "/create", 1, "Create a team.", NONE},
+    {create_channel, "/create", 1, "Create a channel.", TEAM},
+    {create_thread, "/create", 1, "Create a Thread.", CHANNEL},
+    {create_reply, "/create", 1, "Create a thread.", THREAD},
     {list_teams, "/list", 1, "list all existing teams", NONE},
     {list_channels, "/list", 1, "list all existing channels in team", TEAM},
     {list_thread, "/list", 1, "list all existing thread in channel", CHANNEL},
     {list_reply, "/list", 1, "list all existing replies in thread", THREAD},
-    {give_info, "/info", 1, "based on what is being used list the current",
-        NONE},
+    {info_user, "/info", 1, "Info of the current user" , NONE},
+    {info_team, "/info", 1, "Info of the current user" , TEAM},
+    {info_channel, "/info", 1, "Info of the current user" , CHANNEL},
+    {info_thread, "/info", 1, "Info of the current user" , THREAD},
     {NULL, "", 0, "None", NONE}
 };
 

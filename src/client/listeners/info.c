@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** B-NWP-400-LIL-4-1-myteams-simon.riembault
 ** File description:
-** list.c
+** info.c
 */
 
 #include "client.h"
