@@ -154,7 +154,7 @@ write(fd, &packet->len, sizeof(int)); // Send the size of the string
 write(fd, packet->data, packet->len); // Send the string
 ```
 
-![diagram client to server](./diagram_client_to_server.png)
+![diagram client to server](https://github.com/Nathandelenclos/MyTeam/blob/main/diagram_client_to_server.png?raw=true)
 
 ### Read
 ```c
@@ -163,6 +163,6 @@ read(fd, &packet->len, sizeof(int)); // Get the size of the string
 read(fd, packet->data, packet->len); // Get the string
 ```
 
-![diagram server to client](./diagram_server_to_client.png)
+![diagram server to client](https://github.com/Nathandelenclos/MyTeam/blob/main/diagram_server_to_client.png?raw=true)
 
 The string sent contains different information depending on the code of the event. Indeed, each event code is associated with a specific action to be performed on the server side. Thus, the string sent may contain information such as the user's name, the group's name, the message to be sent, etc., depending on the called event. This approach makes communication between the server and the CLI interface more flexible and better suited to the various needs of the application.
