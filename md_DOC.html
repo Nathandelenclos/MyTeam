@@ -171,13 +171,13 @@ Write</h2>
 <div class="fragment"><div class="line">write(fd, &amp;packet-&gt;code, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Send the code of the event</span></div>
 <div class="line">write(fd, &amp;packet-&gt;len, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Send the size of the string</span></div>
 <div class="line">write(fd, packet-&gt;data, packet-&gt;len); <span class="comment">// Send the string</span></div>
-</div><!-- fragment --><p><img src="./diagram_client_to_server.png" alt="diagram client to server" class="inline"/></p>
+</div><!-- fragment --><p><img src="https://github.com/Nathandelenclos/MyTeam/blob/main/diagram_client_to_server.png?raw=true" alt="diagram client to server" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Read</h2>
 <div class="fragment"><div class="line">read(fd, &amp;packet-&gt;code, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Get the code of the event</span></div>
 <div class="line">read(fd, &amp;packet-&gt;len, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Get the size of the string</span></div>
 <div class="line">read(fd, packet-&gt;data, packet-&gt;len); <span class="comment">// Get the string</span></div>
-</div><!-- fragment --><p><img src="./diagram_server_to_client.png" alt="diagram server to client" class="inline"/></p>
+</div><!-- fragment --><p><img src="https://github.com/Nathandelenclos/MyTeam/blob/main/diagram_server_to_client.png?raw=true" alt="diagram server to client" class="inline"/></p>
 <p>The string sent contains different information depending on the code of the event. Indeed, each event code is associated with a specific action to be performed on the server side. Thus, the string sent may contain information such as the user's name, the group's name, the message to be sent, etc., depending on the called event. This approach makes communication between the server and the CLI interface more flexible and better suited to the various needs of the application. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
