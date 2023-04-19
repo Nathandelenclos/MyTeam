@@ -106,15 +106,17 @@ Usage commands in client</h2>
 <li>list all existing teams when the context is not defined (/use)</li>
 <li>list all existing channels when team_uuid is defined (/use “team_uuid”)</li>
 <li>list all existing threads when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)</li>
-<li>list all existing replies when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”) <div class="fragment"><div class="line">/info</div>
-</div><!-- fragment --></li>
+<li>list all existing replies when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)</li>
+</ul>
+<div class="fragment"><div class="line">/info</div>
+</div><!-- fragment --><ul>
 <li>display currently logged user infos when the context is not defined (/use)</li>
 <li>display currently selected team infos when team_uuid is defined (/use “team_uuid”)</li>
 <li>display currently selected channel infos when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)</li>
 <li>display currently selected thread infos when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md6"></a>
-List of events</h1>
+List of events sent by the server.</h1>
 <h2><a class="anchor" id="autotoc_md7"></a>
 Errors</h2>
 <ul>
@@ -159,8 +161,24 @@ Success</h2>
 <li>226 : Info Team Success - <code>team_uuid|team_name|team_description</code></li>
 <li>227 : Info Channel Success - <code>channel_uuid|channel_name|channel_description</code></li>
 <li>228 : Info Thread Success - <code>thread_uuid|user_uuid|time|thread_title|thread_body</code></li>
-<li>229 : Info User Success - <code>user_uuid|user_name|user_status</code> </li>
+<li>229 : Info User Success - <code>user_uuid|user_name|user_status</code></li>
 </ul>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Details</h1>
+<p>The communication protocol we designed to facilitate data exchanges between the server and the CLI interface operates in three distinct parts to be read on the socket. First, we have an integer corresponding to the code of the called event, followed by a second integer representing the size of the string to be read in the third part. The third part thus contains the string itself. This three-part process effectively structures the data exchanged between the server and the CLI interface, facilitating understanding and data processing on the server side.</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Write</h2>
+<div class="fragment"><div class="line">write(fd, &amp;packet-&gt;code, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Send the code of the event</span></div>
+<div class="line">write(fd, &amp;packet-&gt;len, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Send the size of the string</span></div>
+<div class="line">write(fd, packet-&gt;data, packet-&gt;len); <span class="comment">// Send the string</span></div>
+</div><!-- fragment --><p><img src="./diagram_client_to_server.png" alt="diagram client to server" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md11"></a>
+Read</h2>
+<div class="fragment"><div class="line">read(fd, &amp;packet-&gt;code, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Get the code of the event</span></div>
+<div class="line">read(fd, &amp;packet-&gt;len, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)); <span class="comment">// Get the size of the string</span></div>
+<div class="line">read(fd, packet-&gt;data, packet-&gt;len); <span class="comment">// Get the string</span></div>
+</div><!-- fragment --><p><img src="./diagram_server_to_client.png" alt="diagram server to client" class="inline"/></p>
+<p>The string sent contains different information depending on the code of the event. Indeed, each event code is associated with a specific action to be performed on the server side. Thus, the string sent may contain information such as the user's name, the group's name, the message to be sent, etc., depending on the called event. This approach makes communication between the server and the CLI interface more flexible and better suited to the various needs of the application. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
