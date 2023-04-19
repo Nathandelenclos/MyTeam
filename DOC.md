@@ -15,6 +15,9 @@
 - ip is the server ip address on which the server socket listens
 - port is the port number on which the server socket listens
 ### Usage commands in client
+
+
+
 ```bash
 /help
 ```
@@ -82,15 +85,17 @@ create a new reply when team_uuid, channel_uuid and thread_uuid are defined (/us
 - list all existing channels when team_uuid is defined (/use “team_uuid”)
 - list all existing threads when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)
 - list all existing replies when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)
+
 ```bash
 /info
 ```
+
 - display currently logged user infos when the context is not defined (/use)
 - display currently selected team infos when team_uuid is defined (/use “team_uuid”)
 - display currently selected channel infos when team_uuid and channel_uuid are defined (/use “team_uuid” “channel_uuid”)
 - display currently selected thread infos when team_uuid, channel_uuid and thread_uuid are defined (/use “team_uuid” “channel_uuid” “thread_uuid”)
 
-## List of events
+## List of events sent by the server.
 
 ### Errors
 
@@ -137,3 +142,27 @@ create a new reply when team_uuid, channel_uuid and thread_uuid are defined (/us
  - 227 : Info Channel Success - `channel_uuid|channel_name|channel_description`
  - 228 : Info Thread Success - `thread_uuid|user_uuid|time|thread_title|thread_body`
  - 229 : Info User Success - `user_uuid|user_name|user_status`
+
+## Details
+
+The communication protocol we designed to facilitate data exchanges between the server and the CLI interface operates in three distinct parts to be read on the socket. First, we have an integer corresponding to the code of the called event, followed by a second integer representing the size of the string to be read in the third part. The third part thus contains the string itself. This three-part process effectively structures the data exchanged between the server and the CLI interface, facilitating understanding and data processing on the server side.
+
+### Write
+```c
+write(fd, &packet->code, sizeof(int)); // Send the code of the event
+write(fd, &packet->len, sizeof(int)); // Send the size of the string
+write(fd, packet->data, packet->len); // Send the string
+```
+
+![diagram client to server](./diagram_client_to_server.png)
+
+### Read
+```c
+read(fd, &packet->code, sizeof(int)); // Get the code of the event
+read(fd, &packet->len, sizeof(int)); // Get the size of the string
+read(fd, packet->data, packet->len); // Get the string
+```
+
+![diagram server to client](./diagram_server_to_client.png)
+
+The string sent contains different information depending on the code of the event. Indeed, each event code is associated with a specific action to be performed on the server side. Thus, the string sent may contain information such as the user's name, the group's name, the message to be sent, etc., depending on the called event. This approach makes communication between the server and the CLI interface more flexible and better suited to the various needs of the application.
